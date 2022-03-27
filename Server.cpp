@@ -8,7 +8,7 @@
 // #define PORT 5400
 
 // int main(int argc, char const *argv[])
-int openServer(int port)
+int server(int port)
 {
 	int server_fd, new_socket, valread, counter=0;
 	struct sockaddr_in address;

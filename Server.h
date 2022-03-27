@@ -1,2 +1,2 @@
 
-int openServer(int port);
+int server(int port);

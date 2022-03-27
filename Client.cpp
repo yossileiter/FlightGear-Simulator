@@ -11,7 +11,7 @@
 using namespace std;
 
 // int OpenDataServer(int argc, char const *argv[])
-int OpenDataServer(int port)
+int client(int port)
 {
 	int sock = 0, valread, counter = 0;
 	struct sockaddr_in serv_addr;

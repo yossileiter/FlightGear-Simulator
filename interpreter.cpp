@@ -9,7 +9,7 @@ using namespace std;
 
 vector<string> v;
 // string s = "openDataServer controls/flight/rudder 1";
-string s = "openDataServer 5402 simulator";
+string s = "client 5402 simulator";
 
 // convert the line to strings
 void lexer(string s, vector<string> &v)
@@ -39,18 +39,18 @@ void PrintVector(vector<string> v)
 }
 
 // check the command
-void checker(string com)
+void checker(string command)
 {
-    if (com == "openDataServer")
+    if (command == "client")
     {
         int port = stoi(v[1]);
-        OpenDataServer(port);
+        client(port);
     }
-    else if (com == "openServer")
+    else if (command == "server")
     {
         
         int port = stoi(v[1]);
-        openServer(port);
+        server(port);
     }
     else                    cout<<"Illegal command"<<endl;
 }
