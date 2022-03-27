@@ -9,7 +9,7 @@ using namespace std;
 
 vector<string> v;
 // string s = "openDataServer controls/flight/rudder 1";
-string s = "openServer 5400 simulator";
+string s = "openDataServer 5402 simulator";
 
 // convert the line to strings
 void lexer(string s, vector<string> &v)
