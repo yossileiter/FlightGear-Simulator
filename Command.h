@@ -6,25 +6,26 @@ using namespace std;
 /**
  * The Command interface declares a method for executing a command.
  */
-class Command {
- public:
-  virtual ~Command() {
-  }
-  virtual void Execute() const = 0;
+class Command
+{
+    public:
+        virtual ~Command() {}
+        virtual void Execute() const = 0;
 };
 /**
  * Some commands can implement simple operations on their own.
  */
-class SimpleCommand : public Command {
- private:
-  std::string pay_load_;
+class SimpleCommand : public Command
+{
+    private:
+        std::string pay_load_;
 
- public:
-  explicit SimpleCommand(std::string pay_load) : pay_load_(pay_load) {
-  }
-  void Execute() const override {
-    std::cout << "SimpleCommand: See, I can do simple things like printing (" << this->pay_load_ << ")\n";
-  }
+    public:
+        explicit SimpleCommand(std::string pay_load) : pay_load_(pay_load) {}
+        void Execute() const override
+        {
+            std::cout << "SimpleCommand: See, I can do simple things like printing (" << this->pay_load_ << ")\n";
+        }
 };
 
 /**

@@ -1,2 +1,2 @@
 
-int OpenDataServer();
+int OpenDataServer(int port);
