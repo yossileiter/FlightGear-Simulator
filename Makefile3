@@ -1,0 +1,30 @@
+# CC = g++
+# CFLAGS = -Wall -g
+# OBJS = interpreter.o Client.o Server.o
+
+# interpreter: ${OBJS}
+# 	$(CC) $(CFLAGS) -o $@ ${OBJS}
+
+# interpreter: interpreter.cpp 
+# 	$(CC) $(CFLAGS) -c interpreter.cpp Client.cpp Server.cpp
+
+# clean:
+# 	rm *.o 
+
+# Define required macros here
+SHELL = /bin/sh
+
+OBJS =  interpreter.o Client.o Server.o
+CFLAG = -Wall -g
+CC = g++
+INCLUDE =
+LIBS = -lm
+
+hello:${OBJ}
+\TAB${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJS} ${LIBS}
+
+clean:
+\TAB-rm -f *.o core *.core
+
+.cpp.o:
+<TAB>${CC} ${CFLAGS} ${INCLUDES} -c $<

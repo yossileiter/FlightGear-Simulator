@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+// #include "interpreter.cpp"
+#include "Client.cpp"
 
 using namespace std;
+
+#define port 5402
 
 /**
  * The Command interface declares a method for executing a command.
@@ -17,14 +22,10 @@ class Command
  */
 class SimpleCommand : public Command
 {
-    private:
-        std::string pay_load_;
-
     public:
-        explicit SimpleCommand(std::string pay_load) : pay_load_(pay_load) {}
         void Execute() const override
         {
-            std::cout << "SimpleCommand: See, I can do simple things like printing (" << this->pay_load_ << ")\n";
+            client(port);
         }
 };
 
@@ -35,11 +36,11 @@ class SimpleCommand : public Command
  */
 class Receiver {
  public:
-  void DoSomething(const std::string &a) {
-    std::cout << "Receiver: Working on (" << a << ".)\n";
+  void DoSomething(const string &a) {
+    cout << "Receiver: Working on (" << a << ".)\n";
   }
-  void DoSomethingElse(const std::string &b) {
-    std::cout << "Receiver: Also working on (" << b << ".)\n";
+  void DoSomethingElse(const string &b) {
+    cout << "Receiver: Also working on (" << b << ".)\n";
   }
 };
 
@@ -56,20 +57,20 @@ class ComplexCommand : public Command {
   /**
    * Context data, required for launching the receiver's methods.
    */
-  std::string a_;
-  std::string b_;
+  string a_;
+  string b_;
   /**
    * Complex commands can accept one or several receiver objects along with any
    * context data via the constructor.
    */
  public:
-  ComplexCommand(Receiver *receiver, std::string a, std::string b) : receiver_(receiver), a_(a), b_(b) {
+  ComplexCommand(Receiver *receiver, string a, string b) : receiver_(receiver), a_(a), b_(b) {
   }
   /**
    * Commands can delegate to any methods of a receiver.
    */
   void Execute() const override {
-    std::cout << "ComplexCommand: Complex stuff should be done by a receiver object.\n";
+    cout << "ComplexCommand: Complex stuff should be done by a receiver object.\n";
     this->receiver_->DoSomething(this->a_);
     this->receiver_->DoSomethingElse(this->b_);
   }
@@ -109,12 +110,12 @@ class Invoker {
    * Invoker passes a request to a receiver indirectly, by executing a command.
    */
   void DoSomethingImportant() {
-    std::cout << "Invoker: Does anybody want something done before I begin?\n";
+    cout << "Invoker: Does anybody want something done before I begin?\n";
     if (this->on_start_) {
       this->on_start_->Execute();
     }
-    std::cout << "Invoker: ...doing something really important...\n";
-    std::cout << "Invoker: Does anybody want something done after I finish?\n";
+    cout << "Invoker: ...doing something really important...\n";
+    cout << "Invoker: Does anybody want something done after I finish?\n";
     if (this->on_finish_) {
       this->on_finish_->Execute();
     }
@@ -126,7 +127,7 @@ class Invoker {
 
 int main() {
   Invoker *invoker = new Invoker;
-  invoker->SetOnStart(new SimpleCommand("Say Hi!"));
+  invoker->SetOnStart(new SimpleCommand());
   Receiver *receiver = new Receiver;
   invoker->SetOnFinish(new ComplexCommand(receiver, "Send email", "Save report"));
   invoker->DoSomethingImportant();
