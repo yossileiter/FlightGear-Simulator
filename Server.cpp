@@ -1,8 +1,6 @@
 #include "Server.h"
 // #define PORT 5400
 
-// int main(int argc, char const *argv[])
-// int server(int port)
 void Server::Connect(int port, const char* ip)
 {
 	int server_fd, new_socket, valread, counter=0;
@@ -47,7 +45,6 @@ void Server::Connect(int port, const char* ip)
 	
 	while (1)
 	{
-		// sleep(20);
 		valread = read( new_socket , buffer, 4096);
 		printf("%s\n",buffer );
 		printf("counter is: %d\n", counter++);

@@ -6,3 +6,5 @@
 /server
 *.pdf
 *.out
+/example_omri.cpp
+/test.cpp

@@ -1,6 +1,6 @@
 
 CC = g++
-OBJS = interpreter.cpp Client.cpp Server.cpp
+OBJS = main.cpp Client.cpp Server.cpp
 
 
 inter:	$(OBJS)

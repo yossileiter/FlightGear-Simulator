@@ -1,9 +1,12 @@
 #include "Client.h"
+#include <iostream>
 
 #define BUFSIZE 4096
 
 // #define PORT 5402
 using namespace std;
+
+
 
 void Client::Connect(int port, const char* ip)
 {
@@ -37,5 +40,6 @@ void Client::Connect(int port, const char* ip)
 		printf("%s\n",buffer );
 		printf("counter is: %d\n", counter++);
 	}
+	
 
 }
