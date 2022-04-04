@@ -5,11 +5,13 @@ using namespace std;
 int main()
 {
     static Lexer *lexer = new Lexer;
-    lexer->lex(s); 
-    lexer->PrintVector(v);
     static Parser *parser = new Parser;
-    parser->parse(v);
-    // parse(v);
-
+    lexer->ReadInstructions("FlightInstructions.txt");  
+    // lexer->PrintVector(AllLines);
+    for (int i = 0; i < AllLines.size(); i++)
+    {
+        lexer->GetLine(AllLines[i]);
+        parser->parse(v);
+    }
     return 0;
 }

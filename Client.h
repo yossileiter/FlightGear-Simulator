@@ -7,12 +7,6 @@
 
 using namespace std;
 
-// class Command
-// {
-// public:
-//     void do_command();
-// };
-
 class Client
 {
 private:

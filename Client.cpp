@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 void Client::Connect(int port, const char* ip)
 {
 	char *CommandString = "ls\r\n";
@@ -33,13 +32,13 @@ void Client::Connect(int port, const char* ip)
 	{
 		printf("\nConnection Failed \n");
 	}
-	while (1)
-	{
+	// while (1)
+	// {
 		send(sock , CommandString , strlen(CommandString) , 0 );
 		valread = read( sock , buffer, BUFSIZE);
 		printf("%s\n",buffer );
 		printf("counter is: %d\n", counter++);
-	}
+	// }
 	
 
 }
