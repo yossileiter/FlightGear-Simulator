@@ -2,7 +2,7 @@
 #include "Client.h"
 #include "Server.h"
 
-void Lexer::lex(string s)
+void Lexer::GetLine(string s)
     {	
         string temp = "";
         for(int i=0;i<s.length();++i)
@@ -20,9 +20,25 @@ void Lexer::lex(string s)
 void Lexer::PrintVector(vector<string> v)
     {
         for(int i=0;i<v.size();++i)
-            cout<<v[i]<<endl;
+            cout<<"line "<<i<<": "<<v[i]<<endl;
         cout<<"\n";
     }
+
+void Lexer::ReadInstructions(string FilePath)
+{
+    fstream newfile;
+    newfile.open(FilePath,ios::in); //open a file to perform read operation using file object
+    if (newfile.is_open()) //checking whether the file is open
+    { 
+        string line;
+        while(getline(newfile, line)) //read data from file object and put it into string.
+        { 
+            cout << line << "\n"; //print the data of the string  
+            AllLines.push_back(line);
+        }
+        newfile.close(); //close the file object.
+    }
+}
 
 void Parser::parse(vector<string> v)
 {
@@ -36,8 +52,6 @@ void Parser::parse(vector<string> v)
         // Client client = Client::getInstance()->Connect(port, ip);
         // Client::getInstance()->Connect(port, ip);
         client->Connect(port, ip);
-        // client
-        
     }
     else if (command == "server")
     {
