@@ -1,4 +1,5 @@
 #include "Server.h"
+#include <fstream>
 // #define PORT 5400
 
 void Server::Connect(int port, const char* ip)
@@ -43,9 +44,18 @@ void Server::Connect(int port, const char* ip)
 		exit(EXIT_FAILURE);
 	}
 	
-	while (1)
+	while (1) 
 	{
 		valread = read( new_socket , buffer, 4096);
+		ofstream myfile ("DataBase.txt");
+		if (myfile.is_open())
+		{
+			myfile << buffer<<endl;
+			myfile.close();
+		}
+		else cout << "Unable to open file";
+			
+		
 		printf("%s\n",buffer );
 		printf("counter is: %d\n", counter++);
 	}
