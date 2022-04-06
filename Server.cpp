@@ -4,7 +4,7 @@
 
 void Server::Connect(int port, const char* ip)
 {
-	int server_fd, new_socket, valread, counter=0;
+	int server_fd, new_socket, valread, counter = 0;
 	struct sockaddr_in address;
 	int opt = 1;
 	int addrlen = sizeof(address);
@@ -28,7 +28,7 @@ void Server::Connect(int port, const char* ip)
 	address.sin_port = htons( port );
 	
 	// Forcefully attaching socket to the port PORT
-	if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0)
+	if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
 	{
 		perror("bind failed");
 		exit(EXIT_FAILURE);
@@ -38,7 +38,7 @@ void Server::Connect(int port, const char* ip)
 		perror("listen");
 		exit(EXIT_FAILURE);
 	}
-	if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0)
+	if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0)
 	{
 		perror("accept");
 		exit(EXIT_FAILURE);

@@ -10,8 +10,10 @@ int main()
     // lexer->PrintVector(AllLines);
     for (int i = 0; i < AllLines.size(); i++)
     {
-        lexer->GetLine(AllLines[i]);
+        lexer->SplitLine(AllLines[i]);
+        AllLinesSeparated.push_back(v);
         parser->parse(v);
     }
+    
     return 0;
 }

@@ -2,10 +2,10 @@
 #include "Client.h"
 #include "Server.h"
 
-void Lexer::GetLine(string s)
+void Lexer::SplitLine(string s)
     {	
         string temp = "";
-        for(int i=0;i<s.length();++i)
+        for(int i=0 ;i<s.length(); ++i)
         {
             if(s[i]==' ')
             {
@@ -16,6 +16,7 @@ void Lexer::GetLine(string s)
         }
         v.push_back(temp);	
     };
+
 
 void Lexer::PrintVector(vector<string> v)
     {

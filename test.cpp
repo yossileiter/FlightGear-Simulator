@@ -1,121 +1,72 @@
-#include <stdio.h>
-#include <string>
 #include <iostream>
-#include <fstream>
-
 using namespace std;
-int main()
-// {
-//    fstream newfile;
-
-//       newfile.open("FlightInstructions.txt",ios::in); //open a file to perform read operation using file object
-//    if (newfile.is_open()){ //checking whether the file is open
-//       string tp;
-//       while(getline(newfile, tp)){ //read data from file object and put it into string.
-//          cout << tp << "\n"; //print the data of the string
-//       }
-//       newfile.close(); //close the file object.
-//    }
-// }
-{
-    vector<string> readLines(const string& filename);
-    {
-        vector<string> lines;
-        ifstream input(filename);
-        string line;
-        while (getline(input, line))
-        {
-            lines.push_back(line);
-        }
-        return lines;
-    }
-}
-// CPP program to implement hashing with chaining
-#include<bits/stdc++.h>
-using namespace std;
-
-class Hash
-{
-	int BUCKET; // No. of buckets
-
-	// Pointer to an array containing buckets
-	list<int> *table;
-public:
-	Hash(int V); // Constructor
-
-	// inserts a key into hash table
-	void insertItem(int x);
-
-	// deletes a key from hash table
-	void deleteItem(int key);
-
-	// hash function to map values to key
-	int hashFunction(int x) {
-		return (x % BUCKET);
-	}
-
-	void displayHash();
+ 
+class Distance {
+   private:
+      int feet;             // 0 to infinite
+      int inches;           // 0 to 12
+      
+   public:
+      // required constructors
+      Distance() {
+         feet = 0;
+         inches = 0;
+      }
+      Distance(int f, int i) {
+         feet = f;
+         inches = i;
+      }
+    //   void operator = (const Distance &D ) { 
+    //      feet = D.feet;
+    //      inches = D.inches;
+    //   }
+      
+      // method to display distance
+      void displayDistance() {
+         cout << "F: " << feet <<  "\nI:" <<  inches << endl;
+      }
 };
 
-Hash::Hash(int b)
+class base
 {
-	this->BUCKET = b;
-	table = new list<int>[BUCKET];
-}
+public:
+    base() {cout<<"base constructor\n";}
+    virtual ~base() {cout<<"base desstructor\n";}
 
-void Hash::insertItem(int key)
+};
+
+class derived : public base
 {
-	int index = hashFunction(key);
-	table[index].push_back(key);
+public:
+    derived() {cout<<"derived constructor\n";}
+    ~derived() {cout<<"derived desstructor\n";}
+
+};
+
+int main() {
+   Distance D1(11, 10), D2(5, 11);
+
+   cout << "First Distance : "<<endl;
+   D1.displayDistance();
+   cout << "Second Distance :"<<endl; 
+   D2.displayDistance();
+
+   // use assignment operator
+   D1 = D2;
+   cout << "First Distance :"<<endl;
+   D1.displayDistance();
+    cout<<&D1<<endl;
+    cout<<&D2<<endl;
+
+    base* Base = new base();
+    delete Base;
+    cout<<"_______________________________"<<endl;
+    derived* Derived = new derived();
+    cout<<"delete:"<<endl;
+    delete Derived;
+    cout<<"____________****_______________"<<endl;
+    base* poly = new derived();
+    delete poly;
+    return 0;
 }
-
-void Hash::deleteItem(int key)
-{
-// get the hash index of key
-int index = hashFunction(key);
-
-// find the key in (index)th list
-list <int> :: iterator i;
-for (i = table[index].begin();
-		i != table[index].end(); i++) {
-	if (*i == key)
-	break;
-}
-
-// if key is found in hash table, remove it
-if (i != table[index].end())
-	table[index].erase(i);
-}
-
-// function to display hash table
-void Hash::displayHash() {
-for (int i = 0; i < BUCKET; i++) {
-	cout << i;
-	for (auto x : table[i])
-	cout << " --> " << x;
-	cout << endl;
-}
-}
-
-// Driver program
-// int main()
-// {
-// // array that contains keys to be mapped
-// int a[] = {15, 11, 27, 8, 12,5,6,7,3,34,54,6,76,8,798,34,56,765,432,506};
-// int n = sizeof(a)/sizeof(a[0]);
-
-// // insert the keys into the hash table
-// Hash h(7); // 7 is count of buckets in
-// 			// hash table
-// for (int i = 0; i < n; i++)
-// 	h.insertItem(a[i]);
-
-// // delete 12 from hash table
-// // h.deleteItem(12);
-
-// // display the Hash table
-// h.displayHash();
-
-// return 0;
-// }
 
