@@ -67,6 +67,33 @@ int main() {
     cout<<"____________****_______________"<<endl;
     base* poly = new derived();
     delete poly;
+
+    class a
+    {
+        private:
+        int x;
+        int func(int w);
+        
+    };
+    a classa;
+
+    class b : public a
+    {
+    public:
+        int func(int s) //override 
+        {
+            cout<<"hello"<<endl;
+            // x = 8;
+            return s;
+
+        }
+    };
+    b classb;
+    // b* classb = new b;
+    // classa.x = 3;
+    // classb.x = 4;
+    classb.func(2);
+
     return 0;
 }
 
