@@ -27,3 +27,15 @@ class Parser
 public:
     void parse(vector<string> v);    
 };
+
+class Command
+{
+public:
+	virtual void doCommand() = 0;
+};
+
+class openServerCommand : public Command
+{
+public:
+    void doCommand();
+};

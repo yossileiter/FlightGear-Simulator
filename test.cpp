@@ -1,99 +1,86 @@
 #include <iostream>
-using namespace std;
  
-class Distance {
-   private:
-      int feet;             // 0 to infinite
-      int inches;           // 0 to 12
-      
-   public:
-      // required constructors
-      Distance() {
-         feet = 0;
-         inches = 0;
-      }
-      Distance(int f, int i) {
-         feet = f;
-         inches = i;
-      }
-    //   void operator = (const Distance &D ) { 
-    //      feet = D.feet;
-    //      inches = D.inches;
-    //   }
-      
-      // method to display distance
-      void displayDistance() {
-         cout << "F: " << feet <<  "\nI:" <<  inches << endl;
-      }
-};
+using namespace std;
 
-class base
+// Command Interface
+class Command
 {
 public:
-    base() {cout<<"base constructor\n";}
-    virtual ~base() {cout<<"base desstructor\n";}
-
+	virtual void do_command() = 0;
 };
-
-class derived : public base
+ 
+// Receiver Class
+class Light 
 {
 public:
-    derived() {cout<<"derived constructor\n";}
-    ~derived() {cout<<"derived desstructor\n";}
+	void on() {
+		cout << "The light is on\n";
+	}
+	void off() {
+		cout << "The light is off\n";
+	}
+}; 
 
+// Command for turning on the light
+class LightOnCommand : public Command 
+{
+public:
+        LightOnCommand(Light *light) : mLight(light) {}
+	void do_command(){
+		mLight->on();
+	}
+private:
+	Light *mLight;
+};
+ 
+// Command for turning off the light
+class LightOffCommand : public Command 
+{
+public:
+        LightOffCommand(Light *light) : mLight(light) {}
+	void do_command(){
+		mLight->off();
+	}
+private:
+	Light *mLight;
 };
 
-int main() {
-   Distance D1(11, 10), D2(5, 11);
+// Invoker 
+// Stores the ConcreteCommand object 
+class RemoteControl 
+{
+public:
+	void setCommand(Command *cmd) {
+		mCmd = cmd;
+	}
 
-   cout << "First Distance : "<<endl;
-   D1.displayDistance();
-   cout << "Second Distance :"<<endl; 
-   D2.displayDistance();
+	void buttonPressed() {
+		mCmd->do_command();
+	} 
+private:
+	Command *mCmd;
+};
+ 
+// The client
+int main() 
+{
+	// Receiver 
+	Light *light = new Light;
 
-   // use assignment operator
-   D1 = D2;
-   cout << "First Distance :"<<endl;
-   D1.displayDistance();
-    cout<<&D1<<endl;
-    cout<<&D2<<endl;
+	// concrete Command objects 
+	LightOnCommand *lightOn = new LightOnCommand(light);
+	LightOffCommand *lightOff = new LightOffCommand(light);
 
-    base* Base = new base();
-    delete Base;
-    cout<<"_______________________________"<<endl;
-    derived* Derived = new derived();
-    cout<<"delete:"<<endl;
-    delete Derived;
-    cout<<"____________****_______________"<<endl;
-    base* poly = new derived();
-    delete poly;
+	// invoker objects
+	RemoteControl *control = new RemoteControl;
 
-    class a
-    {
-        private:
-        int x;
-        int func(int w);
-        
-    };
-    a classa;
+	// execute
+	control->setCommand(lightOn);
+	control->buttonPressed();
+	control->setCommand(lightOff);
+	control->buttonPressed();
 
-    class b : public a
-    {
-    public:
-        int func(int s) //override 
-        {
-            cout<<"hello"<<endl;
-            // x = 8;
-            return s;
+	delete light, lightOn, lightOff, control;
 
-        }
-    };
-    b classb;
-    // b* classb = new b;
-    // classa.x = 3;
-    // classb.x = 4;
-    classb.func(2);
-
-    return 0;
+	return 0;
 }
-

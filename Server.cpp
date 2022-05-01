@@ -4,6 +4,7 @@
 
 void Server::Connect(int port, const char* ip)
 {
+	// cout<<"testing"<<endl;
 	int server_fd, new_socket, valread, counter = 0;
 	struct sockaddr_in address;
 	int opt = 1;
