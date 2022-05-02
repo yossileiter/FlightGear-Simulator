@@ -2,6 +2,13 @@
 #include <fstream>
 // #define PORT 5400
 
+Server* Server::instance = 0;
+Server* Server::getInstance()
+{
+	if (!instance) instance = new Server;
+	return instance;
+}
+
 void Server::Connect(int port, const char* ip)
 {
 	// cout<<"testing"<<endl;

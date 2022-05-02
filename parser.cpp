@@ -43,7 +43,7 @@ void Lexer::ReadInstructions(string FilePath)
 
 void openServerCommand::doCommand()
 {
-    Server *server = new Server();
+    Server *server = Server::getInstance();
     int port = stoi(v[1]);
     const char* ip = "127.0.0.1";
     server->Connect(port, ip);

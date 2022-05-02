@@ -15,15 +15,11 @@ using namespace std;
 class Server
 {
 private:
+    Server(){}
     static Server* instance;
 
 public:
-    Server() {};
-    Server* getInstance()
-    {
-        if (instance == 0) instance = new Server();
-        return instance;
-    }
+    static Server* getInstance();
 	void Connect(int port, const char* ip);
     ~Server();
 };
