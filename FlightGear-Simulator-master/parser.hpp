@@ -6,6 +6,9 @@ using namespace std;
 
 vector<string> AllLines, v;
 vector<vector<string>> AllLinesSeparated;
+// string s = "client 5402 127.0.0.1";
+// string s = "server 5400 127.0.0.1";
+
 
 class Lexer
 {
@@ -25,22 +28,20 @@ public:
     void parse(vector<string> v);    
 };
 
-
-
 class Command
 {
 public:
-	virtual void doCommand(vector<string> v) = 0;
+	virtual void doCommand() = 0;
 };
 
 class openServerCommand : public Command
 {
 public:
-    void doCommand(vector<string> v) override;
+    void doCommand();
 };
 
 class connectCommand : public Command
 {
 public:
-    void doCommand(vector<string> v);
+    void doCommand();
 };

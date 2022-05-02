@@ -41,7 +41,7 @@ void Lexer::ReadInstructions(string FilePath)
     }
 }
 
-void openServerCommand::doCommand(vector<string> v) 
+void openServerCommand::doCommand()
 {
     Server *server = Server::getInstance();
     int port = stoi(v[1]);
@@ -50,7 +50,7 @@ void openServerCommand::doCommand(vector<string> v)
 
 }
 
-void connectCommand::doCommand(vector<string> v)
+void connectCommand::doCommand()
 {
     Client *client = Client::getInstance();
     const char* ip = v[1].c_str();
@@ -66,14 +66,71 @@ void Parser::parse(vector<string> v)
     {
         
         connectCommand *ConnectCommand = new connectCommand();
-        ConnectCommand->doCommand(v);
+        ConnectCommand->doCommand();
     }
     else if (command == "openDataServer")
     {
         openServerCommand *OpenServerCommand = new openServerCommand();
-        OpenServerCommand->doCommand(v);    
+        OpenServerCommand->doCommand();    
         
     }
     else    cout<<"Illegal command"<<endl;
 }
 
+// -------------------------------------command-------------------------------------------- //
+
+// Command Interface
+
+ 
+// Receiver Class
+class Light 
+{
+public:
+	void on() {
+		cout << "The light is on\n";
+	}
+	void off() {
+		cout << "The light is off\n";
+	}
+}; 
+
+// Command for turning on the light
+class LightOnCommand : public Command 
+{
+public:
+        LightOnCommand(Light *light) : mLight(light) {}
+	void doCommand(){
+		mLight->on();
+	}
+private:
+	Light *mLight;
+};
+ 
+// Command for turning off the light
+class LightOffCommand : public Command 
+{
+public:
+        LightOffCommand(Light *light) : mLight(light) {}
+	void doCommand(){
+		mLight->off();
+	}
+private:
+	Light *mLight;
+};
+
+// Invoker 
+// Stores the ConcreteCommand object 
+class RemoteControl 
+{
+public:
+	void setCommand(Command *cmd) {
+		mCmd = cmd;
+	}
+
+	void buttonPressed() {
+		mCmd->doCommand();
+	} 
+private:
+	Command *mCmd;
+};
+ 
