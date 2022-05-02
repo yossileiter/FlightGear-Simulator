@@ -45,22 +45,17 @@ void openServerCommand::doCommand()
 {
     Server *server = new Server();
     int port = stoi(v[1]);
-    // const char* ip = v[2].c_str();
     const char* ip = "127.0.0.1";
-    // server->getInstance()->Connect(port, ip);
     server->Connect(port, ip);
 
 }
 
 void connectCommand::doCommand()
 {
-    static Client *client = new Client;
+    Client *client = Client::getInstance();
     const char* ip = v[1].c_str();
     int port = stoi(v[2]);
-    // Client client = Client::getInstance()->Connect(port, ip);
-    // Client::getInstance()->Connect(port, ip);
     client->Connect(port, ip);
-
 }
 
 void Parser::parse(vector<string> v)
@@ -69,6 +64,7 @@ void Parser::parse(vector<string> v)
     
     if (command == "connect")
     {
+        
         connectCommand *ConnectCommand = new connectCommand();
         ConnectCommand->doCommand();
     }

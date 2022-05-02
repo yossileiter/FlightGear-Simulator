@@ -6,6 +6,21 @@
 // #define PORT 5402
 using namespace std;
 
+Client* Client::instance = 0;
+Client* Client::getInstance()
+{
+	if(!instance)
+	{
+		instance = new Client();
+		cout << "getInstance(): First instance\n";
+		return instance;
+	}
+	else 
+	{
+		cout << "getInstance(): previous instance\n";
+		return instance;
+	}
+}
 
 void Client::Connect(int port, const char* ip)
 {

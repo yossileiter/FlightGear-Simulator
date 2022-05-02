@@ -10,31 +10,12 @@ using namespace std;
 class Client
 {
 private:
+    Client(){}
     static Client* instance;
 
 public:
-    Client(){}
-    static Client *getInstance()
-{
-        if (instance == 0) instance = new Client();
-        return instance;
-		cout<<"instance is: "<<instance<<endl;
-}
+    static Client *getInstance();
 	void Connect(int port, const char* ip);
     ~Client();
 };
 
-// Client* Client::instance = 0;
-// Client *Client::getInstance()
-// Client::Client(){};
-
-// class Connect : public Command
-// {
-// public:
-//     Connect();
-// };
-
-// void Connect::do_command()
-// {
-//     Client::getInstance()->Connect(port, ip);
-// }
