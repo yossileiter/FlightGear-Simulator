@@ -39,3 +39,9 @@ class openServerCommand : public Command
 public:
     void doCommand();
 };
+
+class connectCommand : public Command
+{
+public:
+    void doCommand();
+};
