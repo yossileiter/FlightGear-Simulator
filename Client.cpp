@@ -15,7 +15,7 @@ Client* Client::getInstance()
 
 void Client::Connect(int port, const char* ip)
 {
-	char *CommandString = "ls\r\n";
+	char *CommandString = (char*)"ls\r\n";
 	
 	int sock = 0, valread, counter = 0;
 	struct sockaddr_in serv_addr;
