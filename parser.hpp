@@ -4,14 +4,13 @@
 #include <fstream>
 using namespace std;
 
-
-vector<string> AllLines, v;
-vector<vector<string>> AllLinesSeparated;
+    // static vector<string> newAllLines;
 
 class Parser
 {
 public:
-    void parse(vector<string> v);   
+    void parse();   
+    void parsing(vector<string> v);
 };
 
 

@@ -3,6 +3,7 @@
 #include "Server.hpp"
 #include "Lexer.hpp"
 
+
 void Lexer::SplitLine(string s)
     {	
         string temp = "";
@@ -34,10 +35,10 @@ void Lexer::ReadInstructions(string FilePath)
     { 
         string line;
         while(getline(newfile, line)) //read data from file object and put it into string.
-        { 
-            // cout << line << "\n"; //print the data of the string  
+        {   
             AllLines.push_back(line);
         }
+        cout<<"newAllLines.size() after ReadInstructions() is: "<<AllLines.size()<<endl;
         newfile.close(); //close the file object.
     }
 }
@@ -59,20 +60,32 @@ void connectCommand::doCommand(vector<string> v)
     client->Connect(port, ip);
 }
 
-void Parser::parse(vector<string> v)
+void Parser::parse()
 {
-    string command = v[0];
-    
+    static Lexer *lexer = new Lexer;
+    lexer->ReadInstructions("FlightInstructions.txt"); 
+    for (int i = 0; i < lexer->AllLines.size(); i++)
+    {
+        lexer->SplitLine(lexer->AllLines[i]);
+        lexer->AllLinesSeparated.push_back(lexer->v);
+    }
+    parsing(lexer->AllLinesSeparated[0]);
+    delete lexer;
+}
+
+void Parser::parsing(vector<string> vec)
+{
+    string command = vec[0];
     if (command == "connect")
     {
         
         connectCommand *ConnectCommand = new connectCommand();
-        ConnectCommand->doCommand(v);
+        ConnectCommand->doCommand(vec);
     }
     else if (command == "openDataServer")
     {
         openServerCommand *OpenServerCommand = new openServerCommand();
-        OpenServerCommand->doCommand(v);    
+        OpenServerCommand->doCommand(vec);    
         
     }
     else    cout<<"Illegal command"<<endl;
