@@ -2,7 +2,7 @@
 using namespace std;
 
 
-void Lexer::ReadInstructions(string FilePath)
+void Lexer::ReadInstructions(string FilePath) //read the instructions file and split to lines
 {
     fstream newfile;
     newfile.open(FilePath,ios::in); //open a file to perform read operation using file object
@@ -18,7 +18,7 @@ void Lexer::ReadInstructions(string FilePath)
     }
 }
 
-void Lexer::SplitLine(string s)
+void Lexer::SplitLine(string s) //split a line into words
     {	
         string temp = "";
         for(int i=0 ;i<s.length(); ++i)
@@ -34,7 +34,7 @@ void Lexer::SplitLine(string s)
     };
 
 
-void Lexer::PrintVector(vector<string> v)
+void Lexer::PrintVector(vector<string> v) 
     {
         for(int i=0;i<v.size();++i)
             cout<<"line "<<i<<": "<<v[i]<<endl;

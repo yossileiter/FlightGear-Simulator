@@ -21,7 +21,7 @@ void connectCommand::doCommand(vector<string> v)
     client->Connect(port, ip);
 }
 
-void Parser::parse()
+void Parser::LetsLex() //create a lexer and lex the file into vector of vectors
 {
     static Lexer *lexer = new Lexer;
     lexer->ReadInstructions("FlightInstructions.txt"); 
@@ -34,7 +34,7 @@ void Parser::parse()
     delete lexer;
 }
 
-void Parser::parsing(vector<string> vec)
+void Parser::parsing(vector<string> vec) //take a line and execute the suitable command
 {
     string command = vec[0];
     if (command == "connect")

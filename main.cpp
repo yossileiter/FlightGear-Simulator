@@ -5,6 +5,6 @@ using namespace std;
 int main()
 {
     static Parser *parser = new Parser;
-    parser->parse();
+    parser->LetsLex();
     return 0;
 }

@@ -4,12 +4,11 @@
 #include <fstream>
 using namespace std;
 
-    // static vector<string> newAllLines;
 
 class Parser
 {
 public:
-    void parse();   
+    void LetsLex();   
     void parsing(vector<string> v);
 };
 
