@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include "Client.hpp"
 #include "Server.hpp"
+#include "Lexer.hpp"
 
 void Lexer::SplitLine(string s)
     {	

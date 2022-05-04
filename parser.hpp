@@ -4,25 +4,14 @@
 #include <fstream>
 using namespace std;
 
+
 vector<string> AllLines, v;
 vector<vector<string>> AllLinesSeparated;
-
-class Lexer
-{
-private:
-
-public:
-    Lexer(){}
-    void ReadInstructions(string FilePath);
-    void SplitLine(string s);
-    void PrintVector(vector<string> v);
-};
-
 
 class Parser
 {
 public:
-    void parse(vector<string> v);    
+    void parse(vector<string> v);   
 };
 
 
