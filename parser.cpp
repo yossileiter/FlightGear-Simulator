@@ -1,25 +1,7 @@
 #include "parser.hpp"
-#include "Client.hpp"
-#include "Server.hpp"
 #include "Lexer.hpp"
+#include "Command.hpp"
 
-
-void openServerCommand::doCommand(vector<string> v) 
-{
-    Server *server = Server::getInstance();
-    int port = stoi(v[1]);
-    const char* ip = "127.0.0.1";
-    server->Connect(port, ip);
-
-}
-
-void connectCommand::doCommand(vector<string> v)
-{
-    Client *client = Client::getInstance();
-    const char* ip = v[1].c_str();
-    int port = stoi(v[2]);
-    client->Connect(port, ip);
-}
 
 void Parser::LetsLex() //create a lexer and lex the file into vector of vectors
 {
