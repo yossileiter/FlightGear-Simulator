@@ -13,7 +13,6 @@ void Lexer::ReadInstructions(string FilePath) //read the instructions file and s
         {   
             AllLines.push_back(line);
         }
-        cout<<"newAllLines.size() after ReadInstructions() is: "<<AllLines.size()<<endl;
         newfile.close(); //close the file object.
     }
 }
@@ -34,7 +33,7 @@ void Lexer::SplitLine(string s) //split a line into words
     };
 
 
-void Lexer::PrintVector(vector<string> v) 
+void Lexer::PrintVector(vector<string> v) //print a vector
     {
         for(int i=0;i<v.size();++i)
             cout<<"line "<<i<<": "<<v[i]<<endl;

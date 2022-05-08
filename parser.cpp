@@ -16,19 +16,23 @@ void Parser::LetsLex() //create a lexer and lex the file into vector of vectors
     delete lexer;
 }
 
-void Parser::parsing(vector<string> vec) //take a line and execute the suitable command
+void Parser::parsing(vector<string> v) //take a line and execute the suitable command
 {
-    string command = vec[0];
+    string command = v[0];
     if (command == "connect")
     {
         
         connectCommand *ConnectCommand = new connectCommand();
-        ConnectCommand->doCommand(vec);
+        ConnectCommand->doCommand(v);
     }
     else if (command == "openDataServer")
     {
         openServerCommand *OpenServerCommand = new openServerCommand();
-        OpenServerCommand->doCommand(vec);    
+        OpenServerCommand->doCommand(v);    
+        
+    }
+    else if (command == "var")
+    {
         
     }
     else    cout<<"Illegal command"<<endl;

@@ -12,7 +12,7 @@ public:
     vector<string> AllLines, v;
     vector<vector<string>> AllLinesSeparated;
     Lexer(){}
-    void ReadInstructions(string FilePath);
-    void SplitLine(string s);
-    void PrintVector(vector<string> v);
+    void ReadInstructions(string FilePath); //read the instructions file and split to lines
+    void SplitLine(string s);               //split a line into words
+    void PrintVector(vector<string> v);     //print a vector
 };

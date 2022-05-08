@@ -11,7 +11,7 @@ Server* Server::getInstance()
 
 void Server::Connect(int port, const char* ip)
 {
-	// cout<<"testing"<<endl;
+	cout<<"Waiting for the Simulator..."<<endl;
 	int server_fd, new_socket, valread, counter = 0;
 	struct sockaddr_in address;
 	int opt = 1;
@@ -63,7 +63,6 @@ void Server::Connect(int port, const char* ip)
 		}
 		else cout << "Unable to open file";
 			
-		
 		printf("%s\n",buffer );
 		printf("counter is: %d\n", counter++);
 	}
