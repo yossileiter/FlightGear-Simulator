@@ -9,12 +9,11 @@ using namespace std;
 class Client
 {
 private:
-    Client(){}
-    static Client* instance;
+    Client() {}
+    static Client *instance;
 
 public:
     static Client *getInstance();
-	void Connect(int port, const char* ip);
+    void Connect(int port, const char *ip);
     ~Client();
 };
-

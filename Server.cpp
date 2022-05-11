@@ -62,9 +62,9 @@ void Server::Connect(int port, const char* ip)
 			myfile.close();
 		}
 		else cout << "Unable to open file";
-			
-		printf("%s\n",buffer );
-		printf("counter is: %d\n", counter++);
+
+        cout << buffer << endl;	
+		cout<<"counter is: "<< counter++ <<endl;
 	}
 
 }

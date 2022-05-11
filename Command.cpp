@@ -1,56 +1,58 @@
 #include "Command.hpp"
 
-void openServerCommand::doCommand(vector<string> v)
+void openServerCommand::doCommand(vector<string> line)
 {
-  if (v.size() == 2)
-  {
-    Server *server = Server::getInstance();
-    int port = stoi(v[1]);
-    const char *ip = "127.0.0.1";
-    server->Connect(port, ip);
-  }
-  else {cout<<"Missing arguments. Enter the port number"<<endl;}
+    if (line.size() == 2)
+    {
+        int port = stoi(line[1]);
+        const char *ip = "127.0.0.1";
+        Server::getInstance()->Connect(port, ip);
+    }
+    else {cout<<"Missing arguments. Enter the port number"<<endl;}
 }
 
-void connectCommand::doCommand(vector<string> v)
+void connectCommand::doCommand(vector<string> line)
 {
-  if (v.size() == 3)
-  {
-    Client *client = Client::getInstance();
-    const char *ip = v[1].c_str();
-    int port = stoi(v[2]);
-    client->Connect(port, ip);
-  }
-  else {cout<<"Missing arguments"<<endl;}
+    if (line.size() == 3)
+    {
+        const char *ip = line[1].c_str();
+        int port = stoi(line[2]);
+        Client::getInstance()->Connect(port, ip);
+    }
+    else {cout<<"Missing arguments"<<endl;}
 }
 
-void varCommand::doCommand(vector<string> v)
+void bindCommand::doCommand(vector<string> line)
 {
-  // Parser::SymbolTable[v[1]] = {0.0};
+    // Parser::SymbolTable[line[1]] = {0.0};
 }
 
-void bindCommand::doCommand(vector<string> v)
+void varCommand::doCommand(vector<string> line)
 {
-  if ((v[3] == "bind") && (v.size() == 5))
-  {
-    // Parser::getInstance()->VarTable[v[1]] = v [4];
-    cout << v[1] << " bound successfully!" << endl;
-  }
-  else if (v.size() == 4)
-  {
-    //for var h0 = 1
-  }
-  else {cout << "Illegal command" << endl;}
+    if ((line[3] == "bind") && (line.size() == 5))            //bind command
+    {
+        // Parser::getInstance()->VarTable[line[1]] = line[4];
+        cout << line[1] << " bound successfully!" << endl;
+    }   
+    else if (line.size() == 4)                             //assignment
+    {
+        //for var h0 = 1
+    }
+    else if (line.size() == 3)                             //set command
+    {
+        // Parser::getInstance()->VarTable[line[0]];
+        string stringSet;
+        stringSet += "set ";
+        // stringSet += Parser::getInstance()->VarTable.at(line[0]);
+        stringSet += line[2];
+        stringSet += "\r\n";
+        // to do: change stringSet to char*
+
+    }
+    else {cout << "Illegal command" << endl;}
 }
 
-void setCommand::doCommand(vector<string> v)
+void printCommand::doCommand(vector<string> line)
 {
-  // Client *client = Client::getInstance();
-  // Parser::getInstance()->VarTable[v[0]];
-  string stringSet;
-  stringSet += "set ";
-  // stringSet += Parser::getInstance()->VarTable.at(v[0]);
-  stringSet += v[2];
-  stringSet += "\r\n";
-  // to do: change stringSet to char*
+    if (line[1].find("""")) { }
 }

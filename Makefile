@@ -1,6 +1,6 @@
 
 CC = g++
-OBJS = main.cpp Client.cpp Server.cpp Lexer.cpp Command.cpp parser.cpp
+OBJS = main.cpp Client.cpp Server.cpp Lexer.cpp Command.cpp parser.cpp 
 
 
 main:	$(OBJS)

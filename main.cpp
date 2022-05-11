@@ -1,10 +1,17 @@
 #include "parser.hpp"
 
-using namespace std;
-
 int main()
 {
     Parser *parser = Parser::getInstance();
-    parser->LetsLex();
-    return 1;
+    Lexer *lexer = Lexer::getInstance();
+
+    parser->BuildCommandsMap();
+    parser->Lexing();
+    
+    for (int i = 0; i < lexer->AllLines.size(); i++)
+    {
+        parser->parsing(lexer->AllLinesSeparated[i]);
+    }
+
+    return 0;
 }
