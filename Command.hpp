@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
@@ -33,6 +34,13 @@ public:
 
 
 class bindCommand : public Command
+{
+public:
+    void doCommand(vector<string> v);
+};
+
+
+class setCommand : public Command
 {
 public:
     void doCommand(vector<string> v);

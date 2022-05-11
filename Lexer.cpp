@@ -1,6 +1,12 @@
 #include "Lexer.hpp"
 using namespace std;
 
+Lexer* Lexer::instance = 0;
+Lexer* Lexer::getInstance()
+{
+	if (!instance) instance = new Lexer;
+	return instance;
+}
 
 void Lexer::ReadInstructions(string FilePath) //read the instructions file and split to lines
 {

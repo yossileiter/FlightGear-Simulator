@@ -12,7 +12,7 @@ void openServerCommand::doCommand(vector<string> v)
     const char *ip = "127.0.0.1";
     server->Connect(port, ip);
   }
-  else {cout<<"Missing arguments"<<endl;}
+  else {cout<<"Missing arguments. Enter the port number"<<endl;}
 }
 
 void connectCommand::doCommand(vector<string> v)
@@ -34,5 +34,16 @@ void varCommand::doCommand(vector<string> v)
 
 void bindCommand::doCommand(vector<string> v)
 {
-  // Parser::VarTable[v[1] = {v[4]}];
+  // Parser::getInstance()->VarTable[v[1] = v[4]];
+  // Server::getInstance()->VarTable[v[1]] = v[4];
+  // server->VarTable[v[1]] = v[4];
+  // Server* server2 = Server::getInstance();
+  // server2->VarTable[v[1]] = v[4];
+}
+
+void setCommand::doCommand(vector<string> v)
+{
+  Client *client = Client::getInstance();
+  // const char *VarPath = v[4].c_str();
+
 }

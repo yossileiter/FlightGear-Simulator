@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <fstream>
+#include <unordered_map>
 
 // int server(int port);
 
@@ -15,11 +16,13 @@ using namespace std;
 class Server
 {
 private:
-    Server(){}
-    static Server* instance;
+    Server() {}
+    static Server *instance;
 
 public:
-    static Server* getInstance();
-	void Connect(int port, const char* ip);
+    static Server *getInstance();
+    // static unordered_map<string, double> SymbolTable;
+    // static unordered_map<string, string> VarTable;
+    void Connect(int port, const char *ip);
     ~Server();
 };
