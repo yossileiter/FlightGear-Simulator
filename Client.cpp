@@ -1,10 +1,6 @@
 #include "Client.hpp"
-#include <iostream>
 
 #define BUFSIZE 4096
-
-// #define PORT 5402
-using namespace std;
 
 Client* Client::instance = 0;
 Client* Client::getInstance()

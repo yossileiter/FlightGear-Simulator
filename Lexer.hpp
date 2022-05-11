@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 class Lexer
 {
 private:
@@ -15,6 +14,7 @@ private:
 public:
     vector<string> AllLines, v;
     vector<vector<string>> AllLinesSeparated;
+
     static Lexer *getInstance();
     void ReadInstructions(string FilePath); //read the instructions file and split to lines
     void SplitLine(string s);               //split a line into words

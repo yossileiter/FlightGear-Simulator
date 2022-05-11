@@ -1,13 +1,10 @@
-#include <stdio.h>
-#include <string.h>
 #include <iostream>
-#include <vector>
 #include <unistd.h>
 #include <sys/socket.h>
-#include <stdlib.h>
 #include <netinet/in.h>
 #include <fstream>
 #include <unordered_map>
+
 
 // int server(int port);
 

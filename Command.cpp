@@ -1,7 +1,4 @@
 #include "Command.hpp"
-#include "Server.hpp"
-#include "Client.hpp"
-#include "parser.hpp"
 
 void openServerCommand::doCommand(vector<string> v)
 {
@@ -34,16 +31,26 @@ void varCommand::doCommand(vector<string> v)
 
 void bindCommand::doCommand(vector<string> v)
 {
-  // Parser::getInstance()->VarTable[v[1] = v[4]];
-  // Server::getInstance()->VarTable[v[1]] = v[4];
-  // server->VarTable[v[1]] = v[4];
-  // Server* server2 = Server::getInstance();
-  // server2->VarTable[v[1]] = v[4];
+  if ((v[3] == "bind") && (v.size() == 5))
+  {
+    // Parser::getInstance()->VarTable[v[1]] = v [4];
+    cout << v[1] << " bound successfully!" << endl;
+  }
+  else if (v.size() == 4)
+  {
+    //for var h0 = 1
+  }
+  else {cout << "Illegal command" << endl;}
 }
 
 void setCommand::doCommand(vector<string> v)
 {
-  Client *client = Client::getInstance();
-  // const char *VarPath = v[4].c_str();
-
+  // Client *client = Client::getInstance();
+  // Parser::getInstance()->VarTable[v[0]];
+  string stringSet;
+  stringSet += "set ";
+  // stringSet += Parser::getInstance()->VarTable.at(v[0]);
+  stringSet += v[2];
+  stringSet += "\r\n";
+  // to do: change stringSet to char*
 }

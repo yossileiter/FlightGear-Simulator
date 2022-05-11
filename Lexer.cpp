@@ -1,5 +1,4 @@
 #include "Lexer.hpp"
-using namespace std;
 
 Lexer* Lexer::instance = 0;
 Lexer* Lexer::getInstance()
