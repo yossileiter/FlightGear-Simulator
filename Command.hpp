@@ -1,9 +1,8 @@
-// #pragma once
 #ifndef COMMAND_H
 #define COMMAND_H
 #include "Server.hpp"
 #include "Client.hpp"
-// #include "parser.hpp"
+// #include "Database.hpp"
 
 #include <stdio.h>
 #include <vector>
@@ -49,6 +48,12 @@ public:
 };
 
 class printCommand : public Command
+{
+public:
+    void doCommand(vector<string> line);
+};
+
+class whileCommand : public Command
 {
 public:
     void doCommand(vector<string> line);

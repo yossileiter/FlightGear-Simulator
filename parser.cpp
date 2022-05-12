@@ -14,25 +14,24 @@ void Parser::BuildCommandsMap() //create commands objects and insert to hash tab
     Command *OpenServerCommand = new openServerCommand();
     Command *VarCommand = new varCommand();
 
-    CommandMap["connect"] = ConnectCommand;
-    CommandMap["openDataServer"] = OpenServerCommand;
-    CommandMap["var"] = VarCommand;
+    Database::getInstance()->CommandMap["connect"] = ConnectCommand;
+    Database::getInstance()->CommandMap["openDataServer"] = OpenServerCommand;
+    Database::getInstance()->CommandMap["var"] = VarCommand;
 }
 
 void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 {
-    Lexer *lexer = Lexer::getInstance();
-    lexer->ReadInstructions("FlightInstructions.txt");
-    for (int i = 0; i < lexer->AllLines.size(); i++)
+    Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
+    for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
-        lexer->SplitLine(lexer->AllLines[i]);
-        lexer->AllLinesSeparated.push_back(lexer->v);
+        Lexer::getInstance()->SplitLine(Lexer::getInstance()->AllLines[i]);
+        Lexer::getInstance()->AllLinesSeparated.push_back(Lexer::getInstance()->v);
     }
 }
 
 void Parser::parsing(vector<string> line) // take a line and execute the suitable command
 {
     //to do: check if v[0] i legal
-    Command* c = CommandMap.at(line[0]);
+    Command* c = Database::getInstance()->CommandMap.at(line[0]);
     c->doCommand(line);
 }

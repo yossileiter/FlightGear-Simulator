@@ -9,6 +9,7 @@
 
 #include "Lexer.hpp"
 #include "Command.hpp"
+#include "Database.hpp"
 
 using namespace std;
 
@@ -19,9 +20,10 @@ private:
     static Parser* instance;
 
 public:
-    unordered_map <string, Command*> CommandMap;        //key: command NAME, value: command OBJECT
-    static unordered_map <string, double> SymbolTable;  //key: Flight DEVICES, value: VALUE in numbers
-    static unordered_map <string, string> VarTable;     //key: Flight device NAME, value: Flight device PATH
+
+    // unordered_map <string, Command*> CommandMap;        //key: command NAME, value: command OBJECT
+    // static unordered_map <string, double> SymbolTable;  //key: Flight DEVICES, value: VALUE in numbers
+    // static unordered_map <string, string> VarTable;     //key: Flight device NAME, value: Flight device PATH
 
     static Parser *getInstance();   //create a singleton
     void BuildCommandsMap();        //create commands objects and insert to hash table

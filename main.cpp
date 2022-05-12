@@ -7,11 +7,13 @@ int main()
 
     parser->BuildCommandsMap();
     parser->Lexing();
-    
-    for (int i = 0; i < lexer->AllLines.size(); i++)
+
+    for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
-        parser->parsing(lexer->AllLinesSeparated[i]);
+        parser->parsing(Lexer::getInstance()->AllLinesSeparated[i]);
     }
 
-    return 0;
+    return 2;
 }
+
+
