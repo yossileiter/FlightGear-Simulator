@@ -1,6 +1,7 @@
 #include "Command.hpp"
+#include "Database.hpp"     //this include can't work from header file
 
-void openServerCommand::doCommand(vector<string> line)
+int openServerCommand::doCommand(vector<string> line)
 {
     if (line.size() == 2)
     {
@@ -8,10 +9,10 @@ void openServerCommand::doCommand(vector<string> line)
         const char *ip = "127.0.0.1";
         Server::getInstance()->Connect(port, ip);
     }
-    else {cout<<"Missing arguments"<<endl;}
+    else {cout<<"open data server - Missing arguments"<<endl;}
 }
 
-void connectCommand::doCommand(vector<string> line)
+int connectCommand::doCommand(vector<string> line)
 {
     if (line.size() == 3)
     {
@@ -19,15 +20,15 @@ void connectCommand::doCommand(vector<string> line)
         int port = stoi(line[2]);
         Client::getInstance()->Connect(port, ip);
     }
-    else {cout<<"Missing arguments"<<endl;}
+    else {cout<<"connect - Missing arguments"<<endl;}
 }
 
 
-void varCommand::doCommand(vector<string> line)
+int varCommand::doCommand(vector<string> line)
 {
     if ((line[3] == "bind") && (line.size() == 5))          //bind command
     {
-    //    Database::getInstance()->VarTable[line[1]] = line[4];
+       Database::getInstance()->VarTable[line[1]] = line[4];
         cout << line[1] << " bound successfully!" << endl;
     }   
     else if (line.size() == 4)                             //assignment
@@ -38,7 +39,7 @@ void varCommand::doCommand(vector<string> line)
     {
         string stringSet;
         stringSet += "set ";
-        // stringSet += Database::getInstance()->VarTable.at(line[0]);
+        stringSet += Database::getInstance()->VarTable.at(line[0]);
         stringSet += line[2];
         stringSet += "\r\n";
         // to do: change stringSet to char*
@@ -46,17 +47,17 @@ void varCommand::doCommand(vector<string> line)
     else {cout << "Illegal command" << endl;}
 }
 
-void printCommand::doCommand(vector<string> line)
+int printCommand::doCommand(vector<string> line)
 {
     if (line[1].find("""")) { }
 }
 
-void whileCommand::doCommand(vector<string> line)
+int whileCommand::doCommand(vector<string> line)
 {
-    
+
 }
 
-void bindCommand::doCommand(vector<string> line)
+int bindCommand::doCommand(vector<string> line)
 {
     
 }

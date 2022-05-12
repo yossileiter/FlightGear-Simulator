@@ -9,6 +9,8 @@ Server* Server::getInstance()
 	return instance;
 }
 
+unordered_map <string, double> Server::liveData;
+
 void Server::Connect(int port, const char* ip)
 {
 	cout<<"Waiting for the Simulator..."<<endl;
@@ -52,7 +54,7 @@ void Server::Connect(int port, const char* ip)
 		exit(EXIT_FAILURE);
 	}
 	
-	while (1) 
+	while (counter == 0) 
 	{
 		valread = read( new_socket , buffer, 4096);
 		ofstream myfile ("DataBase.txt");
@@ -63,9 +65,12 @@ void Server::Connect(int port, const char* ip)
 		}
 		else cout << "Unable to open file";
 
-        cout << buffer << endl;	
+        cout << buffer << endl;
+        data = buffer;
+        
 		cout<<"counter is: "<< counter++ <<endl;
+        
 	}
-
+    
 }
 
