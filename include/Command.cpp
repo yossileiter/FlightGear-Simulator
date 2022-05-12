@@ -1,7 +1,7 @@
 #include "Command.hpp"
 #include "Database.hpp"     //this include can't work from header file
 
-int openServerCommand::doCommand(vector<string> line)
+void openServerCommand::doCommand(vector<string> line)
 {
     if (line.size() == 2)
     {
@@ -12,7 +12,7 @@ int openServerCommand::doCommand(vector<string> line)
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
 
-int connectCommand::doCommand(vector<string> line)
+void connectCommand::doCommand(vector<string> line)
 {
     if (line.size() == 3)
     {
@@ -24,7 +24,7 @@ int connectCommand::doCommand(vector<string> line)
 }
 
 
-int varCommand::doCommand(vector<string> line)
+void varCommand::doCommand(vector<string> line)
 {
     if ((line[3] == "bind") && (line.size() == 5))          //bind command
     {
@@ -47,17 +47,17 @@ int varCommand::doCommand(vector<string> line)
     else {cout << "Illegal command" << endl;}
 }
 
-int printCommand::doCommand(vector<string> line)
+void printCommand::doCommand(vector<string> line)
 {
     if (line[1].find("""")) { }
 }
 
-int whileCommand::doCommand(vector<string> line)
+void whileCommand::doCommand(vector<string> line)
 {
 
 }
 
-int bindCommand::doCommand(vector<string> line)
+void bindCommand::doCommand(vector<string> line)
 {
     
 }
