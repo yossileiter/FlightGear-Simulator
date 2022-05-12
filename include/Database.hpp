@@ -15,11 +15,12 @@ private:
 
 public:
     static unordered_map<string, Command*> CommandMap;      // key: command NAME, value: command OBJECT
-    static unordered_map<string, double> SymbolTable; // key: Flight DEVICES, value: VALUE in numbers
-    static unordered_map<string, string> VarTable;    // key: Flight device NAME, value: Flight device PATH
+    static unordered_map<string, double> SymbolTable;       // key: Flight DEVICES, value: VALUE in numbers
+    static unordered_map<string, string> VarTable;          // key: Flight device NAME, value: Flight device PATH
 
     static Database *getInstance();   
-    void buildmap();     
+    void buildCommandMap();
+    void buildSymbolMap();
 };
 
 #endif

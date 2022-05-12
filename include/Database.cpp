@@ -12,7 +12,7 @@ unordered_map <string, Command*> Database::CommandMap;
 unordered_map <string, double> Database::SymbolTable;
 unordered_map <string, string> Database::VarTable;
 
-void Database::buildmap()
+void Database::buildCommandMap()
 {
     Command *ConnectCommand = new connectCommand();
     Command *OpenServerCommand = new openServerCommand();
@@ -23,6 +23,7 @@ void Database::buildmap()
     Database::getInstance()->CommandMap["var"] = VarCommand;
 }
 
-// unordered_map<string, Command*> CommandMap;      // key: command NAME, value: command OBJECT
-//     static unordered_map<string, double> SymbolTable; // key: Flight DEVICES, value: VALUE in numbers
-//     unordered_map<string, string> VarTable;    // key: Flight device NAME, value: Flight device PATH
+void Database::buildSymbolMap()
+{
+
+}

@@ -1,7 +1,5 @@
 #include "Server.hpp"
 
-// #define PORT 5400
-
 Server* Server::instance = 0;
 Server* Server::getInstance()
 {
