@@ -20,6 +20,7 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
     {
         Lexer::getInstance()->SplitLine(Lexer::getInstance()->AllLines[i]);
         Lexer::getInstance()->AllLinesSeparated.push_back(Lexer::getInstance()->v);
+        Lexer::getInstance()->v.clear();
     }
 }
 
@@ -29,3 +30,10 @@ void Parser::parsing(vector<string> line) // take a line and execute the suitabl
     Database::getInstance()->CommandMap[line[0]]->doCommand(line);
 }
 
+void Parser::PrintVector(vector<string> v) //print a vector
+    {
+        for(int i=0;i<v.size();++i)
+            // cout<<"Line "<<i<<": "<<v[i]<<endl;
+            cout<<v[i]<<endl;
+        cout<<"\n";
+    }

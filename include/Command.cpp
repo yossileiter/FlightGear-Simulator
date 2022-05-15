@@ -29,7 +29,7 @@ void varCommand::doCommand(vector<string> line)
     if ((line[3] == "bind") && (line.size() == 5))          //bind command
     {
        Database::getInstance()->VarTable[line[1]] = line[4];
-        cout << line[1] << " bound successfully!" << endl;
+        cout << "'" << line[1] << "' bound successfully!" << endl;
     }   
     else if (line.size() == 4)                             //assignment
     {
