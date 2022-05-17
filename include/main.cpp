@@ -12,6 +12,7 @@ int main()
         Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i]);
     }
     
+    
     return 0;
 }
 
