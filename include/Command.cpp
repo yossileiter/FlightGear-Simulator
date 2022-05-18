@@ -26,16 +26,19 @@ void connectCommand::doCommand(vector<string> line)
 
 void varCommand::doCommand(vector<string> line)
 {
-    if ((line[3] == "bind") && (line.size() == 5))          //bind command
+    if ((line[3] == "bind") && (line.size() == 5))  //bind a new var
     {
-       Database::getInstance()->VarTable[line[1]] = line[4];
+        Database::getInstance()->VarTable[line[1]] = line[4];
         cout << "'" << line[1] << "' bound successfully!" << endl;
     }   
-    else if (line.size() == 4)                             //assignment
+    else if (line.size() == 4)                      //insert an assignment var into the symbol table
     {
-        //for var h0 = 1
+        double valueForNewVar;
+        string devicePath = Database::getInstance()->VarTable[line[3]];
+        Database::getInstance()->SymbolTable[line[1]] = valueForNewVar;
+        cout << "'" << line[1] << "' was successfully inserted!" << endl;
     }
-    else if (line.size() == 3)                             //set command
+    else if (line.size() == 3)                      //set command
     {
         string stringSet;
         stringSet += "set ";
