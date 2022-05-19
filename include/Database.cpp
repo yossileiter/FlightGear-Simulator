@@ -12,6 +12,14 @@ unordered_map <string, Command*> Database::CommandMap;
 unordered_map <string, double> Database::SymbolTable;
 unordered_map <string, string> Database::VarTable;
 
+template<typename K, typename V>
+void Database::PrintMap(unordered_map<K, V> const &m)
+{
+    for (auto const &pair: m) {
+        std::cout << "{" << pair.first << ": " << pair.second << "}\n";
+    }
+}
+
 void Database::buildCommandMap()
 {
     Command *ConnectCommand = new connectCommand();
@@ -25,5 +33,41 @@ void Database::buildCommandMap()
 
 void Database::buildSymbolMap()
 {
-
+    SymbolTable["/ins0trumentation/airspeed-indicator/indicated-speed-kt"] = 0;
+    SymbolTable["/sim/time/warp"] = 0;
+    SymbolTable["/controls/switches/magnetos"] = 0;
+    SymbolTable["/instrumentation/heading-indicator/offset-deg"] = 21.992;
+    SymbolTable["/instrumentation/altimeter/indicated-altitude-ft"] = 0;
+    SymbolTable["/instrumentation/altimeter/pressure-alt-ft"] = 0;
+    SymbolTable["/instrumentation/attitude-indicator/indicated-pitch-deg"] = 0;
+    SymbolTable["/instrumentation/attitude-indicator/indicated-roll-deg"] = 0;
+    SymbolTable["/instrumentation/attitude-indicator/internal-pitch-deg"] = 0;
+    SymbolTable["/instrumentation/attitude-indicator/internal-roll-deg"] = 0;
+    SymbolTable["/instrumentation/encoder/indicated-altitude-ft"] = 0;
+    SymbolTable["/instrumentation/encoder/pressure-alt-ft"] = 0;
+    SymbolTable["/instrumentation/gps/indicated-altitude-ft"] = 0;
+    SymbolTable["/instrumentation/gps/indicated-ground-speed-kt"] = 0;
+    SymbolTable["/instrumentation/gps/indicated-vertical-speed"] = 0;
+    SymbolTable["/instrumentation/heading-indicator/indicated-heading-deg"] = 22.33;
+    SymbolTable["/instrumentation/magnetic-compass/indicated-heading-deg"] = 0;
+    SymbolTable["/instrumentation/slip-skid-ball/indicated-slip-skid"] = 0;
+    SymbolTable["/instrumentation/turn-indicator/indicated-turn-rate"] = 0;
+    SymbolTable["/instrumentation/vertical-speed-indicator/indicated-speed-fpm"] = 0;
+    SymbolTable["/controls/flight/aileron"] = 0;
+    SymbolTable["/controls/flight/elevator"] = 0;
+    SymbolTable["/controls/flight/rudder"] = 0;
+    SymbolTable["/controls/flight/flaps"] = 0;
+    SymbolTable["/controls/engines/engine/throttle"] = 0;
+    SymbolTable["/controls/engines/current-engine/throttle"] = 0;
+    SymbolTable["/controls/switches/master-avionics"] = 0; 
+    SymbolTable["/controls/switches/starter"] = 0;
+    SymbolTable["/engines/active-engine/auto-start"] = 0;
+    SymbolTable["/controls/flight/speedbrake"] = 0; 
+    SymbolTable["/sim/model/c172p/brake-parking"] = 0;
+    SymbolTable["/controls/engines/engine/primer"] = 0;
+    SymbolTable["/controls/engines/current-engine/mixture"] = 0;
+    SymbolTable["/controls/switches/master-bat"] = 0; 
+    SymbolTable["/controls/switches/master-alt"] = 0;
+    SymbolTable["/engines/engine/rpm"] = 0;
 }
+

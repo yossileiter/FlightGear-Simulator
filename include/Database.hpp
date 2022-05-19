@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #ifndef DATABASE_H
 #define DATABASE_H
 #include <unordered_map>
@@ -21,6 +21,8 @@ public:
     static Database *getInstance();   
     void buildCommandMap();
     void buildSymbolMap();
+    template<typename K, typename V>
+    void PrintMap(unordered_map<K, V> const &m);
 };
 
 #endif
