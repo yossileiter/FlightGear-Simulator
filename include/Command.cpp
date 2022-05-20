@@ -19,8 +19,6 @@ void connectCommand::doCommand(vector<string> line)
         const char *ip = line[1].c_str();
         int port = stoi(line[2]);
         Client::getInstance()->Connect(port, ip);
-        // char *CommandString = (char*)"ls\r\n";
-        // Client::getInstance()->Send(CommandString);
     }
     else {cout<<"connect - Missing arguments"<<endl;}
 }
@@ -50,28 +48,26 @@ void varCommand::doCommand(vector<string> line)
     }
     else if (line.size() == 3)                      //set command
     {
-        string stringSet;
+        // cout<<"three: "<<endl;
+        string stringSet = "ls\r\n";
         stringSet += "set ";
         stringSet += Database::getInstance()->VarTable.at(line[0]);
         stringSet += line[2];
-        stringSet += "\r\n";
-        // to do: change stringSet to char*
-        // char *Com = (char*)"ls\r\n";
-        // char const *Com2 = stringSet.data();
-        // (char*) Com2;
-        // Client::getInstance()->Send(Com2);
+        // stringSet += "\r\n";
+        char* newStringSet = &stringSet[0];
+        Client::getInstance()->Send(newStringSet);
     }
     else {cout << "Illegal command" << endl;}
 }
 
 void printCommand::doCommand(vector<string> line)
 {
-    if (line[1].find("""")) { }
+    if (line[1].find("")) { }
 }
 
 void whileCommand::doCommand(vector<string> line)
 {
-
+    if (line[1].find("{")) { }
 }
 
 void bindCommand::doCommand(vector<string> line)

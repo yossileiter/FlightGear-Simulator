@@ -12,11 +12,7 @@ Client *Client::getInstance()
 
 void Client::Connect(int port, const char *ip)
 {
-	// char *CommandString = (char*)"ls\r\n";
-
-	// int sock = 0, valread, counter = 0;
 	struct sockaddr_in serv_addr;
-	// char buffer[BUFSIZE] = {0};
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
 		printf("\n Socket creation error \n");
@@ -28,13 +24,14 @@ void Client::Connect(int port, const char *ip)
 	// Convert IPv4 and IPv6 addresses from text to binary form
 	if (inet_pton(AF_INET, ip, &serv_addr.sin_addr) <= 0)
 	{
-		printf("\nInvalid address/ Address not supported \n");
+		cout<<"\nInvalid address/ Address not supported" <<endl;
 	}
 
 	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 	{
-		printf("\nConnection Failed \n");
+		cout<<"\nConnection Failed"<<endl;
 	}
+	cout<<"Connection established"<<endl;
 }
 
 void Client::Send(char *command)
