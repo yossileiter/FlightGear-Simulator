@@ -27,33 +27,31 @@ void connectCommand::doCommand(vector<string> line)
 void varCommand::doCommand(vector<string> line)
 {
     if ((line[3] == "bind") && (line.size() == 5))  //bind a new var
-    {
-        Database::getInstance()->VarTable[line[1]] = line[4];
+    {   
+        string path = line[4];
+        if (!path.empty()) 
+        {
+            path.pop_back();
+            path.erase(0,1);
+        }
+        Database::getInstance()->VarTable[line[1]] = path;
         cout << "'" << line[1] << "' bound successfully!" << endl;
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
     {
         double valueForNewVar;
         string devicePath = Database::getInstance()->VarTable[line[3]];         //get device path from var table
-        // const char * devicePath2 = devicePath.c_str();
-        cout<<"device path:"<<devicePath<<endl;
-        // cout << "d2: "<<Database::getInstance()->VarTable["heading"]<<endl;
         valueForNewVar = Database::getInstance()->SymbolTable[devicePath];      //get current value of the device
-        cout <<"value of heading: "<<Database::getInstance()->SymbolTable["/instrumentation/heading-indicator/offset-deg"]<<endl;
-        const char* devicePath3 = devicePath.c_str();
-        cout <<"value of heading 2: "<<Database::getInstance()->SymbolTable[devicePath3]<<endl;
         Database::getInstance()->SymbolTable[line[1]] = valueForNewVar;         //insert the new var as key and current value as value
-        // cout<<Database::getInstance()->SymbolTable[devicePath] <<endl;
-        cout << "'" << line[1] << "' was successfully inserted!" << endl;
+        cout<<"Value of '"<< line[1] <<"' is: "<<Database::getInstance()->SymbolTable[devicePath];
+        cout << " and successfully inserted!" << endl;
     }
     else if (line.size() == 3)                      //set command
     {
-        // cout<<"three: "<<endl;
-        string stringSet = "ls\r\n";
+        string stringSet;
         stringSet += "set ";
         stringSet += Database::getInstance()->VarTable.at(line[0]);
         stringSet += line[2];
-        // stringSet += "\r\n";
         char* newStringSet = &stringSet[0];
         Client::getInstance()->Send(newStringSet);
     }
