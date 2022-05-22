@@ -57,7 +57,13 @@ void varCommand::doCommand(vector<string> line)
 
 void printCommand::doCommand(vector<string> line)
 {
-    if (line[1].find("")) { }
+    if (line[1].find(R"("")"))
+    {
+        line[1].erase(0,1);
+        line[1].pop_back();
+        cout << line[1] <<endl;
+    }
+    else { cout <<"not found"<<endl;}
 }
 
 void whileCommand::doCommand(vector<string> line)
