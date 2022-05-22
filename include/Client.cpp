@@ -30,7 +30,7 @@ void Client::Connect(int port, const char *ip)
 	{
 		cout << "Connection Failed" << endl;
 	}
-	cout << "Connection established" << endl;
+	else cout << "Connection Established" << endl;
 }
 
 void Client::Send(char *command)

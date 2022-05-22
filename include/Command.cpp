@@ -27,7 +27,6 @@ void connectCommand::doCommand(vector<string> line)
         const char *ip = line[1].c_str();
         int port = stoi(line[2]);
         Client::getInstance()->Connect(port, ip);
-        // Client::getInstance()->Send("ls\r\n");
     }
     else {cout<<"connect - Missing arguments"<<endl;}
 }
