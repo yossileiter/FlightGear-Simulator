@@ -7,7 +7,29 @@ Server *Server::getInstance()
 	return instance;
 }
 
-unordered_map<string, double> Server::liveData;
+// unordered_map<string, double> Server::liveData;
+
+void Server::SplitLine(string s) 		//split a line into words
+    {	
+        string temp = "";
+        for(int i=0 ;i<s.length(); ++i)
+        {
+            if(s[i]==',')
+            {
+                data.push_back(stod(temp));
+                temp = "";
+            }
+            else { temp.push_back(s[i]); }		
+        }
+        data.push_back(stod(temp));	
+    };
+
+void Server::PrintVector(vector<double> v) //print a vector
+    {
+        for(int i=0;i<v.size();++i)
+            cout<<v[i]<<endl;
+        cout<<"\n";
+    }
 
 void Server::Connect(int port, const char *ip)
 {
@@ -53,14 +75,15 @@ void Server::Connect(int port, const char *ip)
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);
-		ofstream myfile("DataBase.txt");
-		if (myfile.is_open())
-		{
-			myfile << buffer << endl;
-			myfile.close();
-		}
-		else cout << "Unable to open file";
+		SplitLine(buffer);
 
-		cout << buffer << endl;
+		// PrintVector(data);
+		// ofstream myfile("DataBase.txt");
+		// if (myfile.is_open())
+		// {
+		// 	myfile << buffer << endl;
+		// 	myfile.close();
+		// }
+		// else cout << "Unable to open file";
 	}
 }

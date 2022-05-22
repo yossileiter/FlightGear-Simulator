@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <fstream>
 #include <unordered_map>
+#include <vector>
 
 // #include "Database.hpp"
 
@@ -19,10 +20,12 @@ private:
     int server_fd, new_socket, valread;
 	int opt = 1;
 	char buffer[4096] = {0};
+    vector<double> data;
+    void PrintVector(vector<double> v);
+    void SplitLine(string s);
 
 public:
-    char* data;
-    static unordered_map <string, double> liveData;
+    // static unordered_map <string, double> liveData;
     static Server *getInstance();
     void Connect(int port, const char *ip);
     ~Server();
