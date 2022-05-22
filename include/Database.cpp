@@ -78,5 +78,7 @@ void Database::buildSymbolMap()
 
     SymbolTable["/engines/active-engine/auto-start"] = 0;
     SymbolTable["/engines/engine/rpm"] = 0;
+
+    cout << "SymbolTable created successfully" << endl;
 }
 
