@@ -5,8 +5,7 @@
 Client *Client::instance = 0;
 Client *Client::getInstance()
 {
-	if (!instance)
-		instance = new Client();
+	if (!instance) instance = new Client();
 	return instance;
 }
 
@@ -15,7 +14,7 @@ void Client::Connect(int port, const char *ip)
 	struct sockaddr_in serv_addr;
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
-		printf("\n Socket creation error \n");
+		cout << " Socket creation error" << endl;
 	}
 
 	serv_addr.sin_family = AF_INET;
@@ -24,14 +23,14 @@ void Client::Connect(int port, const char *ip)
 	// Convert IPv4 and IPv6 addresses from text to binary form
 	if (inet_pton(AF_INET, ip, &serv_addr.sin_addr) <= 0)
 	{
-		cout<<"\nInvalid address/ Address not supported" <<endl;
+		cout << "Invalid address/ Address not supported" << endl;
 	}
 
 	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 	{
-		cout<<"\nConnection Failed"<<endl;
+		cout << "Connection Failed" << endl;
 	}
-	cout<<"Connection established"<<endl;
+	cout << "Connection established" << endl;
 }
 
 void Client::Send(char *command)

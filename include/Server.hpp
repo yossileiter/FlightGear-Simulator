@@ -16,6 +16,9 @@ class Server
 private:
     Server() {}
     static Server *instance;
+    int server_fd, new_socket, valread;
+	int opt = 1;
+	char buffer[4096] = {0};
 
 public:
     char* data;

@@ -26,8 +26,12 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 
 void Parser::parsing(vector<string> line) // take a line and execute the suitable command
 {
-    //to do: check if v[0] i legal
-    Database::getInstance()->CommandMap[line[0]]->doCommand(line);
+    auto it = Database::getInstance()->VarTable.find(line[0]);
+    if (it == Database::getInstance()->VarTable.end())
+    {
+        Database::getInstance()->CommandMap[line[0]]->doCommand(line);
+    }
+    else {cout <<"var table: "<<endl;}
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector
