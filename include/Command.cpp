@@ -52,15 +52,6 @@ void varCommand::doCommand(vector<string> line)
         cout << " and successfully inserted!" << endl;
         // PrintMap(Database::getInstance()->SymbolTable);
     }
-    else if (line.size() == 3)                      //set command
-    {
-        string stringSet;
-        stringSet += "set ";
-        stringSet += Database::getInstance()->VarTable.at(line[0]);
-        stringSet += line[2];
-        char* newStringSet = &stringSet[0];
-        Client::getInstance()->Send(newStringSet);
-    }
     else {cout << "Illegal command" << endl;}
 }
 
@@ -74,7 +65,15 @@ void whileCommand::doCommand(vector<string> line)
     if (line[1].find("{")) { }
 }
 
-void bindCommand::doCommand(vector<string> line)
+void setCommand::doCommand(vector<string> line)
 {
-    
+    if (line.size() == 3)
+    {
+        string stringSet = "set ";
+        stringSet += Database::getInstance()->VarTable[line[0]] + " " + line[2] + "\r\n";
+        cout << stringSet << endl;
+        char* newStringSet = &stringSet[0];
+        Client::getInstance()->Send(newStringSet);
+    }
+    else {cout << "Illegal command" << endl;}
 }

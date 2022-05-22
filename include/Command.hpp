@@ -35,12 +35,6 @@ public:
     void doCommand(vector<string> line);
 };
 
-class bindCommand : public Command
-{
-public:
-    void doCommand(vector<string> line);
-};
-
 class setCommand : public Command
 {
 public:

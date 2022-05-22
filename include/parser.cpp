@@ -31,7 +31,10 @@ void Parser::parsing(vector<string> line) // take a line and execute the suitabl
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line);
     }
-    else {cout <<"var table: "<<endl;}
+    else
+    {
+        Database::getInstance()->CommandMap["set"]->doCommand(line);
+    }
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector

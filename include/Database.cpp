@@ -25,10 +25,12 @@ void Database::buildCommandMap()
     Command *ConnectCommand = new connectCommand();
     Command *OpenServerCommand = new openServerCommand();
     Command *VarCommand = new varCommand();
+    Command *SetCommand = new setCommand();
 
     Database::getInstance()->CommandMap["connect"] = ConnectCommand;
     Database::getInstance()->CommandMap["openDataServer"] = OpenServerCommand;
     Database::getInstance()->CommandMap["var"] = VarCommand;
+    Database::getInstance()->CommandMap["set"] = SetCommand;
 }
 
 void Database::buildSymbolMap()
