@@ -75,12 +75,12 @@ void Server::Connect(int port, const char *ip)
 		perror("accept");
 		exit(EXIT_FAILURE);
 	}
-// 	Server::getInstance()->t1 = thread(&Server::ListeningToSimulator, this);
-// }
+	Server::getInstance()->t1 = thread(&Server::ListeningToSimulator, this);
+}
 
-// void Server::ListeningToSimulator()
-// {
-// 	cout << "simul";
+void Server::ListeningToSimulator()
+{
+	cout << "simul";
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);

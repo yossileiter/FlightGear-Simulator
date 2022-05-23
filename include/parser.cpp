@@ -8,6 +8,13 @@ Parser *Parser::getInstance()   //create a singleton
 	return instance;	
 }
 
+template<typename K, typename V, typename T>
+bool Parser::CkeckElementInMap(unordered_map<K,V> const &map, T element)
+{
+    if (map.count(element) == 0) return 0;
+    else return 1;
+}
+
 void Parser::BuildCommandsMap() //create commands objects and insert to hash table
 {
     
@@ -31,9 +38,9 @@ void Parser::parsing(vector<string> line, size_t i) // take a line and execute t
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line);
     }
-    else if (line[1]=="l")
+    else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)
     {
-        Database::getInstance()->CommandMap["set"]->doCommand(line);
+        Database::getInstance()->CommandMap["set"]->doCommand(line);     
     }
     else
     {
