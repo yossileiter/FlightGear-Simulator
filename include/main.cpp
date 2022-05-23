@@ -10,8 +10,7 @@ int main()
     {
         Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i]);
     }
-    // Database::getInstance()->PrintMap(Database::getInstance()->SymbolTable);
-
+    
     return 0;
 }
 

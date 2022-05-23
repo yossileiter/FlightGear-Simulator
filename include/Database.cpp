@@ -12,14 +12,6 @@ unordered_map <string, Command*> Database::CommandMap;
 unordered_map <string, double> Database::SymbolTable;
 unordered_map <string, string> Database::VarTable;
 
-// template<typename K, typename V>
-// void Database::PrintMap(unordered_map<K, V> const &m)
-// {
-//     for (auto const &pair: m) {
-//         std::cout << "{" << pair.first << ": " << pair.second << "}\n";
-//     }
-// }
-
 void Database::buildCommandMap()
 {
     Command *ConnectCommand = new connectCommand();

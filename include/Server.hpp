@@ -25,8 +25,6 @@ private:
     void SplitLine(string s);
 
 public:
-    unordered_map<string, double> mappy;
-    // static unordered_map <string, double> liveData;
     static Server *getInstance();
     void Connect(int port, const char *ip);
     ~Server();

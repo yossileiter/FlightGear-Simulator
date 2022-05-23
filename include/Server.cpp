@@ -21,7 +21,6 @@ void Server::SplitLine(string line) 		//split a line into words
             else { temp.push_back(line[i]); }		
         }
         values.push_back(stod(temp));	
-		// PrintVector(values);
     };
 
 void Server::PrintVector(vector<double> v) //print a vector
@@ -77,27 +76,13 @@ void Server::Connect(int port, const char *ip)
 		valread = read(new_socket, buffer, 4096);
 		SplitLine(buffer);
 		
-		for (size_t i = 0; i < paths.size(); i++)
+		for (size_t i = 0; i < values.size(); i++)
 		{
 			Database::getInstance()->SymbolTable[paths[i]] = values[i];
-			// cout << Database::getInstance()->SymbolTable[paths[i]] << ": " << values[i] <<endl;
+			// cout << Database::getInstance()->SymbolTable[paths[i]]<<","; //": " << values[i] <<endl;
 		}
-
-		// for (auto const &pair: Database::getInstance()->SymbolTable)
-		// {
-		// 	cout << pair.second << ", ";
-		// }
-		// cout << endl << buffer <<endl;
-		// cout <<"\n\n";
-
-
-		// PrintVector(data);
-		// ofstream myfile("DataBase.txt");
-		// if (myfile.is_open())
-		// {
-		// 	myfile << buffer << endl;
-		// 	myfile.close();
-		// }
-		// else cout << "Unable to open file";
+		cout << endl << buffer <<endl;
+		cout <<"\n";
+		values.clear();	
 	}
 }
