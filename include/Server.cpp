@@ -8,8 +8,9 @@ Server *Server::getInstance()
 	return instance;
 }
 
-void Server::SplitLine(string line) 		//split a line into words
+vector <double>  Server::SplitLine(string line) 		//split a line into words
     {	
+		vector<double> values;
         string temp = "";
         for(int i=0 ;i<line.length(); ++i)
         {
@@ -20,7 +21,8 @@ void Server::SplitLine(string line) 		//split a line into words
             }
             else { temp.push_back(line[i]); }		
         }
-        values.push_back(stod(temp));	
+        values.push_back(stod(temp));
+		return values;	
     };
 
 void Server::PrintVector(vector<double> v) //print a vector
@@ -74,15 +76,15 @@ void Server::Connect(int port, const char *ip)
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);
-		SplitLine(buffer);
-		
+		vector<double> values =	SplitLine(buffer);
+
 		for (size_t i = 0; i < values.size(); i++)
 		{
 			Database::getInstance()->SymbolTable[paths[i]] = values[i];
-			// cout << Database::getInstance()->SymbolTable[paths[i]]<<","; //": " << values[i] <<endl;
+			cout << Database::getInstance()->SymbolTable[paths[i]]<<",";
 		}
+
 		cout << endl << buffer <<endl;
 		cout <<"\n";
-		values.clear();	
 	}
 }
