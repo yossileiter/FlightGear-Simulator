@@ -2,7 +2,6 @@
 #define COMMAND_H
 #include "Server.hpp"
 #include "Client.hpp"
-// #include "Database.hpp"
 
 #include <chrono>
 #include <thread>

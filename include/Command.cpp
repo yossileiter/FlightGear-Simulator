@@ -48,8 +48,9 @@ void varCommand::doCommand(vector<string> line)
         string devicePath = Database::getInstance()->VarTable[line[3]];         //get device path from var table
         valueForNewVar = Database::getInstance()->SymbolTable[devicePath];      //get current value of the device
         Database::getInstance()->SymbolTable[line[1]] = valueForNewVar;         //insert the new var as key and current value as value
-        cout<<"Value of '"<< line[1] <<"' is: "<<Database::getInstance()->SymbolTable[devicePath];
-        cout << " and successfully inserted!" << endl;
+        cout << "'" << line[1] << "' Successfully inserted" << endl;
+        // cout<<"Value of '"<< line[1] <<"' is: "<<Database::getInstance()->SymbolTable[devicePath];
+        // cout << " and successfully inserted!" << endl;
         // PrintMap(Database::getInstance()->SymbolTable);
     }
     else {cout << "Illegal command" << endl;}
@@ -57,13 +58,20 @@ void varCommand::doCommand(vector<string> line)
 
 void printCommand::doCommand(vector<string> line)
 {
-    if (line[1].find(R"("")"))
+    if (line[1].find("\""))
     {
         line[1].erase(0,1);
         line[1].pop_back();
-        cout << line[1] <<endl;
+        cout << line[1] << endl;
     }
-    else { cout <<"not found"<<endl;}
+    else
+    {
+        string path = Database::getInstance()->VarTable[line[1]];
+        cout << path <<endl;
+        double value = Database::getInstance()->SymbolTable[path];
+        cout << value <<endl;
+        cout << line[1] << ": " << value << endl;
+    }
 }
 
 void whileCommand::doCommand(vector<string> line)
