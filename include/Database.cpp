@@ -19,12 +19,14 @@ void Database::buildCommandMap()
     Command *VarCommand = new varCommand();
     Command *SetCommand = new setCommand();
     Command *PrintCommand = new printCommand();
+    Command *SleepCommand = new sleepCommand();
 
     Database::getInstance()->CommandMap["connect"] = ConnectCommand;
     Database::getInstance()->CommandMap["openDataServer"] = OpenServerCommand;
     Database::getInstance()->CommandMap["var"] = VarCommand;
     Database::getInstance()->CommandMap["set"] = SetCommand;
     Database::getInstance()->CommandMap["print"] = PrintCommand;
+    Database::getInstance()->CommandMap["sleep"] = SleepCommand;
 }
 
 void Database::buildSymbolMap()

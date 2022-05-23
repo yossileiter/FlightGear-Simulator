@@ -4,6 +4,8 @@
 #include "Client.hpp"
 // #include "Database.hpp"
 
+#include <chrono>
+#include <thread>
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -48,6 +50,12 @@ public:
 };
 
 class whileCommand : public Command
+{
+public:
+    void doCommand(vector<string> line);
+};
+
+class sleepCommand : public Command
 {
 public:
     void doCommand(vector<string> line);

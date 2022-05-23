@@ -83,3 +83,13 @@ void setCommand::doCommand(vector<string> line)
     }
     else {cout << "Illegal command" << endl;}
 }
+
+void sleepCommand::doCommand(vector<string> line)
+{
+    if (line.size() == 2)
+    {
+        this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
+        cout << "Waiting " << line[1] << " milliseconds" << endl;
+    }
+    else cout << "Illegal command" << endl;
+}
