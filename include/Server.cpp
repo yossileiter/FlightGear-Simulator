@@ -80,7 +80,6 @@ void Server::Connect(int port, const char *ip)
 
 void Server::ListeningToSimulator()
 {
-	cout << "simul";
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);
@@ -89,7 +88,7 @@ void Server::ListeningToSimulator()
 		for (size_t i = 0; i < values.size(); i++)
 		{
 			Database::getInstance()->SymbolTable[paths[i]] = values[i];
-			cout << Database::getInstance()->SymbolTable[paths[i]]<<",";
+			cout << Database::getInstance()->SymbolTable[paths[i]]<<", ";
 		}
 		// cout << endl << buffer <<endl;
 		cout <<"\n";
