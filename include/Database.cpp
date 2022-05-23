@@ -35,8 +35,8 @@ void Database::buildSymbolMap()
     SymbolTable["/sim/model/c172p/brake-parking"] = 0;
 
     SymbolTable["/instrumentation/airspeed-indicator/indicated-speed-kt"] = 0;
-    SymbolTable["/instrumentation/heading-indicator/offset-deg"] = 21.992;
-    SymbolTable["/instrumentation/altimeter/indicated-altitude-ft"] = 33;
+    SymbolTable["/instrumentation/heading-indicator/offset-deg"] = 0;
+    SymbolTable["/instrumentation/altimeter/indicated-altitude-ft"] = 0;
     SymbolTable["/instrumentation/altimeter/pressure-alt-ft"] = 0;
     SymbolTable["/instrumentation/attitude-indicator/indicated-pitch-deg"] = 0;
     SymbolTable["/instrumentation/attitude-indicator/indicated-roll-deg"] = 0;
@@ -47,7 +47,7 @@ void Database::buildSymbolMap()
     SymbolTable["/instrumentation/gps/indicated-altitude-ft"] = 0;
     SymbolTable["/instrumentation/gps/indicated-ground-speed-kt"] = 0;
     SymbolTable["/instrumentation/gps/indicated-vertical-speed"] = 0;
-    SymbolTable["/instrumentation/heading-indicator/indicated-heading-deg"] = 22.33;
+    SymbolTable["/instrumentation/heading-indicator/indicated-heading-deg"] = 0;
     SymbolTable["/instrumentation/magnetic-compass/indicated-heading-deg"] = 0;
     SymbolTable["/instrumentation/slip-skid-ball/indicated-slip-skid"] = 0;
     SymbolTable["/instrumentation/turn-indicator/indicated-turn-rate"] = 0;

@@ -8,7 +8,10 @@ Server *Server::getInstance()
 	return instance;
 }
 
-vector <double>  Server::SplitLine(string line) 		//split a line into words
+// void ListeningToSimulator();
+
+
+vector <double> Server::SplitLine(string line) 		//split a line into words
     {	
 		vector<double> values;
         string temp = "";
@@ -72,7 +75,12 @@ void Server::Connect(int port, const char *ip)
 		perror("accept");
 		exit(EXIT_FAILURE);
 	}
+// 	Server::getInstance()->t1 = thread(&Server::ListeningToSimulator, this);
+// }
 
+// void Server::ListeningToSimulator()
+// {
+// 	cout << "simul";
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);
@@ -83,8 +91,7 @@ void Server::Connect(int port, const char *ip)
 			Database::getInstance()->SymbolTable[paths[i]] = values[i];
 			cout << Database::getInstance()->SymbolTable[paths[i]]<<",";
 		}
-
-		cout << endl << buffer <<endl;
+		// cout << endl << buffer <<endl;
 		cout <<"\n";
 	}
 }

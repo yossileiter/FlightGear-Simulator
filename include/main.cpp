@@ -6,9 +6,9 @@ int main()
     Database::getInstance()->buildSymbolMap();      //maybe should be in background
     Parser::getInstance()->Lexing();
 
-    for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
+    for (size_t i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
-        Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i]);
+        Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i], i);
     }
     
     return 0;

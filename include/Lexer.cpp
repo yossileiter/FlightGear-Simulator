@@ -7,6 +7,22 @@ Lexer* Lexer::getInstance()
 	return instance;
 }
 
+bool Lexer::FindIfElementExist(vector<string> v, string element)
+{    
+    vector<string>::iterator it = find(v.begin(), v.end(), element.c_str());
+    if (it != v.end()) return 1;
+    else return 0;
+}
+
+int Lexer::FindElementLocation(vector<vector<string>> v, string element)
+{
+    for (size_t rows = 0; rows < AllLinesSeparated.size(); rows++)
+    {
+        if (FindIfElementExist(AllLinesSeparated[rows], element)) return rows;
+    }
+    return 0;
+}
+
 void Lexer::ReadInstructions(string FilePath) //read the instructions file and split to lines
 {
     fstream newfile;
@@ -46,4 +62,3 @@ void Lexer::PrintVector(vector<string> v) //print a vector
             cout<<v[i]<<endl;
         cout<<"\n";
     }
-

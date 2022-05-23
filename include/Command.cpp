@@ -16,6 +16,7 @@ void openServerCommand::doCommand(vector<string> line)
         int port = stoi(line[1]);
         const char *ip = "127.0.0.1";
         Server::getInstance()->Connect(port, ip);
+        // Server::getInstance()->ListeningToSimulator();
     }
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
@@ -78,7 +79,7 @@ void whileCommand::doCommand(vector<string> line)
 {
     if (line[1].find("{")) { }
 }
-
+\
 void setCommand::doCommand(vector<string> line)
 {
     if (line.size() == 3)

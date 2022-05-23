@@ -7,6 +7,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <vector>
+#include <thread>
 #include <map>
 
 using namespace std;
@@ -26,6 +27,8 @@ private:
 public:
     static Server *getInstance();
     void Connect(int port, const char *ip);
+    // void ListeningToSimulator();
+    thread t1;
     ~Server();
 };
 

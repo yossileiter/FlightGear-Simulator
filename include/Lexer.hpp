@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,6 +23,8 @@ public:
     void ReadInstructions(string FilePath); // read the instructions file and split to lines
     void SplitLine(string s);               // split a line into words
     void PrintVector(vector<string> v);     // print a vector
+    bool FindIfElementExist(vector<string> v, string element);
+    int FindElementLocation(vector<vector<string>> v, string element);
 };
 
 #endif

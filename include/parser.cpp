@@ -24,22 +24,28 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
     }
 }
 
-void Parser::parsing(vector<string> line) // take a line and execute the suitable command
+void Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
 {
     auto it = Database::getInstance()->VarTable.find(line[0]);
     if (it == Database::getInstance()->VarTable.end())
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line);
     }
-    else
+    else if (line[1]=="l")
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line);
+    }
+    else
+    {
+        int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
+        if (location != 0) cout<<"location: "<<location<<endl;
+        else cout<<"not found\n";
     }
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector
     {
-        for(int i=0;i<v.size();++i)
+        for(size_t i=0;i<v.size();++i)
             // cout<<"Line "<<i<<": "<<v[i]<<endl;
             cout<<v[i]<<endl;
         cout<<"\n";
