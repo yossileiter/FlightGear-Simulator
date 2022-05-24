@@ -18,7 +18,6 @@ void openServerCommand::doCommand(vector<string> line, int i)
         int port = stoi(line[1]);
         const char *ip = "127.0.0.1";
         Server::getInstance()->Connect(port, ip);
-        // Server::getInstance()->ListeningToSimulator();
     }
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
@@ -49,8 +48,7 @@ void varCommand::doCommand(vector<string> line, int i)
         line[4].pop_back();
         line[4].erase(0,1);
         Database::getInstance()->VarTable[line[1]] = line[4];       //insert to var table
-        cout << "'" << line[1] << "' bound successfully!" << endl;
-        // PrintMap(Database::getInstance()->VarTable);        
+        cout << "'" << line[1] << "' bound successfully!" << endl;     
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
     {
@@ -59,9 +57,6 @@ void varCommand::doCommand(vector<string> line, int i)
         valueForNewVar = Database::getInstance()->SymbolTable[devicePath];      //get current value of the device
         Database::getInstance()->SymbolTable[line[1]] = valueForNewVar;         //insert the new var as key and current value as value
         cout << "'" << line[1] << "' Successfully inserted" << endl;
-        // cout<<"Value of '"<< line[1] <<"' is: "<<Database::getInstance()->SymbolTable[devicePath];
-        // cout << " and successfully inserted!" << endl;
-        // PrintMap(Database::getInstance()->SymbolTable);
     }
     else {cout << "Illegal command" << endl;}
 }
@@ -72,7 +67,7 @@ int varCommand::get_i(int i)
 
 void printCommand::doCommand(vector<string> line, int i)
 {
-    if (line[1].find("\""))         //find "" in the line and remove it
+    if (line[1][0] == '"')         //find "" in the line and remove it
     {
         line[1].erase(0,1);
         line[1].pop_back();
@@ -81,9 +76,7 @@ void printCommand::doCommand(vector<string> line, int i)
     else                            //print a variable
     {
         string path = Database::getInstance()->VarTable[line[1]]; 
-        // cout << path <<endl;
         double value = Database::getInstance()->SymbolTable[path];
-        // cout << value <<endl;
         cout << line[1] << ": " << value << endl;
     }
 }
@@ -94,9 +87,7 @@ int printCommand::get_i(int i)
 
 void whileCommand::doCommand(vector<string> line, int i)
 {
-    // if (line[1].find("{")) { }
-    cout<<"WHILE LOOP!!!\t\t";
-    cout <<"original size: "<<Lexer::getInstance()->AllLinesSeparated.size()<<" |\t";
+    cout<<"While loop {\n";
     
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
@@ -105,35 +96,24 @@ void whileCommand::doCommand(vector<string> line, int i)
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
         varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
         int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
-        cout<<"location: "<<location<<endl;
-        cout<<"i: "<<i<<endl;
-        for (size_t j = i+1; j < location; j++)
-        {   
-            cout<<"j: "<<j<<endl;
-            whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
-            cout << "insert line: "<<Lexer::getInstance()->AllLinesSeparated[j][0] <<" "<<Lexer::getInstance()->AllLinesSeparated[j][1]<<endl;
-            // Lexer::getInstance()->AllLinesSeparated[j].clear();             //clear the original vector 
-            cout<<"line j: "<<Lexer::getInstance()->AllLinesSeparated[j].size()<<endl;
-            cout <<"big vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<"\n";    
-            // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
 
+        for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
+        {   
+            whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
         }
         
-        cout <<"left vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<" |\t";    
-        loopLength = whileLines.size();                                              
-        cout <<"while lines: "<<loopLength<<endl; 
-        
-        for (size_t k = 0; k < whileLines.size(); k++)
+        loopLength = whileLines.size();                                                      
+        for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
         {
-            cout << "parsing line: "<<whileLines[k][0] <<" "<<whileLines[k][1]<<endl;
-            Parser::getInstance()->parsing(whileLines[k], 100);
+            Parser::getInstance()->parsing(whileLines[k], i);
         }
+        cout <<"}\n End while loop\n";
     }
     else cout << "Variable not found" << endl;
 }
-int whileCommand::get_i(int i)
+int whileCommand::get_i(int i)                                  //increase the i by amount of while lines
 {
-    return i += loopLength;
+    return i += loopLength;                                     
 }
 
 template<typename K, typename V, typename T>

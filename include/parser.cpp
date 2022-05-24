@@ -32,47 +32,19 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 }
 
 int Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
-{
-    // cout << line[0]<<endl;
-    // if (line[0]=="}")
-    // {
-    //     cout <<"do nothing"<<endl;
-    // }
-    // else if (Database::getInstance()->VarTable.find(line[0]) == Database::getInstance()->VarTable.end()) //if the line[0] is a command
-    // {
-    //     Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
-    //     Lexer::getInstance()->AllLinesSeparated[i].clear();
-    // }
-    // else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)          //if line[0] is a var
-    // {
-    //     Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
-    //     Lexer::getInstance()->AllLinesSeparated[i].clear();
-    // }
-    // else
-    // {
-    //     cout <<"do nothing"<<endl;
-    // }
-    
-    cout << line[0]<<endl;
+{   
     if (line[0]=="}")
     {
-        cout <<"do nothing"<<endl;
         return i;
     }
-    // if (line.empty())
-    // {
-    //     cout <<"do nothing"<<endl;
-    // }
     else if (Database::getInstance()->VarTable.find(line[0]) == Database::getInstance()->VarTable.end()) //if the line[0] is a command
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
-        cout<<"i: "<<Database::getInstance()->CommandMap[line[0]]->get_i(i)<<endl;
         return Database::getInstance()->CommandMap[line[0]]->get_i(i);
     }
     else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)          //if line[0] is a var
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
-        cout<<"i: "<<Database::getInstance()->CommandMap["set"]->get_i(i)<<endl;   
         return Database::getInstance()->CommandMap["set"]->get_i(i);
     }
     else
@@ -80,14 +52,11 @@ int Parser::parsing(vector<string> line, size_t i) // take a line and execute th
         cout <<"do nothing"<<endl;
         return i;
     }
-    // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
-    // cout<<"anyway"<<endl;
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector
     {
         for(size_t i=0;i<v.size();++i)
-            // cout<<"Line "<<i<<": "<<v[i]<<endl;
             cout<<v[i]<<endl;
         cout<<"\n";
     }
