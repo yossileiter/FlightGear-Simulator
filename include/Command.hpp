@@ -52,11 +52,11 @@ public:
 class whileCommand : public Command
 {
 private:
+    template<typename K, typename V, typename T>
+    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
 
 public:
     void doCommand(vector<string> line);
-    template<typename K, typename V, typename T>
-    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
 };
 
 class sleepCommand : public Command
