@@ -88,7 +88,7 @@ int printCommand::get_i(int i)
 void whileCommand::doCommand(vector<string> line, int i)
 {
     cout<<"While loop {\n";
-    
+    checkExpression(line[1], line[2], line[3]);
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
         vector<vector<string>> whileLines;
@@ -121,6 +121,19 @@ bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
 {
     if (map.count(element)) return 0;
     else return 1;
+}
+bool whileCommand::checkExpression(string x, string op, string y)
+{
+    x = stoi(x);
+    y = stoi(y);
+
+    if      ((op == "==") && (x == y))  return true;
+    else if ((op == "!=") && (x != y))  return true;
+    else if ((op == "<")  && (x < y))   return true;
+    else if ((op == ">")  && (x > y))   return true;
+    else if ((op == "<=") && (x <= y))  return true;
+    else if ((op == ">=") && (x >= y))  return true;
+    else return false;
 }
 
 void setCommand::doCommand(vector<string> line, int i)
