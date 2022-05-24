@@ -9,7 +9,7 @@ void PrintMap(unordered_map<K, V> const &m)
     }
 }
 
-void openServerCommand::doCommand(vector<string> line)
+void openServerCommand::doCommand(vector<string> line, int i)
 {
     if (line.size() == 2)
     {
@@ -21,7 +21,7 @@ void openServerCommand::doCommand(vector<string> line)
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
 
-void connectCommand::doCommand(vector<string> line)
+void connectCommand::doCommand(vector<string> line, int i)
 {
     if (line.size() == 3)
     {
@@ -33,7 +33,7 @@ void connectCommand::doCommand(vector<string> line)
 }
 
 
-void varCommand::doCommand(vector<string> line)
+void varCommand::doCommand(vector<string> line, int i)
 {
     if ((line[3] == "bind") && (line.size() == 5))  //bind a new var
     {   
@@ -57,7 +57,7 @@ void varCommand::doCommand(vector<string> line)
     else {cout << "Illegal command" << endl;}
 }
 
-void printCommand::doCommand(vector<string> line)
+void printCommand::doCommand(vector<string> line, int i)
 {
     if (line[1].find("\""))         //find "" in the line and remove it
     {
@@ -75,17 +75,34 @@ void printCommand::doCommand(vector<string> line)
     }
 }
 
-void whileCommand::doCommand(vector<string> line)
+
+void whileCommand::doCommand(vector<string> line, int i)
 {
     // if (line[1].find("{")) { }
     cout<<"WHILE LOOP!!!"<<endl;
-
+    cout <<"original size: "<<Lexer::getInstance()->AllLinesSeparated.size()<<endl;
+    
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
+        vector<vector<string>> whileLines;
         double varValue;
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
         varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-        cout << "value is: " << varValue << endl;
+        // cout << "value is: " << varValue << endl;
+        int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
+        // if (location != 0) cout<<"location: "<<location<<endl;
+        // else cout<<"not found\n";
+        // cout<< "size: "<< 
+        for (size_t j = i+1; j <= location; j++)
+        {   
+            whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
+            Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin()+i);
+        }
+        
+    cout <<"left vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<endl;    
+    cout <<"while lines: "<<whileLines.size()<<endl;                                              
+    
+
     }
     else cout << "Variable not found" << endl;
 }
@@ -97,7 +114,7 @@ bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     else return 1;
 }
 
-void setCommand::doCommand(vector<string> line)
+void setCommand::doCommand(vector<string> line, int i)
 {
     if (line.size() == 3)                       //send set command
     {
@@ -110,7 +127,7 @@ void setCommand::doCommand(vector<string> line)
     else {cout << "Illegal command" << endl;}
 }
 
-void sleepCommand::doCommand(vector<string> line)       //sleep
+void sleepCommand::doCommand(vector<string> line, int i)       //sleep
 {
     if (line.size() == 2)
     {
@@ -119,3 +136,4 @@ void sleepCommand::doCommand(vector<string> line)       //sleep
     }
     else cout << "Illegal command" << endl;
 }
+
