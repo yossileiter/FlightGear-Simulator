@@ -5,7 +5,8 @@
 template<typename K, typename V>
 void PrintMap(unordered_map<K, V> const &m)
 {
-    for (auto const &pair: m) {
+    for (auto const &pair: m)
+    {
         std::cout << "  {" << pair.first << ": " << pair.second << "}\n";
     }
 }
@@ -21,6 +22,10 @@ void openServerCommand::doCommand(vector<string> line, int i)
     }
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
+int openServerCommand::get_i(int i)
+{
+    return i;
+}
 
 void connectCommand::doCommand(vector<string> line, int i)
 {
@@ -32,7 +37,10 @@ void connectCommand::doCommand(vector<string> line, int i)
     }
     else {cout<<"connect - Missing arguments"<<endl;}
 }
-
+int connectCommand::get_i(int i)
+{
+    return i;
+}
 
 void varCommand::doCommand(vector<string> line, int i)
 {
@@ -57,6 +65,10 @@ void varCommand::doCommand(vector<string> line, int i)
     }
     else {cout << "Illegal command" << endl;}
 }
+int varCommand::get_i(int i)
+{
+    return i;
+}
 
 void printCommand::doCommand(vector<string> line, int i)
 {
@@ -75,7 +87,10 @@ void printCommand::doCommand(vector<string> line, int i)
         cout << line[1] << ": " << value << endl;
     }
 }
-
+int printCommand::get_i(int i)
+{
+    return i;
+}
 
 void whileCommand::doCommand(vector<string> line, int i)
 {
@@ -98,13 +113,15 @@ void whileCommand::doCommand(vector<string> line, int i)
             whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
             cout << "insert line: "<<Lexer::getInstance()->AllLinesSeparated[j][0] <<" "<<Lexer::getInstance()->AllLinesSeparated[j][1]<<endl;
             // Lexer::getInstance()->AllLinesSeparated[j].clear();             //clear the original vector 
+            cout<<"line j: "<<Lexer::getInstance()->AllLinesSeparated[j].size()<<endl;
             cout <<"big vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<"\n";    
             // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
 
         }
         
         cout <<"left vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<" |\t";    
-        cout <<"while lines: "<<whileLines.size()<<endl;                                               
+        loopLength = whileLines.size();                                              
+        cout <<"while lines: "<<loopLength<<endl; 
         
         for (size_t k = 0; k < whileLines.size(); k++)
         {
@@ -113,6 +130,10 @@ void whileCommand::doCommand(vector<string> line, int i)
         }
     }
     else cout << "Variable not found" << endl;
+}
+int whileCommand::get_i(int i)
+{
+    return i += loopLength;
 }
 
 template<typename K, typename V, typename T>
@@ -134,6 +155,10 @@ void setCommand::doCommand(vector<string> line, int i)
     }
     else {cout << "Illegal command" << endl;}
 }
+int setCommand::get_i(int i)
+{
+    return i;
+}
 
 void sleepCommand::doCommand(vector<string> line, int i)       //sleep
 {
@@ -144,4 +169,7 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
     }
     else cout << "Illegal command" << endl;
 }
-
+int sleepCommand::get_i(int i)
+{
+    return i;
+}

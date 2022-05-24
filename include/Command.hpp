@@ -17,6 +17,7 @@ class Command
 {
 public:
     virtual void doCommand(vector<string> line, int i) = 0;
+    virtual int get_i(int i) = 0;
 
 };
 
@@ -24,30 +25,35 @@ class openServerCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 class connectCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 class varCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 class setCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 class printCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 class whileCommand : public Command
@@ -58,12 +64,15 @@ private:
 
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
+    int loopLength;
 };
 
 class sleepCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
+    virtual int get_i(int i);
 };
 
 #endif
