@@ -34,15 +34,15 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 void Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
 {
     auto it = Database::getInstance()->VarTable.find(line[0]);
-    if (it == Database::getInstance()->VarTable.end())
+    if (it == Database::getInstance()->VarTable.end())          //if the line[0] is a command
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line);
     }
-    else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)
+    else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)  //if line[0] is a var
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line);     
     }
-    else
+    else                                                        //if line[0] is the end of while loop
     {
         int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
         if (location != 0) cout<<"location: "<<location<<endl;

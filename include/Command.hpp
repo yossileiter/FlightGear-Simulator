@@ -16,6 +16,7 @@ class Command
 {
 public:
     virtual void doCommand(vector<string> line) = 0;
+
 };
 
 class openServerCommand : public Command
@@ -50,8 +51,12 @@ public:
 
 class whileCommand : public Command
 {
+private:
+
 public:
     void doCommand(vector<string> line);
+    template<typename K, typename V, typename T>
+    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
 };
 
 class sleepCommand : public Command

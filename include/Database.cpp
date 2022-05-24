@@ -20,6 +20,7 @@ void Database::buildCommandMap()
     Command *SetCommand = new setCommand();
     Command *PrintCommand = new printCommand();
     Command *SleepCommand = new sleepCommand();
+    Command *WhileCommand = new whileCommand();
 
     Database::getInstance()->CommandMap["connect"] = ConnectCommand;
     Database::getInstance()->CommandMap["openDataServer"] = OpenServerCommand;
@@ -27,6 +28,7 @@ void Database::buildCommandMap()
     Database::getInstance()->CommandMap["set"] = SetCommand;
     Database::getInstance()->CommandMap["print"] = PrintCommand;
     Database::getInstance()->CommandMap["sleep"] = SleepCommand;
+    Database::getInstance()->CommandMap["while"] = WhileCommand;
 }
 
 void Database::buildSymbolMap()

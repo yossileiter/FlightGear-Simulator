@@ -24,3 +24,6 @@ If you want to run the SERVER, the first line must be `server 5400 127.0.0.1`
 ### Client
 If you want to run the CLIENT, the first line must be `client 5402 127.0.0.1`
 
+### Kill the process
+Run this `kill -9 $(lsof -ti :5400)`
+

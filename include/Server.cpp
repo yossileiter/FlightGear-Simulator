@@ -83,12 +83,12 @@ void Server::ListeningToSimulator()
 	while (true)
 	{
 		valread = read(new_socket, buffer, 4096);
-		vector<double> values =	SplitLine(buffer);
+		vector<double> values =	SplitLine(buffer);			//split buffer to a vector
 
-		for (size_t i = 0; i < values.size(); i++)
+		for (size_t i = 0; i < values.size(); i++)		
 		{
-			Database::getInstance()->SymbolTable[paths[i]] = values[i];
-			cout << Database::getInstance()->SymbolTable[paths[i]]<<", ";
+			Database::getInstance()->SymbolTable[paths[i]] = values[i];		//update symbol table from the buffer
+			cout << Database::getInstance()->SymbolTable[paths[i]]<<", ";	
 		}
 		// cout << endl << buffer <<endl;
 		cout <<"\n";

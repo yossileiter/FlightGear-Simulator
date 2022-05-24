@@ -39,7 +39,7 @@ void varCommand::doCommand(vector<string> line)
     {   
         line[4].pop_back();
         line[4].erase(0,1);
-        Database::getInstance()->VarTable[line[1]] = line[4];
+        Database::getInstance()->VarTable[line[1]] = line[4];       //insert to var table
         cout << "'" << line[1] << "' bound successfully!" << endl;
         // PrintMap(Database::getInstance()->VarTable);        
     }   
@@ -59,30 +59,47 @@ void varCommand::doCommand(vector<string> line)
 
 void printCommand::doCommand(vector<string> line)
 {
-    if (line[1].find("\""))
+    if (line[1].find("\""))         //find "" in the line and remove it
     {
         line[1].erase(0,1);
         line[1].pop_back();
         cout << line[1] << endl;
     }
-    else
+    else                            //print a variable
     {
-        string path = Database::getInstance()->VarTable[line[1]];
-        cout << path <<endl;
+        string path = Database::getInstance()->VarTable[line[1]]; 
+        // cout << path <<endl;
         double value = Database::getInstance()->SymbolTable[path];
-        cout << value <<endl;
+        // cout << value <<endl;
         cout << line[1] << ": " << value << endl;
     }
 }
 
 void whileCommand::doCommand(vector<string> line)
 {
-    if (line[1].find("{")) { }
+    // if (line[1].find("{")) { }
+    cout<<"WHILE LOOP!!!"<<endl;
+
+    if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
+    {
+        double varValue;
+        string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
+        varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
+        cout << "value is: " << varValue << endl;
+    }
+    else cout << "Variable not found" << endl;
 }
-\
+
+template<typename K, typename V, typename T>
+bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
+{
+    if (map.count(element)) return 0;
+    else return 1;
+}
+
 void setCommand::doCommand(vector<string> line)
 {
-    if (line.size() == 3)
+    if (line.size() == 3)                       //send set command
     {
         string stringSet = "set ";
         stringSet += Database::getInstance()->VarTable[line[0]] + " " + line[2] + "\r\n";
@@ -93,7 +110,7 @@ void setCommand::doCommand(vector<string> line)
     else {cout << "Illegal command" << endl;}
 }
 
-void sleepCommand::doCommand(vector<string> line)
+void sleepCommand::doCommand(vector<string> line)       //sleep
 {
     if (line.size() == 2)
     {
