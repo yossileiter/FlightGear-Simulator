@@ -33,12 +33,20 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 
 void Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
 {
-    auto it = Database::getInstance()->VarTable.find(line[0]);
-    if (it == Database::getInstance()->VarTable.end())          //if the line[0] is a command
+    cout << line[0]<<endl;
+    if (line[0]=="}")
+    {
+        cout <<"do nothing"<<endl;
+    }
+    // if (line.empty())
+    // {
+    //     cout <<"do nothing"<<endl;
+    // }
+    else if (Database::getInstance()->VarTable.find(line[0]) == Database::getInstance()->VarTable.end()) //if the line[0] is a command
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
     }
-    else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)  //if line[0] is a var
+    else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)          //if line[0] is a var
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line, i);     
     }
@@ -46,6 +54,8 @@ void Parser::parsing(vector<string> line, size_t i) // take a line and execute t
     {
         cout <<"do nothing"<<endl;
     }
+    // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
+    // cout<<"anyway"<<endl;
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector

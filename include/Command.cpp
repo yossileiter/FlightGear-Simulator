@@ -1,5 +1,6 @@
 #include "Command.hpp"
 #include "Database.hpp"     //this include can't work from header file
+#include "parser.hpp"
 
 template<typename K, typename V>
 void PrintMap(unordered_map<K, V> const &m)
@@ -79,8 +80,8 @@ void printCommand::doCommand(vector<string> line, int i)
 void whileCommand::doCommand(vector<string> line, int i)
 {
     // if (line[1].find("{")) { }
-    cout<<"WHILE LOOP!!!"<<endl;
-    cout <<"original size: "<<Lexer::getInstance()->AllLinesSeparated.size()<<endl;
+    cout<<"WHILE LOOP!!!\t\t";
+    cout <<"original size: "<<Lexer::getInstance()->AllLinesSeparated.size()<<" |\t";
     
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
@@ -88,21 +89,28 @@ void whileCommand::doCommand(vector<string> line, int i)
         double varValue;
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
         varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-        // cout << "value is: " << varValue << endl;
         int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
-        // if (location != 0) cout<<"location: "<<location<<endl;
-        // else cout<<"not found\n";
-        // cout<< "size: "<< 
-        for (size_t j = i+1; j <= location; j++)
+        cout<<"location: "<<location<<endl;
+        cout<<"i: "<<i<<endl;
+        for (size_t j = i+1; j < location; j++)
         {   
+            cout<<"j: "<<j<<endl;
             whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
-            Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin()+i);
+            cout << "insert line: "<<Lexer::getInstance()->AllLinesSeparated[j][0] <<" "<<Lexer::getInstance()->AllLinesSeparated[j][1]<<endl;
+            // Lexer::getInstance()->AllLinesSeparated[j].clear();             //clear the original vector 
+            cout <<"big vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<"\n";    
+            // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
+
         }
         
-    cout <<"left vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<endl;    
-    cout <<"while lines: "<<whileLines.size()<<endl;                                              
-    
-
+        cout <<"left vector: " <<Lexer::getInstance()->AllLinesSeparated.size()<<" |\t";    
+        cout <<"while lines: "<<whileLines.size()<<endl;                                               
+        
+        for (size_t k = 0; k < whileLines.size(); k++)
+        {
+            cout << "parsing line: "<<whileLines[k][0] <<" "<<whileLines[k][1]<<endl;
+            Parser::getInstance()->parsing(whileLines[k], 100);
+        }
     }
     else cout << "Variable not found" << endl;
 }
