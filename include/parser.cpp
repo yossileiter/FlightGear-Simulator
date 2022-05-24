@@ -31,7 +31,7 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
     }
 }
 
-void Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
+int Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
 {
     // cout << line[0]<<endl;
     // if (line[0]=="}")
@@ -57,6 +57,7 @@ void Parser::parsing(vector<string> line, size_t i) // take a line and execute t
     if (line[0]=="}")
     {
         cout <<"do nothing"<<endl;
+        return i;
     }
     // if (line.empty())
     // {
@@ -66,15 +67,18 @@ void Parser::parsing(vector<string> line, size_t i) // take a line and execute t
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
         cout<<"i: "<<Database::getInstance()->CommandMap[line[0]]->get_i(i)<<endl;
+        return Database::getInstance()->CommandMap[line[0]]->get_i(i);
     }
     else if (CkeckElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)          //if line[0] is a var
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
         cout<<"i: "<<Database::getInstance()->CommandMap["set"]->get_i(i)<<endl;   
+        return Database::getInstance()->CommandMap["set"]->get_i(i);
     }
     else
     {
         cout <<"do nothing"<<endl;
+        return i;
     }
     // Lexer::getInstance()->AllLinesSeparated.erase(Lexer::getInstance()->AllLinesSeparated.begin());
     // cout<<"anyway"<<endl;
