@@ -3,6 +3,7 @@
 #include "Server.hpp"
 #include "Client.hpp"
 #include "Lexer.hpp"
+#include "ShuntingYard.cpp"
 
 #include <chrono>
 #include <thread>
@@ -61,7 +62,7 @@ class whileCommand : public Command
 private:
     template<typename K, typename V, typename T>
     bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
-    bool checkExpression(string x, string op, string y);
+    bool checkExpression(int x, string op, string y);
 
 public:
     void doCommand(vector<string> line, int i);

@@ -225,15 +225,3 @@ public:
 
 template< class T > 
 void Token< T >::evaluate (Calculator * c) { c->consume (token_); }
-
-int main () {
-    Calculator c;
-    std::cout << c.calculate ("1/998001") << std::endl;
-    for (size_t i = 0; i < 3; i++)
-    {
-        std::cout<<"hey\n";
-        // i = 3;
-    }
-    
-    return 0;
-}

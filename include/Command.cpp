@@ -88,26 +88,30 @@ int printCommand::get_i(int i)
 void whileCommand::doCommand(vector<string> line, int i)
 {
     cout<<"While loop {\n";
-    checkExpression(line[1], line[2], line[3]);
+
+    int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
+    vector<vector<string>> whileLines;
+    for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
+    {   
+        whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
+    }
+
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
-        vector<vector<string>> whileLines;
-        double varValue;
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
-        varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-        int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
-
-        for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
-        {   
-            whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
-        }
-        
+        double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
         loopLength = whileLines.size();                                                      
-        for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
+        
+        if (checkExpression(varValue, line[2], line[3]) == 1)
         {
-            Parser::getInstance()->parsing(whileLines[k], i);
+            
+            for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
+            {
+                Parser::getInstance()->parsing(whileLines[k], i);
+            }
+            cout <<"}\nEnd while loop\n";
         }
-        cout <<"}\n End while loop\n";
+        else (cout <<"The condition is not met\n}\n End while loop\n");
     }
     else cout << "Variable not found" << endl;
 }
@@ -122,10 +126,9 @@ bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     if (map.count(element)) return 0;
     else return 1;
 }
-bool whileCommand::checkExpression(string x, string op, string y)
+bool whileCommand::checkExpression(int x, string op, string yString)
 {
-    x = stoi(x);
-    y = stoi(y);
+    int y = stoi(yString);
 
     if      ((op == "==") && (x == y))  return true;
     else if ((op == "!=") && (x != y))  return true;
@@ -145,6 +148,10 @@ void setCommand::doCommand(vector<string> line, int i)
         cout << stringSet << endl;
         char* newStringSet = &stringSet[0];
         Client::getInstance()->Send(newStringSet);
+    }
+    else if (line.size() > 3)
+    {
+
     }
     else {cout << "Illegal command" << endl;}
 }

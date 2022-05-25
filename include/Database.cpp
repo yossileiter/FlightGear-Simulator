@@ -38,7 +38,7 @@ void Database::buildSymbolMap()
 
     SymbolTable["/instrumentation/airspeed-indicator/indicated-speed-kt"] = 0;
     SymbolTable["/instrumentation/heading-indicator/offset-deg"] = 0;
-    SymbolTable["/instrumentation/altimeter/indicated-altitude-ft"] = 0;
+    SymbolTable["/instrumentation/altimeter/indicated-altitude-ft"] = 120;
     SymbolTable["/instrumentation/altimeter/pressure-alt-ft"] = 0;
     SymbolTable["/instrumentation/attitude-indicator/indicated-pitch-deg"] = 0;
     SymbolTable["/instrumentation/attitude-indicator/indicated-roll-deg"] = 0;
