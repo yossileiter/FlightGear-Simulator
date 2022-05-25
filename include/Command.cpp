@@ -141,19 +141,41 @@ bool whileCommand::checkExpression(int x, string op, string yString)
 
 void setCommand::doCommand(vector<string> line, int i)
 {
+    double varValue;
+    string stringSet = "set " + Database::getInstance()->VarTable[line[0]] + " ";
+
     if (line.size() == 3)                       //send set command
     {
-        string stringSet = "set ";
-        stringSet += Database::getInstance()->VarTable[line[0]] + " " + line[2] + "\r\n";
+        stringSet += line[2] + "\r\n";
         cout << stringSet << endl;
         char* newStringSet = &stringSet[0];
         Client::getInstance()->Send(newStringSet);
     }
     else if (line.size() > 3)
     {
-
+        for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the 2 first)
+        {
+            if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
+            {
+                varValue = getVarValue(line[j]);                                        //get his value
+                cout<<line[j]<<" in\n";
+            }
+            else cout<<line[j]<<" not in\n";
+        }
     }
     else {cout << "Illegal command" << endl;}
+}
+template<typename K, typename V, typename T>
+bool setCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
+{
+    if (map.count(element)) return 0;
+    else return 1;
+}
+double setCommand::getVarValue(string var)
+{
+    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
+    double varValue = Database::getInstance()->SymbolTable[devicePath]; //get the variable value
+    return varValue;
 }
 int setCommand::get_i(int i)
 {

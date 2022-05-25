@@ -48,6 +48,9 @@ class setCommand : public Command
 public:
     void doCommand(vector<string> line, int i);
     virtual int get_i(int i);
+    double getVarValue(string var);
+    template<typename K, typename V, typename T>
+    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
 };
 
 class printCommand : public Command
