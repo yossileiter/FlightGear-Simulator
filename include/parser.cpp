@@ -47,11 +47,6 @@ int Parser::parsing(vector<string> line, size_t i) // take a line and execute th
         Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
         return Database::getInstance()->CommandMap["set"]->get_i(i);
     }
-    else
-    {
-        cout <<"do nothing"<<endl;
-        return i;
-    }
 }
 
 void Parser::PrintVector(vector<string> v) //print a vector

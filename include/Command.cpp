@@ -91,20 +91,20 @@ void whileCommand::doCommand(vector<string> line, int i)
 
     int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
     vector<vector<string>> whileLines;
+
     for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
     {   
         whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
     }
+    loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
         double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-        loopLength = whileLines.size();                                                      
         
-        if (checkExpression(varValue, line[2], line[3]) == 1)
+        if (checkExpression(varValue, line[2], line[3]) == 1)       //check if the condition is met
         {
-            
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
             {
                 Parser::getInstance()->parsing(whileLines[k], i);
@@ -113,7 +113,7 @@ void whileCommand::doCommand(vector<string> line, int i)
         }
         else (cout <<"The condition is not met\n}\n End while loop\n");
     }
-    else cout << "Variable not found" << endl;
+    else cout << "Variable not found\n}\n End while loop\n";
 }
 int whileCommand::get_i(int i)                                  //increase the i by amount of while lines
 {
