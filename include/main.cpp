@@ -5,8 +5,8 @@ int main()
     Database::getInstance()->buildCommandMap();     //maybe should be in background
     Database::getInstance()->buildSymbolMap();      //maybe should be in background
     Parser::getInstance()->Lexing();
-    // Calculator c;
-    // cout<<c.calculate("2.0000000/70")<<endl;
+    Calculator c;
+    cout<<c.calculate("0-2.0000000/70")<<endl;
 
     for (size_t i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
@@ -15,9 +15,3 @@ int main()
     
     return 0;
 }
-
-
-
-
-
-

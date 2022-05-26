@@ -147,29 +147,44 @@ void setCommand::doCommand(vector<string> line, int i)
     if (line.size() == 3)                       //send set command
     {
         stringSet += line[2] + "\r\n";
-        cout << stringSet << endl;
+        // cout << stringSet << endl;
         char* newStringSet = &stringSet[0];
         Client::getInstance()->Send(newStringSet);
+        // return;
     }
     else if (line.size() > 3)
     {
-        string stringSet2;
+        string tempStringSet;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the 2 first)
         {
+            if (CkeckElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)     //for var h0
+            {
+                cout <<"in symbol" <<endl;
+                // varValue = getVarValue(line[j]);                                        //get his value
+                // stringSet2 += to_string(varValue);
+                // cout<<"["<<line[j]<<" in. value: "<<varValue<<"] ";
+                // cout<<"\n string set: "<<stringSet2<<endl;
+                // return;
+            }
             if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                        //get his value
-                stringSet2 += to_string(varValue);
-                cout<<"["<<line[j]<<" in. value: "<<varValue<<"] ";
-                // cout<<"\n string set: "<<stringSet2<<endl;
+                tempStringSet += to_string(varValue);
             }
             else
             {
-                cout<<"["<<line[j]<<" not] ";
-                stringSet2 += line[j];
+                tempStringSet += line[j];
             }
         }
-        cout<<" || string is: "<<stringSet2<<endl;
+
+        string stringWithZero = "0";                        //avoid "-" in front of a line
+        stringWithZero += tempStringSet;
+
+        Calculator c;   
+        double answer = c.calculate(stringWithZero);        //calculate the expression
+        stringSet += to_string(answer)  += "\r\n";          
+        char* newStringSet = &stringSet[0];                 
+        Client::getInstance()->Send(newStringSet);          //send to client
     }
     else {cout << "Illegal command" << endl;}
 }
