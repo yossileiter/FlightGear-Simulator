@@ -159,32 +159,31 @@ void setCommand::doCommand(vector<string> line, int i)
         {
             if (CkeckElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)     //for var h0
             {
-                cout <<"in symbol" <<endl;
-                // varValue = getVarValue(line[j]);                                        //get his value
-                // stringSet2 += to_string(varValue);
-                // cout<<"["<<line[j]<<" in. value: "<<varValue<<"] ";
-                // cout<<"\n string set: "<<stringSet2<<endl;
-                // return;
+                varValue = Database::getInstance()->SymbolTable[line[j]]; 
+                tempStringSet += to_string(varValue);
+                // cout <<j<<": temp: "<<tempStringSet<<endl;
             }
-            if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
+            else if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                        //get his value
                 tempStringSet += to_string(varValue);
+                // cout <<j<< ": temp: "<<tempStringSet<<endl;
             }
             else
             {
                 tempStringSet += line[j];
+                // cout <<j<< ": temp: "<<tempStringSet<<endl;
             }
         }
-
+        // cout << "final temp: "<<tempStringSet<<endl;
         string stringWithZero = "0";                        //avoid "-" in front of a line
         stringWithZero += tempStringSet;
-
         Calculator c;   
         double answer = c.calculate(stringWithZero);        //calculate the expression
+        
         stringSet += to_string(answer)  += "\r\n";          
-        char* newStringSet = &stringSet[0];                 
-        Client::getInstance()->Send(newStringSet);          //send to client
+        char* stringSetToChar = &stringSet[0];                 
+        Client::getInstance()->Send(stringSetToChar);          //send to client
     }
     else {cout << "Illegal command" << endl;}
 }
