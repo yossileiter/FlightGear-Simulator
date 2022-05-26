@@ -208,8 +208,8 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
 {
     if (line.size() == 2)
     {
-        this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
         cout << "Waiting " << line[1] << " milliseconds" << endl;
+        this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
     }
     else cout << "Illegal command" << endl;
 }
