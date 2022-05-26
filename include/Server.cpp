@@ -88,7 +88,6 @@ void Server::ListeningToSimulator()
 		for (size_t i = 0; i < values.size(); i++)		
 		{
 			Database::getInstance()->SymbolTable[paths[i]] = values[i];		//update symbol table from the buffer
-			// cout << Database::getInstance()->SymbolTable[paths[i]]<<", ";	
 		}
 	}
 }

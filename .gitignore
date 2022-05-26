@@ -1,13 +1,6 @@
 /.vscode
-/Command.h.gch
-/client
-/generic_small (1).xml
-/inter
-/server
 *.pdf
 *.out
 *.txt
 !FlightInstructions.txt
-/example_omri.cpp
-/test.cpp
 /main

@@ -20,7 +20,6 @@ public:
 
     static Database *getInstance();   
     void buildCommandMap();
-    void buildSymbolMap();
 };
 
 #endif
