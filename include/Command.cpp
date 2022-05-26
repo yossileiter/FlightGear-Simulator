@@ -103,7 +103,7 @@ void whileCommand::doCommand(vector<string> line, int i)
         string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
         double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
         
-        if (checkExpression(varValue, line[2], line[3]) == 1)       //check if the condition is met
+        while (checkExpression(varValue, line[2], line[3]) == 1)       //check if the condition is met
         {
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
             {
@@ -111,7 +111,7 @@ void whileCommand::doCommand(vector<string> line, int i)
             }
             cout <<"}\nEnd while loop\n";
         }
-        else (cout <<"The condition is not met\n}\n End while loop\n");
+        // else (cout <<"The condition is not met\n}\n End while loop\n");
     }
     else cout << "Variable not found\n}\n End while loop\n";
 }
