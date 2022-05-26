@@ -1,0 +1,55 @@
+openDataServer 5400
+connect 127.0.0.1 5402
+var warp = bind "/sim/time/warp"
+var magnetos = bind "/controls/switches/magnetos"
+var throttle = bind "/controls/engines/current-engine/throttle"
+var mixture = bind "/controls/engines/current-engine/mixture"
+var masterbat = bind "/controls/switches/master-bat"
+var masterlat = bind "/controls/switches/master-alt"
+var masteravionics = bind "/controls/switches/master-avionics"
+var brakeparking = bind "/sim/model/c172p/brake-parking"
+var primer = bind "/controls/engines/engine/primer"
+var starter = bind "/controls/switches/starter"
+var autostart = bind "/engines/active-engine/auto-start"
+var breaks = bind "/controls/flight/speedbrake"
+var heading = bind "/instrumentation/heading-indicator/offset-deg"
+var airspeed = bind "/instrumentation/airspeed-indicator/indicated-speed-kt"
+var roll = bind "/instrumentation/attitude-indicator/indicated-roll-deg"
+var pitch = bind "/instrumentation/attitude-indicator/internal-pitch-deg"
+var rudder = bind "/controls/flight/rudder"
+var aileron = bind "/controls/flight/aileron"
+var elevator = bind "/controls/flight/elevator"
+var alt = bind "/instrumentation/altimeter/indicated-altitude-ft"
+var rpm = bind "/engines/engine/rpm"
+sleep 30000
+print "let's_start"
+sleep 1000
+magnetos = 3
+throttle = 0.2
+mixture = 0.949
+masterbat = 1
+masterlat = 1
+masteravionics = 1
+brakeparking = 0
+primer = 3
+starter = 1
+autostart = 1
+print "engine_is_warming..."
+print rpm
+rpm = 800
+print rpm
+sleep 5000
+print "let's_fly"
+var h0 = heading
+print h0
+sleep 10000
+breaks = 0
+throttle = 1
+while alt < 1000 {
+rudder = ( h0 - heading ) / 20
+aileron = ( 0 - roll ) / 70
+elevator = pitch / 50
+print alt
+sleep 250
+}
+print "done"
