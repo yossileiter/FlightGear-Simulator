@@ -69,6 +69,7 @@ void Server::Connect(int port, const char *ip)
 		exit(EXIT_FAILURE);
 	}
 	Server::getInstance()->t1 = thread(&Server::ListeningToSimulator, this);
+	// system("fgfs --telnet=socket,in,10,127.0.0.1,5402,tcp --generic=socket,out,10,127.0.0.1,5400,tcp,generic_small");
 }
 
 void Server::ListeningToSimulator()
