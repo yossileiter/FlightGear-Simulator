@@ -12,28 +12,21 @@ Server *Server::getInstance()
 
 
 vector <double> Server::SplitLine(string line) 		//split a line into words
-    {	
-		vector<double> values;
-        string temp = "";
-        for(int i=0 ;i<line.length(); ++i)
-        {
-            if(line[i]==',')
-            {
-                values.push_back(stod(temp));
-                temp = "";
-            }
-            else { temp.push_back(line[i]); }		
-        }
-        values.push_back(stod(temp));
-		return values;	
-    };
-
-void Server::PrintVector(vector<double> v) //print a vector
-    {
-        for(int i=0;i<v.size();++i)
-            cout<<v[i]<<endl;
-        cout<<"\n";
-    }
+{	
+	vector<double> values;
+	string temp = "";
+	for(int i=0 ;i<line.length(); ++i)
+	{
+		if(line[i]==',')
+		{
+			values.push_back(stod(temp));
+			temp = "";
+		}
+		else { temp.push_back(line[i]); }		
+	}
+	values.push_back(stod(temp));
+	return values;	
+};
 
 void Server::Connect(int port, const char *ip)
 {

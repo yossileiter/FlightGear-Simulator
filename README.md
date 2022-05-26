@@ -1,3 +1,13 @@
+<p align="center">
+  <img 
+    align="right"
+    width="167"
+    height="222"
+    src="https://wiki.flightgear.org/w/images/0/00/Fglogo1.png"
+  >
+</p>
+
+
 # FlightGear-Simulator
 
 ### Getting Started

@@ -49,10 +49,3 @@ void Lexer::SplitLine(string s) //split a line into words
     }
     v.push_back(temp);	
 };
-
-
-void Lexer::PrintVector(vector<string> v) //print a vector
-    {
-        for(int i=0;i<v.size();++i) cout<<v[i]<<endl;
-        cout<<"\n";
-    }

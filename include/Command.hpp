@@ -26,28 +26,28 @@ class openServerCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
 };
 
 class connectCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
 };
 
 class varCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
 };
 
 class setCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
     double getVarValue(string var);
     template<typename K, typename V, typename T>
     bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
@@ -57,7 +57,7 @@ class printCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
 };
 
 class whileCommand : public Command
@@ -69,7 +69,7 @@ private:
 
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
     int loopLength;
 };
 
@@ -77,7 +77,7 @@ class sleepCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    virtual int get_i(int i);
+    int get_i(int i);
 };
 
 #endif

@@ -15,11 +15,6 @@ bool Parser::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     else return 1;
 }
 
-void Parser::BuildCommandsMap() //create commands objects and insert to hash table
-{
-    
-}
-
 void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 {
     Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
@@ -49,10 +44,3 @@ int Parser::parsing(vector<string> line, size_t i) // take a line and execute th
     }
     return 0;
 }
-
-void Parser::PrintVector(vector<string> v) //print a vector
-    {
-        for(size_t i=0;i<v.size();++i)
-            cout<<v[i]<<endl;
-        cout<<"\n";
-    }

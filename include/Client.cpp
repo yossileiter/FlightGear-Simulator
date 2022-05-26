@@ -36,6 +36,6 @@ void Client::Connect(int port, const char *ip)
 void Client::Send(char *command)
 {
 	::send(sock, command, strlen(command), 0);
-	valread = read(sock, buffer, BUFSIZE);
-	cout << buffer << endl;
+	// valread = read(sock, buffer, BUFSIZE);
+	// cout << buffer << endl;
 }
