@@ -22,7 +22,7 @@ void Parser::BuildCommandsMap() //create commands objects and insert to hash tab
 
 void Parser::Lexing() // create a lexer and lex the file into vector of vectors
 {
-    Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
+    Lexer::getInstance()->ReadInstructions("FlightInstructions2.txt");
     for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
         Lexer::getInstance()->SplitLine(Lexer::getInstance()->AllLines[i]);
