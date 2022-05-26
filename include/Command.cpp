@@ -153,15 +153,23 @@ void setCommand::doCommand(vector<string> line, int i)
     }
     else if (line.size() > 3)
     {
+        string stringSet2;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the 2 first)
         {
             if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                        //get his value
-                cout<<line[j]<<" in\n";
+                stringSet2 += to_string(varValue);
+                cout<<"["<<line[j]<<" in. value: "<<varValue<<"] ";
+                // cout<<"\n string set: "<<stringSet2<<endl;
             }
-            else cout<<line[j]<<" not in\n";
+            else
+            {
+                cout<<"["<<line[j]<<" not] ";
+                stringSet2 += line[j];
+            }
         }
+        cout<<" || string is: "<<stringSet2<<endl;
     }
     else {cout << "Illegal command" << endl;}
 }
