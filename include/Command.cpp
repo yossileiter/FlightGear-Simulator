@@ -101,10 +101,10 @@ void whileCommand::doCommand(vector<string> line, int i)
 
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
     {
-        string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
-        double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
+        // string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
+        // double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
         
-        while (checkExpression(varValue, line[2], line[3]) == 1)       //check if the condition is met
+        while (checkExpression(getValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
         {
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
             {
@@ -119,6 +119,13 @@ void whileCommand::doCommand(vector<string> line, int i)
 int whileCommand::get_i(int i)                                  //increase the i by amount of while lines
 {
     return i += loopLength;                                     
+}
+
+double whileCommand::getValue(string line_1)
+{
+    string devicePath = Database::getInstance()->VarTable[line_1];         //get device path from var table
+    double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
+    return varValue;
 }
 
 template<typename K, typename V, typename T>
@@ -178,17 +185,17 @@ void setCommand::doCommand(vector<string> line, int i)
             }
         }
         // cout << "final temp: "<<tempStringSet<<endl;            //delete
-        string stringWithZero = "0";                        //avoid "-" in front of a line
-        stringWithZero += tempStringSet;
-        // cout << stringWithZero<<endl;       //delete
+        // string stringWithZero = "0";                        //avoid "-" in front of a line
+        // stringWithZero += tempStringSet;
+        cout << tempStringSet<<endl;       //delete
 
         Calculator c;   
-        double answer = c.calculate(stringWithZero);        //calculate the expression
+        double answer = c.calculate(tempStringSet);        //calculate the expression
         
         stringSet += to_string(answer)  += "\r\n";          
         char* stringSetToChar = &stringSet[0];                 
         Client::getInstance()->Send(stringSetToChar);          //send to client
-        // cout << stringSetToChar <<endl;     //delete
+        cout << stringSetToChar <<endl;     //delete
     }
     else {cout << "Illegal command" << endl;}
 }

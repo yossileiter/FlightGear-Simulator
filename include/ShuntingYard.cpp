@@ -207,7 +207,19 @@ public:
         Evaluate expression 
         Note: Expression is expected to be in infix form.
      */
-    double calculate (const std::string& expr) { 
+    double calculate (std::string& expr) { 
+        if (expr[2] == '-' && expr[3] == '-')
+        {
+            cout <<"before +: "<<expr<<endl;
+            expr.erase(2,2);
+            // expr = '+' + expr;
+        }
+        cout <<"after +: "<<expr<<endl;
+        string stringWithZero = "0";                        //avoid "-" in front of a line
+        expr = stringWithZero += expr;
+        cout <<"after zero: "<<expr<<endl;
+
+
         ShuntingYard shunting(expr);
         RPNExpression rpn = shunting.to_rpn ();
         flush ();

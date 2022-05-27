@@ -68,6 +68,7 @@ private:
     bool checkExpression(int x, string op, string y);
 
 public:
+    double getValue(string line_1);
     void doCommand(vector<string> line, int i);
     int get_i(int i);
     int loopLength;
