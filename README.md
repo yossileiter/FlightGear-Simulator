@@ -27,8 +27,6 @@ Make sure you have the file `generic_small.xml` in `/usr/share/games/flightgear/
 
 - Then launch the program `./main`.
 
-- Launch the FlightGear, and press the button `fly!`.
-
 
 The `main` file reads the commands from `FlightInstructions.txt` file.
 
