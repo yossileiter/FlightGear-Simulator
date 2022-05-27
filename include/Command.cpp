@@ -49,7 +49,7 @@ void varCommand::doCommand(vector<string> line, int i)
         line[4].erase(0,1);
         Database::getInstance()->VarTable[line[1]] = line[4];       //insert to var table
         cout << "'" << line[1] << "' bound successfully!" << endl;  
-        cout << "path is: " << Database::getInstance()->VarTable[line[1]] << endl;      //delete
+        // cout << "path is: " << Database::getInstance()->VarTable[line[1]] << endl;      //delete
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
     {
@@ -163,24 +163,24 @@ void setCommand::doCommand(vector<string> line, int i)
             {
                 varValue = Database::getInstance()->SymbolTable[line[j]]; 
                 tempStringSet += to_string(varValue);
-                cout <<j<<": temp: "<<tempStringSet<<endl;      //delete
+                // cout <<j<<": temp: "<<tempStringSet<<endl;      //delete
             }
             else if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                        //get his value
                 tempStringSet += to_string(varValue);
-                cout <<j<< ": temp: "<<tempStringSet<<endl;     //delete
+                // cout <<j<< ": temp: "<<tempStringSet<<endl;     //delete
             }
             else
             {
                 tempStringSet += line[j];
-                cout <<j<< ": temp: "<<tempStringSet<<endl;     //delete
+                // cout <<j<< ": temp: "<<tempStringSet<<endl;     //delete
             }
         }
         cout << "final temp: "<<tempStringSet<<endl;            //delete
         string stringWithZero = "0";                        //avoid "-" in front of a line
         stringWithZero += tempStringSet;
-        cout << stringWithZero<<endl;       //delete
+        // cout << stringWithZero<<endl;       //delete
 
         Calculator c;   
         double answer = c.calculate(stringWithZero);        //calculate the expression
@@ -188,7 +188,7 @@ void setCommand::doCommand(vector<string> line, int i)
         stringSet += to_string(answer)  += "\r\n";          
         char* stringSetToChar = &stringSet[0];                 
         Client::getInstance()->Send(stringSetToChar);          //send to client
-        cout << stringSetToChar <<endl;     //delete
+        // cout << stringSetToChar <<endl;     //delete
     }
     else {cout << "Illegal command" << endl;}
 }
