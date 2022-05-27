@@ -177,7 +177,7 @@ void setCommand::doCommand(vector<string> line, int i)
                 // cout <<j<< ": temp: "<<tempStringSet<<endl;     //delete
             }
         }
-        cout << "final temp: "<<tempStringSet<<endl;            //delete
+        // cout << "final temp: "<<tempStringSet<<endl;            //delete
         string stringWithZero = "0";                        //avoid "-" in front of a line
         stringWithZero += tempStringSet;
         // cout << stringWithZero<<endl;       //delete

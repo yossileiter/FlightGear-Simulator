@@ -27,7 +27,9 @@ public:
     static Server *getInstance();
     void Connect(int port, const char *ip);
     void ListeningToSimulator();
+    void launchFG();
     thread t1;
+    thread t2;
     ~Server();
 };
 

@@ -30,6 +30,7 @@ vector <double> Server::SplitLine(string line) 		//split a line into words
 
 void Server::Connect(int port, const char *ip)
 {
+	Server::getInstance()->t2 = thread(&Server::launchFG, this);
 	cout << "Waiting for the Simulator..." << endl;
 
 	struct sockaddr_in address;
@@ -69,7 +70,11 @@ void Server::Connect(int port, const char *ip)
 		exit(EXIT_FAILURE);
 	}
 	Server::getInstance()->t1 = thread(&Server::ListeningToSimulator, this);
-	// system("fgfs --telnet=socket,in,10,127.0.0.1,5402,tcp --generic=socket,out,10,127.0.0.1,5400,tcp,generic_small");
+}
+
+void Server::launchFG()
+{
+	system("fgfs --telnet=socket,in,10,127.0.0.1,5402,tcp --generic=socket,out,10,127.0.0.1,5400,tcp,generic_small");
 }
 
 void Server::ListeningToSimulator()
