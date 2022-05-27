@@ -32,6 +32,9 @@ Make sure you have the file `generic_small.xml` in `/usr/share/games/flightgear/
 
 The `main` file reads the commands from `FlightInstructions.txt` file.
 
+
+> Note that there is a problem with the Heading indicator so that it is not continuously updated, which may affect the direction of the plane
+
 #### Kill the process
 Run this `kill -9 $(lsof -ti :5400)`
 
