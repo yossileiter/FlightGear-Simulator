@@ -1,6 +1,0 @@
-/.vscode
-*.pdf
-*.out
-*.txt
-!FlightInstructions.txt
-/main
