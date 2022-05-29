@@ -14,7 +14,7 @@
 
 This interpreter allows you to fly the plane in the flight simulator.
 
-- Download the simulator from (http://home.flightgear.org/))[FlightGear.org]
+- Download the simulator from [FlightGear.org](http://home.flightgear.org/).
 
 - Run `make` in Terminal from the library `/FlightGear-Simulator/include`.
 
