@@ -208,17 +208,17 @@ public:
         Note: Expression is expected to be in infix form.
      */
     double calculate (std::string& expr) { 
-        if (expr[2] == '-' && expr[3] == '-')
+        for (size_t i = 0; i < expr.length(); i++)          
         {
-            cout <<"before +: "<<expr<<endl;
-            expr.erase(2,2);
-            // expr = '+' + expr;
+            if (expr[0] == '-') expr.insert(0, "0");        //avoid "-" in the start of expression
+            if (expr[i] == '-' && expr[i+1] == '-')         //avoid "--" in the expression
+            {
+                // cout <<"before +: "<<expr<<endl;
+                expr.erase(i,2);
+                expr.insert(i, "+");
+            }
         }
-        cout <<"after +: "<<expr<<endl;
-        string stringWithZero = "0";                        //avoid "-" in front of a line
-        expr = stringWithZero += expr;
-        cout <<"after zero: "<<expr<<endl;
-
+        // cout <<"after +: "<<expr<<endl;
 
         ShuntingYard shunting(expr);
         RPNExpression rpn = shunting.to_rpn ();

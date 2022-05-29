@@ -100,11 +100,8 @@ void whileCommand::doCommand(vector<string> line, int i)
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
     if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
-    {
-        // string devicePath = Database::getInstance()->VarTable[line[1]];         //get device path from var table
-        // double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-        
-        while (checkExpression(getValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
+    {        
+        while (checkExpression(getVarValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
         {
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
             {
@@ -112,7 +109,6 @@ void whileCommand::doCommand(vector<string> line, int i)
             }
             cout <<"}\nEnd while loop\n";
         }
-        // else (cout <<"The condition is not met\n}\n End while loop\n");
     }
     else cout << "Variable not found\n}\n End while loop\n";
 }
@@ -121,9 +117,9 @@ int whileCommand::get_i(int i)                                  //increase the i
     return i += loopLength;                                     
 }
 
-double whileCommand::getValue(string line_1)
+double whileCommand::getVarValue(string var)
 {
-    string devicePath = Database::getInstance()->VarTable[line_1];         //get device path from var table
+    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
     double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
     return varValue;
 }
@@ -134,7 +130,7 @@ bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     if (map.count(element)) return 0;
     else return 1;
 }
-bool whileCommand::checkExpression(int x, string op, string yString)
+bool whileCommand::checkExpression(double x, string op, string yString)
 {
     int y = stoi(yString);
 

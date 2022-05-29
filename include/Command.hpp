@@ -65,10 +65,10 @@ class whileCommand : public Command
 private:
     template<typename K, typename V, typename T>
     bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
-    bool checkExpression(int x, string op, string y);
+    bool checkExpression(double x, string op, string y);
+    double getVarValue(string var);
 
 public:
-    double getValue(string line_1);
     void doCommand(vector<string> line, int i);
     int get_i(int i);
     int loopLength;

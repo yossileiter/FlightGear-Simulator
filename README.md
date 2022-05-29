@@ -14,12 +14,7 @@
 
 This interpreter allows you to fly the plane in the flight simulator.
 
-You can download the simulator from `http://home.flightgear.org/`
-
-Don't forget to add in the `Settings` screen, add the following lines in `additional settings`
-
-`--telnet=socket,in,10,127.0.0.1,5402,tcp`  
-`--generic=socket,out,10,127.0.0.1,5400,tcp,generic_small`
+Download the simulator from `http://home.flightgear.org/`
 
 Make sure you have the file `generic_small.xml` in `/usr/share/games/flightgear/Protocol/`. 
 
