@@ -14,8 +14,7 @@
 
 This interpreter allows you to fly the plane in the flight simulator.
 
-Download the simulator from `http://home.flightgear.org/`
-
+- Download the simulator from (http://home.flightgear.org/))[FlightGear.org]
 
 - Run `make` in Terminal from the library `/FlightGear-Simulator/include`.
 
@@ -23,8 +22,9 @@ Download the simulator from `http://home.flightgear.org/`
 
 
 The program reads the commands from `FlightInstructions.txt` file.   
-in addition, the command `make` copy the file `generic_small.xml` into `/usr/share/games/flightgear/Protocol/`. 
 
+The command `make` copy the file `generic_small.xml` into `/usr/share/games/flightgear/Protocol/`, so you don't h 
+ave to do that.
 
 > Note that there is a problem with the Heading indicator so that it is not continuously updated, which may affect the direction of the plane
 

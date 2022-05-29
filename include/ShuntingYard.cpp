@@ -210,15 +210,16 @@ public:
     double calculate (std::string& expr) { 
         for (size_t i = 0; i < expr.length(); i++)          
         {
-            if (expr[0] == '-') expr.insert(0, "0");        //avoid "-" in the start of expression
-            if (expr[i] == '-' && expr[i+1] == '-')         //avoid "--" in the expression
+            if (expr[0] == '-') expr.insert(0, "0");                        //avoid "-" in the start of expression
+            if (expr[i] == '(' && expr[i+1] == '-') expr.insert(i+1, "0");  //avoid "-" in the start of expression with "("
+            if (expr[i] == '-' && expr[i+1] == '-')                         //avoid "--" in the expression
             {
                 // cout <<"before +: "<<expr<<endl;
                 expr.erase(i,2);
                 expr.insert(i, "+");
             }
         }
-        // cout <<"after +: "<<expr<<endl;
+        cout <<"after +: "<<expr<<endl;
 
         ShuntingYard shunting(expr);
         RPNExpression rpn = shunting.to_rpn ();
