@@ -208,6 +208,7 @@ public:
         Note: Expression is expected to be in infix form.
      */
     double calculate (std::string& expr) { 
+        cout << "expr: " <<expr<<endl;
         for (size_t i = 0; i < expr.length(); i++)          
         {
             if (expr[0] == '-') expr.insert(0, "0");                        //avoid "-" in the start of expression

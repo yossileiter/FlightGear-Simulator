@@ -12,7 +12,6 @@ var primer = bind "/controls/engines/engine/primer"
 var starter = bind "/controls/switches/starter"
 var autostart = bind "/engines/active-engine/auto-start"
 var breaks = bind "/controls/flight/speedbrake"
-var heading = bind "/instrumentation/heading-indicator/offset-deg"
 var airspeed = bind "/instrumentation/airspeed-indicator/indicated-speed-kt"
 var roll = bind "/instrumentation/attitude-indicator/indicated-roll-deg"
 var pitch = bind "/instrumentation/attitude-indicator/internal-pitch-deg"
@@ -21,6 +20,7 @@ var aileron = bind "/controls/flight/aileron"
 var elevator = bind "/controls/flight/elevator"
 var alt = bind "/instrumentation/altimeter/indicated-altitude-ft"
 var rpm = bind "/engines/engine/rpm"
+var heading = bind "/instrumentation/heading-indicator/indicated-heading-deg
 sleep 30000
 print "let's_start"
 sleep 1000
@@ -46,7 +46,11 @@ breaks = 0
 sleep 1000
 throttle = 1
 while alt < 1000 {
-rudder = ( h0 - heading ) / 20
+print heading
+print h1
+print h2
+print h3
+rudder = ( h0 - heading ) / 80
 print roll
 aileron = ( 0 - roll ) / 70
 print pitch

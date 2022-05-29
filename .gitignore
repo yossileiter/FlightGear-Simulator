@@ -3,4 +3,5 @@
 *.out
 *.txt
 !FlightInstructions.txt
+.gitignore
 /main
