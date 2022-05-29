@@ -1,9 +1,7 @@
-// #pragma once
 #ifndef DATABASE_H
 #define DATABASE_H
 #include <unordered_map>
 #include "Command.hpp"
-// #include "parser.hpp"
 
 using namespace std;
 

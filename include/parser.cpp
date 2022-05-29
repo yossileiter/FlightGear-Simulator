@@ -8,6 +8,19 @@ Parser *Parser::getInstance()   //create a singleton
 	return instance;	
 }
 
+vector <string> Parser::SplitLine(string s)
+{
+    vector <string> v;
+    string temp = "";
+    for(int i = 0 ; i < s.length(); ++i)
+    {
+        if(s[i]==' ') v.push_back(temp), temp = "";
+        else { temp.push_back(s[i]); }		
+    }
+    v.push_back(temp);
+    return v;
+}
+
 template<typename K, typename V, typename T>
 bool Parser::CkeckElementInMap(unordered_map<K,V> const &map, T element)
 {
@@ -20,9 +33,7 @@ void Parser::Lexing() // create a lexer and lex the file into vector of vectors
     Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
     for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
-        Lexer::getInstance()->SplitLine(Lexer::getInstance()->AllLines[i]);
-        Lexer::getInstance()->AllLinesSeparated.push_back(Lexer::getInstance()->v);
-        Lexer::getInstance()->v.clear();
+        Lexer::getInstance()->AllLinesSeparated.push_back(SplitLine(Lexer::getInstance()->AllLines[i]));
     }
 }
 

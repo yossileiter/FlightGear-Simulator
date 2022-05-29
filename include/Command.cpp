@@ -89,7 +89,7 @@ void whileCommand::doCommand(vector<string> line, int i)
 {
     cout<<"While loop {\n";
 
-    int location = Lexer::getInstance()->FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
+    int location = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
     vector<vector<string>> whileLines;
 
     for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
@@ -111,6 +111,23 @@ void whileCommand::doCommand(vector<string> line, int i)
     }
     else cout << "Variable not found\n}\n End while loop\n";
 }
+
+bool whileCommand::FindIfElementExist(vector<string> v, string element)
+{    
+    vector<string>::iterator it = find(v.begin(), v.end(), element.c_str());
+    if (it != v.end()) return 1;
+    else return 0;
+}
+
+int whileCommand::FindElementLocation(vector<vector<string>> v, string element)
+{
+    for (size_t rows = 0; rows < Lexer::getInstance()->AllLinesSeparated.size(); rows++)
+    {
+        if (FindIfElementExist(Lexer::getInstance()->AllLinesSeparated[rows], element)) return rows;
+    }
+    return 0;
+}
+
 int whileCommand::get_i(int i)                                  //increase the i by amount of while lines
 {
     return i += loopLength;                                     
@@ -206,7 +223,7 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
 {
     if (line.size() == 2)
     {
-        cout << "Waiting " << line[1] << " milliseconds" << endl;
+        cout << "Waiting " << line[1] << " Milliseconds" << endl;
         this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
     }
     else cout << "Illegal command" << endl;

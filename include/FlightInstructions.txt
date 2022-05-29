@@ -1,3 +1,5 @@
+print "hello world"
+print "hilbert"
 openDataServer 5400
 connect 127.0.0.1 5402
 var warp = bind "/sim/time/warp"
@@ -47,9 +49,6 @@ sleep 1000
 throttle = 1
 while alt < 1000 {
 print heading
-print h1
-print h2
-print h3
 rudder = ( h0 - heading ) / 80
 print roll
 aileron = ( 0 - roll ) / 70

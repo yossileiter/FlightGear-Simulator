@@ -8,6 +8,7 @@
 #include <chrono>
 #include <thread>
 #include <stdio.h>
+#include <array>
 #include <vector>
 #include <iostream>
 #include <unordered_map>
@@ -66,9 +67,11 @@ private:
     template<typename K, typename V, typename T>
     bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
     bool checkExpression(double x, string op, string y);
-    double getVarValue(string var);
+    bool FindIfElementExist(vector<string> v, string element);
+    int FindElementLocation(vector<vector<string>> v, string element);
 
 public:
+    double getVarValue(string var);
     void doCommand(vector<string> line, int i);
     int get_i(int i);
     int loopLength;

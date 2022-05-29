@@ -8,8 +8,6 @@ Server *Server::getInstance()
 	return instance;
 }
 
-// void ListeningToSimulator();
-
 
 vector <double> Server::SplitLine(string line) 		//split a line into words
 {	
