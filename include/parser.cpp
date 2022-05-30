@@ -28,9 +28,9 @@ bool Parser::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     else return 1;
 }
 
-void Parser::Lexing() // create a lexer and lex the file into vector of vectors
+void Parser::Lexing(string filePath) // create a lexer and lex the file into vector of vectors
 {
-    Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
+    Lexer::getInstance()->ReadInstructions(filePath);
     for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
     {
         Lexer::getInstance()->AllLinesSeparated.push_back(SplitLine(Lexer::getInstance()->AllLines[i]));

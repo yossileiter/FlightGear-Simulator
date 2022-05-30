@@ -3,7 +3,7 @@
 int main()
 {
     Database::getInstance()->buildCommandMap();     //maybe should be in background
-    Parser::getInstance()->Lexing();
+    Parser::getInstance()->Lexing("FlightInstructions.txt");
    
     for (size_t i = 0; i < Lexer::getInstance()->AllLinesSeparated.size(); i++)
     {
@@ -11,5 +11,5 @@ int main()
     }
 
     return 0;
-}
 
+}

@@ -21,8 +21,6 @@ public:
 
     static Lexer *getInstance();            // instantiating lexer
     void ReadInstructions(string FilePath); // read the instructions file and split to lines
-    // bool FindIfElementExist(vector<string> v, string element);
-    // int FindElementLocation(vector<vector<string>> v, string element);
 };
 
 #endif

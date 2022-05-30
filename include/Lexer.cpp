@@ -7,32 +7,15 @@ Lexer* Lexer::getInstance()
 	return instance;
 }
 
-// bool Lexer::FindIfElementExist(vector<string> v, string element)
-// {    
-//     vector<string>::iterator it = find(v.begin(), v.end(), element.c_str());
-//     if (it != v.end()) return 1;
-//     else return 0;
-// }
-
-// int Lexer::FindElementLocation(vector<vector<string>> v, string element)
-// {
-//     for (size_t rows = 0; rows < AllLinesSeparated.size(); rows++)
-//     {
-//         if (FindIfElementExist(AllLinesSeparated[rows], element)) return rows;
-//     }
-//     return 0;
-// }
-
 void Lexer::ReadInstructions(string FilePath) //read the instructions file and split to lines
 {
     fstream newfile;
-    newfile.open(FilePath,ios::in); //open a file to perform read operation using file object
-    if (newfile.is_open()) //checking whether the file is open
+    newfile.open(FilePath,ios::in); 
+    if (newfile.is_open())
     { 
         string line;
         while(getline(newfile, line)) AllLines.push_back(line); //read data from file object and put it into string.
-        
-        newfile.close(); //close the file object.
+        newfile.close(); 
     }
 }
 

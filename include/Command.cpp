@@ -2,6 +2,13 @@
 #include "Database.hpp"     //this include can't work from header file
 #include "parser.hpp"
 
+double Command::getVarValue(string var)
+{
+    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
+    double varValue = Database::getInstance()->SymbolTable[devicePath]; //get the variable value
+    return varValue;
+}
+
 template<typename K, typename V>
 void PrintMap(unordered_map<K, V> const &m)
 {
@@ -21,10 +28,6 @@ void openServerCommand::doCommand(vector<string> line, int i)
     }
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
-int openServerCommand::get_i(int i)
-{
-    return i;
-}
 
 void connectCommand::doCommand(vector<string> line, int i)
 {
@@ -35,10 +38,6 @@ void connectCommand::doCommand(vector<string> line, int i)
         Client::getInstance()->Connect(port, ip);
     }
     else {cout<<"connect - Missing arguments"<<endl;}
-}
-int connectCommand::get_i(int i)
-{
-    return i;
 }
 
 void varCommand::doCommand(vector<string> line, int i)
@@ -52,17 +51,10 @@ void varCommand::doCommand(vector<string> line, int i)
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
     {
-        double valueForNewVar;
-        string devicePath = Database::getInstance()->VarTable[line[3]];         //get device path from var table
-        valueForNewVar = Database::getInstance()->SymbolTable[devicePath];      //get current value of the device
-        Database::getInstance()->SymbolTable[line[1]] = valueForNewVar;         //insert the new var as key and current value as value
+        Database::getInstance()->SymbolTable[line[1]] = getVarValue(line[3]);         //insert the new var as key and current value as value
         cout << "'" << line[1] << "' Successfully inserted" << endl;
     }
     else {cout << "Illegal command" << endl;}
-}
-int varCommand::get_i(int i)
-{
-    return i;
 }
 
 void printCommand::doCommand(vector<string> line, int i)
@@ -75,22 +67,16 @@ void printCommand::doCommand(vector<string> line, int i)
     }
     else                            //print a variable
     {
-        string path = Database::getInstance()->VarTable[line[1]]; 
-        double value = Database::getInstance()->SymbolTable[path];
-        cout << line[1] << ": " << value << endl;
+        cout << line[1] << ": " << getVarValue(line[1]) << endl;
     }
-}
-int printCommand::get_i(int i)
-{
-    return i;
 }
 
 void whileCommand::doCommand(vector<string> line, int i)
 {
     cout<<"While loop {\n";
+    vector<vector<string>> whileLines;
 
     int location = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
-    vector<vector<string>> whileLines;
 
     for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
     {   
@@ -128,17 +114,6 @@ int whileCommand::FindElementLocation(vector<vector<string>> v, string element)
     return 0;
 }
 
-int whileCommand::get_i(int i)                                  //increase the i by amount of while lines
-{
-    return i += loopLength;                                     
-}
-
-double whileCommand::getVarValue(string var)
-{
-    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
-    double varValue = Database::getInstance()->SymbolTable[devicePath];            //get the variable value
-    return varValue;
-}
 
 template<typename K, typename V, typename T>
 bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
@@ -208,16 +183,6 @@ bool setCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
     if (map.count(element)) return 0;
     else return 1;
 }
-double setCommand::getVarValue(string var)
-{
-    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
-    double varValue = Database::getInstance()->SymbolTable[devicePath]; //get the variable value
-    return varValue;
-}
-int setCommand::get_i(int i)
-{
-    return i;
-}
 
 void sleepCommand::doCommand(vector<string> line, int i)       //sleep
 {
@@ -227,8 +192,4 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
         this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
     }
     else cout << "Illegal command" << endl;
-}
-int sleepCommand::get_i(int i)
-{
-    return i;
 }

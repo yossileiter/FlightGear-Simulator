@@ -1,5 +1,3 @@
-print "hello world"
-print "hilbert"
 openDataServer 5400
 connect 127.0.0.1 5402
 var warp = bind "/sim/time/warp"
@@ -40,8 +38,8 @@ print "engine_is_warming..."
 print rpm
 rpm = 800
 print rpm
-sleep 15000
 var h0 = heading
+sleep 15000
 print h0
 print "let's_fly"
 breaks = 0
