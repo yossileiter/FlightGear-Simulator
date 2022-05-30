@@ -19,3 +19,23 @@ void Lexer::ReadInstructions(string FilePath) //read the instructions file and s
     }
 }
 
+void Lexer::Lexing() // create a lexer and lex the file into vector of vectors
+{
+    for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
+    {
+        Lexer::getInstance()->AllLinesSeparated.push_back(SplitLine(Lexer::getInstance()->AllLines[i]));
+    }
+}
+
+vector <string> Lexer::SplitLine(string s)
+{
+    vector <string> v;
+    string temp = "";
+    for(int i = 0 ; i < s.length(); ++i)
+    {
+        if(s[i]==' ') v.push_back(temp), temp = "";
+        else { temp.push_back(s[i]); }		
+    }
+    v.push_back(temp);
+    return v;
+}

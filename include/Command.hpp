@@ -19,7 +19,7 @@ class Command
 {
 public:
     virtual void doCommand(vector<string> line, int i) = 0;
-    virtual int get_i(int i) {return i;}
+    virtual int get_i(int i) { return i; }
     double getVarValue(string var);
 };
 
@@ -45,8 +45,8 @@ class setCommand : public Command
 {
 public:
     void doCommand(vector<string> line, int i);
-    template<typename K, typename V, typename T>
-    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
+    template <typename K, typename V, typename T>
+    bool CkeckElementInMap(unordered_map<K, V> const &map, T element);
 };
 
 class printCommand : public Command
@@ -58,17 +58,16 @@ public:
 class whileCommand : public Command
 {
 private:
-    template<typename K, typename V, typename T>
-    bool CkeckElementInMap(unordered_map<K,V> const &map, T element);
+    template <typename K, typename V, typename T>
+    bool CkeckElementInMap(unordered_map<K, V> const &map, T element);
     bool checkExpression(double x, string op, string y);
     bool FindIfElementExist(vector<string> v, string element);
     int FindElementLocation(vector<vector<string>> v, string element);
 
 public:
     void doCommand(vector<string> line, int i);
-    int get_i(int i) { return i += loopLength; }            //increase the i by amount of while lines
+    int get_i(int i) { return i += loopLength; } // increase the i by amount of while lines
     int loopLength;
-
 };
 
 class sleepCommand : public Command

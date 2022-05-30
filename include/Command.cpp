@@ -92,8 +92,9 @@ void whileCommand::doCommand(vector<string> line, int i)
             {
                 Parser::getInstance()->parsing(whileLines[k], i);
             }
-            cout <<"}\nEnd while loop\n";
+            cout << endl;
         }
+        cout <<"}\nEnd while loop\n";
     }
     else cout << "Variable not found\n}\n End while loop\n";
 }

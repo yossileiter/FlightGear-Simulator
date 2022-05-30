@@ -18,6 +18,6 @@ private:
 public:
     static Client *getInstance();
     void Connect(int port, const char *ip);
-    void Send(char* command);
+    void Send(char *command);
     ~Client();
 };
