@@ -1,7 +1,0 @@
-/.vscode
-*.pdf
-*.out
-*.txt
-!FlightInstructions.txt
-.gitignore
-/main
