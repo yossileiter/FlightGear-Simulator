@@ -9,13 +9,11 @@ double Command::getVarValue(string var)
     return varValue;
 }
 
-template<typename K, typename V>
-void PrintMap(unordered_map<K, V> const &m)
+template<typename K, typename V, typename T>
+bool Command::CkeckIfElementInMap(unordered_map<K,V> const &map, T element)
 {
-    for (auto const &pair: m)
-    {
-        std::cout << "  {" << pair.first << ": " << pair.second << "}\n";
-    }
+    if (map.count(element)) return 0;
+    else return 1;
 }
 
 void openServerCommand::doCommand(vector<string> line, int i)
@@ -84,7 +82,7 @@ void whileCommand::doCommand(vector<string> line, int i)
     }
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
-    if (CkeckElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if var exist in var table
+    if (CkeckIfElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if line[1] is in var table
     {        
         while (checkExpression(getVarValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
         {
@@ -116,12 +114,6 @@ int whileCommand::FindElementLocation(vector<vector<string>> v, string element, 
 }
 
 
-template<typename K, typename V, typename T>
-bool whileCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
-{
-    if (map.count(element)) return 0;
-    else return 1;
-}
 bool whileCommand::checkExpression(double x, string op, string yString)
 {
     int y = stoi(yString);
@@ -152,14 +144,14 @@ void setCommand::doCommand(vector<string> line, int i)
         string tempStringSet;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the 2 first)
         {
-            if (CkeckElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)     //for var h0
-            {
-                varValue = Database::getInstance()->SymbolTable[line[j]]; 
+            if (CkeckIfElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)      //for var h0
+            {           
+                varValue = Database::getInstance()->SymbolTable[line[j]];                   //get his value
                 tempStringSet += to_string(varValue);
             }
-            else if (CkeckElementInMap(Database::getInstance()->VarTable, line[j]) == 0)     //if the var in var table
+            else if (CkeckIfElementInMap(Database::getInstance()->VarTable, line[j]) == 0)    //if the var in var table
             {
-                varValue = getVarValue(line[j]);                                        //get his value
+                varValue = getVarValue(line[j]);                                            //get his value
                 tempStringSet += to_string(varValue);
             }
             else
@@ -174,15 +166,8 @@ void setCommand::doCommand(vector<string> line, int i)
         stringSet += to_string(answer)  += "\r\n";          
         char* stringSetToChar = &stringSet[0];                 
         Client::getInstance()->Send(stringSetToChar);          //send to client
-        cout << stringSetToChar <<endl;     //delete
     }
     else {cout << "Illegal command" << endl;}
-}
-template<typename K, typename V, typename T>
-bool setCommand::CkeckElementInMap(unordered_map<K,V> const &map, T element)
-{
-    if (map.count(element)) return 0;
-    else return 1;
 }
 
 void sleepCommand::doCommand(vector<string> line, int i)       //sleep
