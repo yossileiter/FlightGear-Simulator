@@ -57,7 +57,7 @@ void varCommand::doCommand(vector<string> line, int i)
 
 void printCommand::doCommand(vector<string> line, int i)
 {
-    if (line[1][0] == '"')         //find "" in the line and remove it
+    if (line[1][0] == '"')         //print text
     {
         line[1].erase(0,1);
         line[1].pop_back();
@@ -74,9 +74,9 @@ void whileCommand::doCommand(vector<string> line, int i)
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
 
-    int location = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}", i);
+    int bracketLocation = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}", i);  
 
-    for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
+    for (size_t j = i+1; j < bracketLocation; j++)                 //fill new vector with while lines
     {   
         whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
     }
@@ -97,7 +97,7 @@ void whileCommand::doCommand(vector<string> line, int i)
     else cout << "Variable not found\n}\n End while loop\n";
 }
 
-bool whileCommand::FindIfElementExist(vector<string> v, string element)
+bool whileCommand::FindIfElementInVector(vector<string> v, string element)
 {    
     vector<string>::iterator it = find(v.begin(), v.end(), element.c_str());
     if (it != v.end()) return 1;
@@ -106,9 +106,9 @@ bool whileCommand::FindIfElementExist(vector<string> v, string element)
 
 int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
 {
-    for (size_t rows = i; rows < Lexer::getInstance()->AllLinesSeparated.size(); rows++)
+    for (size_t row = i; row < Lexer::getInstance()->AllLinesSeparated.size(); row++)
     {
-        if (FindIfElementExist(Lexer::getInstance()->AllLinesSeparated[rows], element)) return rows;
+        if (FindIfElementInVector(Lexer::getInstance()->AllLinesSeparated[row], element)) return row;
     }
     return 0;
 }
@@ -116,7 +116,7 @@ int whileCommand::FindElementLocation(vector<vector<string>> v, string element, 
 
 bool whileCommand::checkExpression(double x, string op, string yString)
 {
-    int y = stoi(yString);
+    double y = stod(yString);
 
     if      ((op == "==") && (x == y))  return true;
     else if ((op == "!=") && (x != y))  return true;
@@ -135,37 +135,36 @@ void setCommand::doCommand(vector<string> line, int i)
     if (line.size() == 3)                       //send set command
     {
         stringSet += line[2] + "\r\n";
-        char* newStringSet = &stringSet[0];
-        Client::getInstance()->Send(newStringSet);
-        cout << newStringSet <<endl;
+        char* stringSetChar = &stringSet[0];
+        Client::getInstance()->Send(stringSetChar);
     }
     else if (line.size() > 3)
     {
-        string tempStringSet;
-        for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the 2 first)
+        string mathematicalExpression;
+        for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the first 2)
         {
             if (CkeckIfElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)      //for var h0
             {           
                 varValue = Database::getInstance()->SymbolTable[line[j]];                   //get his value
-                tempStringSet += to_string(varValue);
+                mathematicalExpression += to_string(varValue);
             }
             else if (CkeckIfElementInMap(Database::getInstance()->VarTable, line[j]) == 0)    //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                            //get his value
-                tempStringSet += to_string(varValue);
+                mathematicalExpression += to_string(varValue);
             }
             else
             {
-                tempStringSet += line[j];
+                mathematicalExpression += line[j];
             }
         }
 
         Calculator c;   
-        double answer = c.calculate(tempStringSet);        //calculate the expression
+        double result = c.calculate(mathematicalExpression);        //calculate the expression
         
-        stringSet += to_string(answer)  += "\r\n";          
-        char* stringSetToChar = &stringSet[0];                 
-        Client::getInstance()->Send(stringSetToChar);          //send to client
+        stringSet += to_string(result)  += "\r\n";          
+        char* stringSetChar = &stringSet[0];                 
+        Client::getInstance()->Send(stringSetChar);          //send to client
     }
     else {cout << "Illegal command" << endl;}
 }

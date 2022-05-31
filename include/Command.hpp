@@ -60,13 +60,13 @@ class whileCommand : public Command
 private:
 
     bool checkExpression(double x, string op, string y);
-    bool FindIfElementExist(vector<string> v, string element);
+    bool FindIfElementInVector(vector<string> v, string element);
     int FindElementLocation(vector<vector<string>> v, string element, int i);
+    int loopLength;
 
 public:
     void doCommand(vector<string> line, int i);
     int get_i(int i) { return i += loopLength; } // increase the i by amount of while lines
-    int loopLength;
 };
 
 class sleepCommand : public Command
