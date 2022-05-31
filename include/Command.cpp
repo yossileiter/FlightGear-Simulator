@@ -76,7 +76,7 @@ void whileCommand::doCommand(vector<string> line, int i)
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
 
-    int location = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}");
+    int location = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}", i);
 
     for (size_t j = i+1; j < location; j++)                 //fill new vector with while lines
     {   
@@ -106,9 +106,9 @@ bool whileCommand::FindIfElementExist(vector<string> v, string element)
     else return 0;
 }
 
-int whileCommand::FindElementLocation(vector<vector<string>> v, string element)
+int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
 {
-    for (size_t rows = 0; rows < Lexer::getInstance()->AllLinesSeparated.size(); rows++)
+    for (size_t rows = i; rows < Lexer::getInstance()->AllLinesSeparated.size(); rows++)
     {
         if (FindIfElementExist(Lexer::getInstance()->AllLinesSeparated[rows], element)) return rows;
     }

@@ -22,12 +22,12 @@ int Parser::parsing(vector<string> line, size_t i) // take a line and execute th
     {
         return i;
     }
-    else if (Database::getInstance()->VarTable.find(line[0]) == Database::getInstance()->VarTable.end()) //if the line[0] is a command
+    else if (CkeckIfElementInMap(Database::getInstance()->CommandMap, line[0]) == 1) //if the line[0] is a command
     {
         Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
         return Database::getInstance()->CommandMap[line[0]]->get_i(i);
     }
-    else if (CkeckIfElementInMap(Database::getInstance()->CommandMap, line[0]) == 0)          //if line[0] is a var
+    else if (Database::getInstance()->VarTable.find(line[0]) != Database::getInstance()->VarTable.end())          //if line[0] is a var
     {
         Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
         return Database::getInstance()->CommandMap["set"]->get_i(i);

@@ -62,7 +62,7 @@ private:
     bool CkeckElementInMap(unordered_map<K, V> const &map, T element);
     bool checkExpression(double x, string op, string y);
     bool FindIfElementExist(vector<string> v, string element);
-    int FindElementLocation(vector<vector<string>> v, string element);
+    int FindElementLocation(vector<vector<string>> v, string element, int i);
 
 public:
     void doCommand(vector<string> line, int i);

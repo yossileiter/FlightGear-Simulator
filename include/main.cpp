@@ -10,6 +10,6 @@ int main()
     {
         i = Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i], i);
     }
-
+    
     return 0;
 }
