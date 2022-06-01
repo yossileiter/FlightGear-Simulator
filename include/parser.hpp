@@ -19,7 +19,7 @@ using namespace std;
 class Parser
 {
 private:
-    Parser() {}
+    Parser() { DATABASE->buildCommandMap();}
     static Parser *instance;
 
 public:

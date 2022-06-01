@@ -2,7 +2,6 @@
 
 int main()
 {
-    DATABASE->buildCommandMap(); // maybe should be in background
     LEXER->ReadInstructions("FlightInstructions.txt");
     LEXER->Lexing();
 
@@ -10,9 +9,6 @@ int main()
     {
         i = PARSER->parsing(LEXER->AllLinesSeparated[i], i);
     }
-    
+
     return 0;
 }
-
-
-
