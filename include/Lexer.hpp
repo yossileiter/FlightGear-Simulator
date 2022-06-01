@@ -16,15 +16,13 @@ class Lexer
 private:
     Lexer() {}
     static Lexer *instance;
-    vector<string> SplitLine(string s);
+    vector<string> splitLineIntoWords(string s);
 
 public:
-    vector<string> AllLines;
-    vector<vector<string>> AllLinesSeparated;
-
+    
+    vector<vector<string>> flightPlan;
     static Lexer *getInstance();            // instantiating lexer
-    void Lexing();                          // create a lexer and lex the file into vector of vectors
-    void ReadInstructions(string FilePath); // read the instructions file and split to lines
+    void ReadTextFile(string FilePath);     // read the instructions file and split to lines
 };
 
 #endif

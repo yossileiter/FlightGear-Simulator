@@ -74,11 +74,11 @@ void whileCommand::doCommand(vector<string> line, int i)
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
 
-    int bracketLocation = FindElementLocation(LEXER->AllLinesSeparated, "}", i);  
+    int bracketLocation = FindElementLocation(LEXER->flightPlan, "}", i);  
 
     for (size_t j = i+1; j < bracketLocation; j++)                 //fill new vector with while lines
     {   
-        whileLines.push_back(LEXER->AllLinesSeparated[j]);
+        whileLines.push_back(LEXER->flightPlan[j]);
     }
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
@@ -106,9 +106,9 @@ bool whileCommand::FindIfElementInVector(vector<string> v, string element)
 
 int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
 {
-    for (size_t row = i; row < LEXER->AllLinesSeparated.size(); row++)
+    for (size_t row = i; row < LEXER->flightPlan.size(); row++)
     {
-        if (FindIfElementInVector(LEXER->AllLinesSeparated[row], element)) return row;
+        if (FindIfElementInVector(LEXER->flightPlan[row], element)) return row;
     }
     return 0;
 }

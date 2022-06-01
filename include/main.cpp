@@ -2,12 +2,11 @@
 
 int main()
 {
-    LEXER->ReadInstructions("FlightInstructions.txt");
-    LEXER->Lexing();
+    LEXER->ReadTextFile("FlightInstructions.txt");
 
-    for (size_t i = 0; i < LEXER->AllLinesSeparated.size(); i++)
+    for (size_t i = 0; i < LEXER->flightPlan.size(); i++)
     {
-        i = PARSER->parsing(LEXER->AllLinesSeparated[i], i);
+        i = PARSER->parsing(LEXER->flightPlan[i], i);
     }
 
     return 0;

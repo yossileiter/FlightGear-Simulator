@@ -1,40 +1,44 @@
 #include "Lexer.hpp"
 
-Lexer* Lexer::instance = 0;
-Lexer* LEXER
+Lexer *Lexer::instance = 0;
+Lexer *LEXER
 {
-	if (!instance) instance = new Lexer;
-	return instance;
+    if (!instance)
+        instance = new Lexer;
+    return instance;
 }
 
-void Lexer::ReadInstructions(string FilePath) //read the instructions file and split to lines
+void Lexer::ReadTextFile(string FilePath) // read the instructions file and split to lines
 {
     fstream newfile;
-    newfile.open(FilePath,ios::in); 
+    newfile.open(FilePath, ios::in);
     if (newfile.is_open())
-    { 
+    {
+        vector<string> AllLines;
         string line;
-        while(getline(newfile, line)) AllLines.push_back(line); //read data from file object and put it into string.
-        newfile.close(); 
+        while (getline(newfile, line))
+            AllLines.push_back(line); // read data from file object and put it into string.
+        newfile.close();
+
+        for (int i = 0; i < AllLines.size(); i++)
+        {
+            LEXER->flightPlan.push_back(splitLineIntoWords(AllLines[i]));
+        }
     }
 }
 
-void Lexer::Lexing() // create a lexer and lex the file into vector of vectors
+vector<string> Lexer::splitLineIntoWords(string s)
 {
-    for (int i = 0; i < LEXER->AllLines.size(); i++)
-    {
-        LEXER->AllLinesSeparated.push_back(SplitLine(LEXER->AllLines[i]));
-    }
-}
-
-vector <string> Lexer::SplitLine(string s)
-{
-    vector <string> v;
+    vector<string> v;
     string temp = "";
-    for(int i = 0 ; i < s.length(); ++i)
+    for (int i = 0; i < s.length(); ++i)
     {
-        if(s[i]==' ') v.push_back(temp), temp = "";
-        else { temp.push_back(s[i]); }		
+        if (s[i] == ' ')
+            v.push_back(temp), temp = "";
+        else
+        {
+            temp.push_back(s[i]);
+        }
     }
     v.push_back(temp);
     return v;
