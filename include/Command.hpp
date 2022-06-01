@@ -1,5 +1,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
+#define DATABASE Database::getInstance()
+#define LEXER Lexer::getInstance()
+
 #include "Server.hpp"
 #include "Client.hpp"
 #include "Lexer.hpp"

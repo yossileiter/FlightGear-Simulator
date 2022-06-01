@@ -4,8 +4,8 @@
 
 double Command::getVarValue(string var)
 {
-    string devicePath = Database::getInstance()->VarTable[var];         //get device path from var table
-    double varValue = Database::getInstance()->SymbolTable[devicePath]; //get the variable value
+    string devicePath = DATABASE->VarTable[var];         //get device path from var table
+    double varValue = DATABASE->SymbolTable[devicePath]; //get the variable value
     return varValue;
 }
 
@@ -44,12 +44,12 @@ void varCommand::doCommand(vector<string> line, int i)
     {   
         line[4].pop_back();
         line[4].erase(0,1);
-        Database::getInstance()->VarTable[line[1]] = line[4];       //insert to var table
+        DATABASE->VarTable[line[1]] = line[4];       //insert to var table
         cout << "'" << line[1] << "' bound successfully!" << endl;  
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
     {
-        Database::getInstance()->SymbolTable[line[1]] = getVarValue(line[3]);         //insert the new var as key and current value as value
+        DATABASE->SymbolTable[line[1]] = getVarValue(line[3]);         //insert the new var as key and current value as value
         cout << "'" << line[1] << "' Successfully inserted" << endl;
     }
     else {cout << "Illegal command" << endl;}
@@ -74,15 +74,15 @@ void whileCommand::doCommand(vector<string> line, int i)
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
 
-    int bracketLocation = FindElementLocation(Lexer::getInstance()->AllLinesSeparated, "}", i);  
+    int bracketLocation = FindElementLocation(LEXER->AllLinesSeparated, "}", i);  
 
     for (size_t j = i+1; j < bracketLocation; j++)                 //fill new vector with while lines
     {   
-        whileLines.push_back(Lexer::getInstance()->AllLinesSeparated[j]);
+        whileLines.push_back(LEXER->AllLinesSeparated[j]);
     }
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
-    if (CkeckIfElementInMap(Database::getInstance()->VarTable, line[1]) == 0)   //if line[1] is in var table
+    if (CkeckIfElementInMap(DATABASE->VarTable, line[1]) == 0)   //if line[1] is in var table
     {        
         while (checkExpression(getVarValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
         {
@@ -106,9 +106,9 @@ bool whileCommand::FindIfElementInVector(vector<string> v, string element)
 
 int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
 {
-    for (size_t row = i; row < Lexer::getInstance()->AllLinesSeparated.size(); row++)
+    for (size_t row = i; row < LEXER->AllLinesSeparated.size(); row++)
     {
-        if (FindIfElementInVector(Lexer::getInstance()->AllLinesSeparated[row], element)) return row;
+        if (FindIfElementInVector(LEXER->AllLinesSeparated[row], element)) return row;
     }
     return 0;
 }
@@ -130,7 +130,7 @@ bool whileCommand::checkExpression(double x, string op, string yString)
 void setCommand::doCommand(vector<string> line, int i)
 {
     double varValue;
-    string stringSet = "set " + Database::getInstance()->VarTable[line[0]] + " ";
+    string stringSet = "set " + DATABASE->VarTable[line[0]] + " ";
 
     if (line.size() == 3)                       //send set command
     {
@@ -143,12 +143,12 @@ void setCommand::doCommand(vector<string> line, int i)
         string mathematicalExpression;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the first 2)
         {
-            if (CkeckIfElementInMap(Database::getInstance()->SymbolTable, line[j]) == 0)      //for var h0
+            if (CkeckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)      //for var h0
             {           
-                varValue = Database::getInstance()->SymbolTable[line[j]];                   //get his value
+                varValue = DATABASE->SymbolTable[line[j]];                   //get his value
                 mathematicalExpression += to_string(varValue);
             }
-            else if (CkeckIfElementInMap(Database::getInstance()->VarTable, line[j]) == 0)    //if the var in var table
+            else if (CkeckIfElementInMap(DATABASE->VarTable, line[j]) == 0)    //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                            //get his value
                 mathematicalExpression += to_string(varValue);

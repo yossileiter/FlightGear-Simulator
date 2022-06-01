@@ -2,14 +2,17 @@
 
 int main()
 {
-    Database::getInstance()->buildCommandMap(); // maybe should be in background
-    Lexer::getInstance()->ReadInstructions("FlightInstructions.txt");
-    Lexer::getInstance()->Lexing();
+    DATABASE->buildCommandMap(); // maybe should be in background
+    LEXER->ReadInstructions("FlightInstructions.txt");
+    LEXER->Lexing();
 
-    for (size_t i = 0; i < Lexer::getInstance()->AllLinesSeparated.size(); i++)
+    for (size_t i = 0; i < LEXER->AllLinesSeparated.size(); i++)
     {
-        i = Parser::getInstance()->parsing(Lexer::getInstance()->AllLinesSeparated[i], i);
+        i = PARSER->parsing(LEXER->AllLinesSeparated[i], i);
     }
     
     return 0;
 }
+
+
+

@@ -2,7 +2,7 @@
 
 Database *Database::instance = 0;
 
-Database *Database::getInstance()   //create a singleton
+Database *DATABASE   //create a singleton
 {
 	if(!instance) instance = new Database();
 	return instance;
@@ -22,13 +22,13 @@ void Database::buildCommandMap()
     Command *SleepCommand = new sleepCommand();
     Command *WhileCommand = new whileCommand();
 
-    Database::getInstance()->CommandMap["connect"] = ConnectCommand;
-    Database::getInstance()->CommandMap["openDataServer"] = OpenServerCommand;
-    Database::getInstance()->CommandMap["var"] = VarCommand;
-    Database::getInstance()->CommandMap["set"] = SetCommand;
-    Database::getInstance()->CommandMap["print"] = PrintCommand;
-    Database::getInstance()->CommandMap["sleep"] = SleepCommand;
-    Database::getInstance()->CommandMap["while"] = WhileCommand;
+    DATABASE->CommandMap["connect"] = ConnectCommand;
+    DATABASE->CommandMap["openDataServer"] = OpenServerCommand;
+    DATABASE->CommandMap["var"] = VarCommand;
+    DATABASE->CommandMap["="] = SetCommand;
+    DATABASE->CommandMap["print"] = PrintCommand;
+    DATABASE->CommandMap["sleep"] = SleepCommand;
+    DATABASE->CommandMap["while"] = WhileCommand;
 }
 
 

@@ -1,6 +1,8 @@
 #ifndef LEXER_H
 #define LEXER_H
 
+#define LEXER Lexer::getInstance()
+
 #include <stdio.h>
 #include <vector>
 #include <iostream>

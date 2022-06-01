@@ -2,7 +2,7 @@
 
 Parser *Parser::instance = 0;
 
-Parser *Parser::getInstance()   //create a singleton
+Parser *PARSER  //create a singleton
 {
 	if(!instance) instance = new Parser();
 	return instance;	
@@ -22,15 +22,15 @@ int Parser::parsing(vector<string> line, size_t i) // take a line and execute th
     {
         return i;
     }
-    else if (CkeckIfElementInMap(Database::getInstance()->CommandMap, line[0]) == 1) //if the line[0] is a command
+    else if (CkeckIfElementInMap(DATABASE->CommandMap, line[0]) == 1) //if the line[0] is a command
     {
-        Database::getInstance()->CommandMap[line[0]]->doCommand(line, i);
-        return Database::getInstance()->CommandMap[line[0]]->get_i(i);
+        DATABASE->CommandMap[line[0]]->doCommand(line, i);
+        return DATABASE->CommandMap[line[0]]->get_i(i);
     }
-    else if (Database::getInstance()->VarTable.find(line[0]) != Database::getInstance()->VarTable.end())          //if line[0] is a var
+    else if (DATABASE->VarTable.find(line[0]) != DATABASE->VarTable.end())          //if line[0] is a var
     {
-        Database::getInstance()->CommandMap["set"]->doCommand(line, i);  
-        return Database::getInstance()->CommandMap["set"]->get_i(i);
+        DATABASE->CommandMap[line[1]]->doCommand(line, i);  
+        return DATABASE->CommandMap[line[1]]->get_i(i);
     }
     return 0;
 }

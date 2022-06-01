@@ -1,6 +1,9 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#define DATABASE Database::getInstance()
+#define PARSER Parser::getInstance()
+
 #include <stdio.h>
 #include <vector>
 #include <iostream>

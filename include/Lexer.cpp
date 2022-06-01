@@ -1,7 +1,7 @@
 #include "Lexer.hpp"
 
 Lexer* Lexer::instance = 0;
-Lexer* Lexer::getInstance()
+Lexer* LEXER
 {
 	if (!instance) instance = new Lexer;
 	return instance;
@@ -21,9 +21,9 @@ void Lexer::ReadInstructions(string FilePath) //read the instructions file and s
 
 void Lexer::Lexing() // create a lexer and lex the file into vector of vectors
 {
-    for (int i = 0; i < Lexer::getInstance()->AllLines.size(); i++)
+    for (int i = 0; i < LEXER->AllLines.size(); i++)
     {
-        Lexer::getInstance()->AllLinesSeparated.push_back(SplitLine(Lexer::getInstance()->AllLines[i]));
+        LEXER->AllLinesSeparated.push_back(SplitLine(LEXER->AllLines[i]));
     }
 }
 

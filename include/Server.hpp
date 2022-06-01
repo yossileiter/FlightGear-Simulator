@@ -1,5 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
+#define SERVER Server::getInstance()
+
 #include <iostream>
 #include <unistd.h>
 #include <sys/socket.h>
