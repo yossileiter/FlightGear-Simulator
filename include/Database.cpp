@@ -21,6 +21,7 @@ void Database::buildCommandMap()
     Command *PrintCommand = new printCommand();
     Command *SleepCommand = new sleepCommand();
     Command *WhileCommand = new whileCommand();
+    Command *DoNothingCommand = new doNothingCommand();
 
     DATABASE->CommandMap["connect"] = ConnectCommand;
     DATABASE->CommandMap["openDataServer"] = OpenServerCommand;
@@ -29,6 +30,7 @@ void Database::buildCommandMap()
     DATABASE->CommandMap["print"] = PrintCommand;
     DATABASE->CommandMap["sleep"] = SleepCommand;
     DATABASE->CommandMap["while"] = WhileCommand;
+    DATABASE->CommandMap["doNothing"] = DoNothingCommand;
 }
 
 

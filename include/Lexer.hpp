@@ -20,7 +20,7 @@ private:
 
 public:
     
-    vector<vector<string>> flightPlan;
+    vector<vector<string>> allTextLines;
     static Lexer *getInstance();            // instantiating lexer
     void ReadTextFile(string FilePath);     // read the instructions file and split to lines
 };

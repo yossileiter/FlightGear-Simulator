@@ -78,4 +78,10 @@ public:
     void doCommand(vector<string> line, int i);
 };
 
+class doNothingCommand : public Command
+{
+public:
+    void doCommand(vector<string> line, int i);
+};
+
 #endif

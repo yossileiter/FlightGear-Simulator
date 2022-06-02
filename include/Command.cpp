@@ -74,11 +74,11 @@ void whileCommand::doCommand(vector<string> line, int i)
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
 
-    int bracketLocation = FindElementLocation(LEXER->flightPlan, "}", i);  
+    int bracketLocation = FindElementLocation(LEXER->allTextLines, "}", i);  
 
     for (size_t j = i+1; j < bracketLocation; j++)                 //fill new vector with while lines
     {   
-        whileLines.push_back(LEXER->flightPlan[j]);
+        whileLines.push_back(LEXER->allTextLines[j]);
     }
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
@@ -106,9 +106,9 @@ bool whileCommand::FindIfElementInVector(vector<string> v, string element)
 
 int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
 {
-    for (size_t row = i; row < LEXER->flightPlan.size(); row++)
+    for (size_t row = i; row < LEXER->allTextLines.size(); row++)
     {
-        if (FindIfElementInVector(LEXER->flightPlan[row], element)) return row;
+        if (FindIfElementInVector(LEXER->allTextLines[row], element)) return row;
     }
     return 0;
 }
@@ -143,17 +143,17 @@ void setCommand::doCommand(vector<string> line, int i)
         string mathematicalExpression;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the first 2)
         {
-            if (CkeckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)      //for var h0
+            if (CkeckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)       //for var h0
             {           
-                varValue = DATABASE->SymbolTable[line[j]];                   //get his value
+                varValue = DATABASE->SymbolTable[line[j]];                      
                 mathematicalExpression += to_string(varValue);
             }
-            else if (CkeckIfElementInMap(DATABASE->VarTable, line[j]) == 0)    //if the var in var table
+            else if (CkeckIfElementInMap(DATABASE->VarTable, line[j]) == 0)     //if the var in var table
             {
-                varValue = getVarValue(line[j]);                                            //get his value
+                varValue = getVarValue(line[j]);                                
                 mathematicalExpression += to_string(varValue);
             }
-            else
+            else                                                                //for other signs
             {
                 mathematicalExpression += line[j];
             }
@@ -177,4 +177,9 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
         this_thread::sleep_for(chrono::milliseconds(stoi(line[1])));
     }
     else cout << "Illegal command" << endl;
+}
+
+void doNothingCommand::doCommand(vector<string> line, int i)
+{
+    
 }

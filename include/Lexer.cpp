@@ -22,7 +22,7 @@ void Lexer::ReadTextFile(string FilePath) // read the instructions file and spli
 
         for (int i = 0; i < AllLines.size(); i++)
         {
-            LEXER->flightPlan.push_back(splitLineIntoWords(AllLines[i]));
+            LEXER->allTextLines.push_back(splitLineIntoWords(AllLines[i]));
         }
     }
 }
