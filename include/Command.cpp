@@ -108,7 +108,7 @@ bool whileCommand::FindIfElementInVector(vector<string> v, string element)
     else return 0;
 }
 
-int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)
+int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)    
 {
     for (size_t row = i; row < LEXER->allTextLines.size(); row++)
     {
@@ -136,18 +136,18 @@ void setCommand::doCommand(const vector<string> &line, int i)
     double varValue;
     string stringSet = "set " + DATABASE->VarTable[line[0]] + " ";
 
-    if (line.size() == 3)                       //send set command
+    if (line.size() == 3)                       // send to client simple set command
     {
         stringSet += line[2] + "\r\n";
         char* stringSetChar = &stringSet[0];
         Client::getInstance()->Send(stringSetChar);
     }
-    else if (line.size() > 3)
+    else if (line.size() > 3)                   // send to client complex command
     {
         string mathematicalExpression;
-        for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the first 2)
+        for (size_t j = 2; j < line.size(); j++)                    //for all elements in line (except for the first 2)
         {
-            if (CheckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)       //for var h0
+            if (CheckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)       //for manually configured var
             {           
                 varValue = DATABASE->SymbolTable[line[j]];                      
                 mathematicalExpression += to_string(varValue);
@@ -157,7 +157,7 @@ void setCommand::doCommand(const vector<string> &line, int i)
                 varValue = getVarValue(line[j]);                                
                 mathematicalExpression += to_string(varValue);
             }
-            else                                                                //for other signs
+            else                                                                //for other signs like "(", "+"
             {
                 mathematicalExpression += line[j];
             }
@@ -168,12 +168,12 @@ void setCommand::doCommand(const vector<string> &line, int i)
         
         stringSet += to_string(result)  += "\r\n";          
         char* stringSetChar = &stringSet[0];                 
-        Client::getInstance()->Send(stringSetChar);          //send to client
+        Client::getInstance()->Send(stringSetChar);                 //send the result to client
     }
     else {cout << "Illegal command" << endl;}
 }
 
-void sleepCommand::doCommand(const vector<string> &line, int i)       //sleep
+void sleepCommand::doCommand(const vector<string> &line, int i)     //sleep
 {
     if (line.size() == 2)
     {
@@ -183,7 +183,7 @@ void sleepCommand::doCommand(const vector<string> &line, int i)       //sleep
     else cout << "Illegal command" << endl;
 }
 
-void doNothingCommand::doCommand(const vector<string> &line, int i)
+void unknownCommand::doCommand(const vector<string> &line, int i) // unknown command
 {
-    cout << "Unknown command" << endl; 
+    cout << "Unknown Command: " << line[0] << endl; 
 }

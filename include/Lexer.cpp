@@ -17,7 +17,9 @@ void Lexer::ReadTextFile(string FilePath) // read the instructions file and spli
         vector<string> AllLines;
         string line;
         while (getline(newfile, line))
-            AllLines.push_back(line); // read data from file object and put it into string.
+        {
+            AllLines.push_back(line);
+        }
         newfile.close();
 
         for (int i = 0; i < AllLines.size(); i++)

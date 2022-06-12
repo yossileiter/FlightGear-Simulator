@@ -77,7 +77,7 @@ public:
     void doCommand(const vector<string> &line, int i);
 };
 
-class doNothingCommand : public Command
+class unknownCommand : public Command
 {
 public:
     void doCommand(const vector<string> &line, int i);

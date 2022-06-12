@@ -18,7 +18,7 @@ class Parser
 {
 public:
     Parser() { DATABASE->buildCommandMap();}
-    int parsing(const vector<string> &line, size_t i); // take a line and execute the suitable command
+    int parsing(const vector<string> &line, size_t i);  // take a line and execute the suitable command
     template <typename K, typename V, typename T>
     bool CheckIfElementInMap(unordered_map<K, V> const &map, T element);
 };

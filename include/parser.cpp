@@ -10,20 +10,19 @@ bool Parser::CheckIfElementInMap(unordered_map<K,V> const &map, T element)
 }
 
 
-int Parser::parsing(const vector<string> &line, size_t i) // take a line and execute the suitable command
+int Parser::parsing(const vector<string> &line, size_t i)       // take a line and execute the suitable command
 {   
-    
     string command;
 
-    if (CheckIfElementInMap(DATABASE->CommandMap, line[0])) //if the line[0] is a command
+    if (CheckIfElementInMap(DATABASE->CommandMap, line[0]))                 // line[0] is a command
     {
         command = line[0];
     }
-    else if (DATABASE->VarTable.find(line[0]) != DATABASE->VarTable.end())          //if line[0] is a var
+    else if (DATABASE->VarTable.find(line[0]) != DATABASE->VarTable.end())  // line[0] is a var
     {
         command = line[1];
     }
-    else { command = "doNothing"; return i; }
+    else { command = "unknownCommand"; }                                    // unknown command 
 
     DATABASE->CommandMap[command]->doCommand(line, i);  
     return DATABASE->CommandMap[command]->get_i(i);
