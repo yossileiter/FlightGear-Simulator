@@ -1,7 +1,5 @@
 #include "Client.hpp"
 
-// #define BUFSIZE 4096
-
 Client *Client::instance = 0;
 Client *Client::getInstance()
 {

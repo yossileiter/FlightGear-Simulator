@@ -1,7 +1,6 @@
 #ifndef COMMAND_H
 #define COMMAND_H
-#define DATABASE Database::getInstance()
-#define LEXER Lexer::getInstance()
+
 
 #include "Server.hpp"
 #include "Client.hpp"
@@ -21,41 +20,41 @@ using namespace std;
 class Command
 {
 public:
-    virtual void doCommand(vector<string> line, int i) = 0;
+    virtual void doCommand(const vector<string> &line, int i) = 0;
     virtual int get_i(int i) { return i; }
     double getVarValue(string var);
     template <typename K, typename V, typename T>
-    bool CkeckIfElementInMap(unordered_map<K, V> const &map, T element);
+    bool CheckIfElementInMap(unordered_map<K, V> const &map, T element);
 };
 
 class openServerCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class connectCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class varCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class setCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class printCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class whileCommand : public Command
@@ -68,20 +67,20 @@ private:
     int loopLength;
 
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
     int get_i(int i) { return i += loopLength; } // increase the i by amount of while lines
 };
 
 class sleepCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 class doNothingCommand : public Command
 {
 public:
-    void doCommand(vector<string> line, int i);
+    void doCommand(const vector<string> &line, int i);
 };
 
 #endif

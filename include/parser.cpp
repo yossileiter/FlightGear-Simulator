@@ -1,25 +1,21 @@
 #include "parser.hpp"
+#include "Database.hpp"
 
-Parser *Parser::instance = 0;
-
-Parser *PARSER  //create a singleton
-{
-	if(!instance) instance = new Parser();
-	return instance;	
-}
 
 template<typename K, typename V, typename T>
-bool Parser::CkeckIfElementInMap(unordered_map<K,V> const &map, T element)
+bool Parser::CheckIfElementInMap(unordered_map<K,V> const &map, T element)
 {
     if (map.count(element) == 0) return 0;
     else return 1;
 }
 
 
-int Parser::parsing(vector<string> line, size_t i) // take a line and execute the suitable command
+int Parser::parsing(const vector<string> &line, size_t i) // take a line and execute the suitable command
 {   
+    
     string command;
-    if (CkeckIfElementInMap(DATABASE->CommandMap, line[0]) == 1) //if the line[0] is a command
+
+    if (CheckIfElementInMap(DATABASE->CommandMap, line[0])) //if the line[0] is a command
     {
         command = line[0];
     }

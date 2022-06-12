@@ -1,5 +1,5 @@
 #include "Command.hpp"
-#include "Database.hpp"     //this include can't work from header file
+#include "Database.hpp"
 #include "parser.hpp"
 
 double Command::getVarValue(string var)
@@ -10,13 +10,13 @@ double Command::getVarValue(string var)
 }
 
 template<typename K, typename V, typename T>
-bool Command::CkeckIfElementInMap(unordered_map<K,V> const &map, T element)
+bool Command::CheckIfElementInMap(unordered_map<K,V> const &map, T element)
 {
     if (map.count(element)) return 0;
     else return 1;
 }
 
-void openServerCommand::doCommand(vector<string> line, int i)
+void openServerCommand::doCommand(const vector<string> &line, int i)
 {
     if (line.size() == 2)
     {
@@ -27,7 +27,7 @@ void openServerCommand::doCommand(vector<string> line, int i)
     else {cout<<"open data server - Missing arguments"<<endl;}
 }
 
-void connectCommand::doCommand(vector<string> line, int i)
+void connectCommand::doCommand(const vector<string> &line, int i)
 {
     if (line.size() == 3)
     {
@@ -38,13 +38,14 @@ void connectCommand::doCommand(vector<string> line, int i)
     else {cout<<"connect - Missing arguments"<<endl;}
 }
 
-void varCommand::doCommand(vector<string> line, int i)
-{
+void varCommand::doCommand(const vector<string> &line, int i)
+{   
     if ((line[3] == "bind") && (line.size() == 5))  //bind a new var
     {   
-        line[4].pop_back();
-        line[4].erase(0,1);
-        DATABASE->VarTable[line[1]] = line[4];       //insert to var table
+        string path = line[4];
+        path.pop_back();
+        path.erase(0,1);
+        DATABASE->VarTable[line[1]] = path;       //insert to var table
         cout << "'" << line[1] << "' bound successfully!" << endl;  
     }   
     else if (line.size() == 4)                     //insert an assignment var into the symbol table
@@ -55,13 +56,14 @@ void varCommand::doCommand(vector<string> line, int i)
     else {cout << "Illegal command" << endl;}
 }
 
-void printCommand::doCommand(vector<string> line, int i)
+void printCommand::doCommand(const vector<string> &line, int i)
 {
     if (line[1][0] == '"')         //print text
     {
-        line[1].erase(0,1);
-        line[1].pop_back();
-        cout << line[1] << endl;
+        string textToPrint = line[1];
+        textToPrint.erase(0,1);
+        textToPrint.pop_back();
+        cout << textToPrint << endl;
     }
     else                            //print a variable
     {
@@ -69,7 +71,7 @@ void printCommand::doCommand(vector<string> line, int i)
     }
 }
 
-void whileCommand::doCommand(vector<string> line, int i)
+void whileCommand::doCommand(const vector<string> &line, int i)
 {
     cout<<"While loop {\n";
     vector<vector<string>> whileLines;
@@ -82,14 +84,16 @@ void whileCommand::doCommand(vector<string> line, int i)
     }
     loopLength = whileLines.size();                         //update the main i to skip the while lines                                
 
-    if (CkeckIfElementInMap(DATABASE->VarTable, line[1]) == 0)   //if line[1] is in var table
+    if (CheckIfElementInMap(DATABASE->VarTable, line[1]) == 0)   //if line[1] is in var table
     {        
         while (checkExpression(getVarValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
         {
+            Parser *parser = new Parser;
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
             {
-                Parser::getInstance()->parsing(whileLines[k], i);
+                parser->parsing(whileLines[k], i);
             }
+            delete parser;
             cout << endl;
         }
         cout <<"}\nEnd while loop\n";
@@ -127,7 +131,7 @@ bool whileCommand::checkExpression(double x, string op, string yString)
     else return false;
 }
 
-void setCommand::doCommand(vector<string> line, int i)
+void setCommand::doCommand(const vector<string> &line, int i)
 {
     double varValue;
     string stringSet = "set " + DATABASE->VarTable[line[0]] + " ";
@@ -143,12 +147,12 @@ void setCommand::doCommand(vector<string> line, int i)
         string mathematicalExpression;
         for (size_t j = 2; j < line.size(); j++)                                //for all elements in line (except the first 2)
         {
-            if (CkeckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)       //for var h0
+            if (CheckIfElementInMap(DATABASE->SymbolTable, line[j]) == 0)       //for var h0
             {           
                 varValue = DATABASE->SymbolTable[line[j]];                      
                 mathematicalExpression += to_string(varValue);
             }
-            else if (CkeckIfElementInMap(DATABASE->VarTable, line[j]) == 0)     //if the var in var table
+            else if (CheckIfElementInMap(DATABASE->VarTable, line[j]) == 0)     //if the var in var table
             {
                 varValue = getVarValue(line[j]);                                
                 mathematicalExpression += to_string(varValue);
@@ -169,7 +173,7 @@ void setCommand::doCommand(vector<string> line, int i)
     else {cout << "Illegal command" << endl;}
 }
 
-void sleepCommand::doCommand(vector<string> line, int i)       //sleep
+void sleepCommand::doCommand(const vector<string> &line, int i)       //sleep
 {
     if (line.size() == 2)
     {
@@ -179,7 +183,7 @@ void sleepCommand::doCommand(vector<string> line, int i)       //sleep
     else cout << "Illegal command" << endl;
 }
 
-void doNothingCommand::doCommand(vector<string> line, int i)
+void doNothingCommand::doCommand(const vector<string> &line, int i)
 {
-    
+    cout << "Unknown command" << endl; 
 }

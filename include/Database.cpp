@@ -32,5 +32,3 @@ void Database::buildCommandMap()
     DATABASE->CommandMap["while"] = WhileCommand;
     DATABASE->CommandMap["doNothing"] = DoNothingCommand;
 }
-
-
