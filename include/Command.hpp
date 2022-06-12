@@ -68,7 +68,7 @@ private:
 
 public:
     void doCommand(const vector<string> &line, int i);
-    int get_i(int i) { return i += loopLength; } // increase the i by amount of while lines
+    int get_i(int i) { return i += loopLength; } // update the main i to skip the while lines length
 };
 
 class sleepCommand : public Command

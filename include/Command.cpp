@@ -65,7 +65,7 @@ void printCommand::doCommand(const vector<string> &line, int i)
         textToPrint.pop_back();
         cout << textToPrint << endl;
     }
-    else                            //print a variable
+    else                            //print a variable value
     {
         cout << line[1] << ": " << getVarValue(line[1]) << endl;
     }
@@ -82,11 +82,11 @@ void whileCommand::doCommand(const vector<string> &line, int i)
     {   
         whileLines.push_back(LEXER->allTextLines[j]);
     }
-    loopLength = whileLines.size();                         //update the main i to skip the while lines                                
+    loopLength = whileLines.size();                                                        
 
     if (CheckIfElementInMap(DATABASE->VarTable, line[1]) == 0)   //if line[1] is in var table
     {        
-        while (checkExpression(getVarValue(line[1]), line[2], line[3]) == 1)       //check if the condition is met
+        while (checkExpression(getVarValue(line[1]), line[2], line[3]))       //check if the condition is met
         {
             Parser *parser = new Parser;
             for (size_t k = 0; k < whileLines.size(); k++)          //parse the while lines 
