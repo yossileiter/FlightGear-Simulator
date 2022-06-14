@@ -28,7 +28,7 @@ vector <double> Server::SplitLine(string line) 		//split a line into words
 
 void Server::Connect(int port, const char *ip)
 {
-	SERVER->t1 = thread(&Server::launchFG, this);
+	t1 = thread(&Server::launchFG, this);
 	cout << "Waiting for the Simulator..." << endl;
 
 	struct sockaddr_in address;
@@ -67,7 +67,7 @@ void Server::Connect(int port, const char *ip)
 		perror("accept");
 		exit(EXIT_FAILURE);
 	}
-	SERVER->t2 = thread(&Server::ListeningToSimulator, this);
+	t2 = thread(&Server::ListeningToSimulator, this);
 }
 
 void Server::launchFG()

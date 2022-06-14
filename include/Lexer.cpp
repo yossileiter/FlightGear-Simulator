@@ -24,6 +24,7 @@ void Lexer::ReadTextFile(string FilePath) // read the instructions file and spli
 
         for (int i = 0; i < AllLines.size(); i++)
         {
+            while (AllLines[i][0] == ' ') AllLines[i].erase(0, 1);          // remove indentation
             LEXER->allTextLines.push_back(splitLineIntoWords(AllLines[i]));
         }
     }
@@ -32,7 +33,7 @@ void Lexer::ReadTextFile(string FilePath) // read the instructions file and spli
 vector<string> Lexer::splitLineIntoWords(string s)
 {
     vector<string> v;
-    string temp = "";
+    string temp;
     for (int i = 0; i < s.length(); ++i)
     {
         if (s[i] == ' ')
