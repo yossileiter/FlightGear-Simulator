@@ -21,7 +21,7 @@ private:
 public:
     
     vector<vector<string>> allTextLines;
-    static Lexer *getInstance();            // instantiating lexer
+    static Lexer *getInstance();           
     void ReadTextFile(string FilePath);     // read the instructions file and split to lines
 };
 

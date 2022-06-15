@@ -78,13 +78,13 @@ void whileCommand::doCommand(const vector<string> &line, int i)
 
     int bracketLocation = FindElementLocation(LEXER->allTextLines, "}", i);  
 
-    for (size_t j = i+1; j < bracketLocation; j++)                 //fill new vector with while lines
+    for (size_t j = i+1; j < bracketLocation; j++)                  //fill new vector with while lines
     {   
         whileLines.push_back(LEXER->allTextLines[j]);
     }
     loopLength = whileLines.size();                                                        
 
-    if (CheckIfElementInMap(DATABASE->VarTable, line[1]) == 0)   //if line[1] is in var table
+    if (CheckIfElementInMap(DATABASE->VarTable, line[1]) == 0)      //if line[1] is in var table
     {        
         while (checkExpression(getVarValue(line[1]), line[2], line[3]))       //check if the condition is met
         {
