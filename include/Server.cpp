@@ -2,7 +2,7 @@
 #include "Database.hpp"
 
 Server *Server::instance = 0;
-Server *SERVER
+Server *Server::getInstance()
 {
 	if (!instance) instance = new Server;
 	return instance;

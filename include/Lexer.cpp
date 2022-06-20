@@ -1,11 +1,11 @@
 #include "Lexer.hpp"
 
 Lexer *Lexer::instance = 0;
-Lexer *LEXER
+
+Lexer *Lexer::getInstance()
 {
-    if (!instance)
-        instance = new Lexer;
-    return instance;
+	if(!instance) instance = new Lexer();
+	return instance;
 }
 
 void Lexer::ReadTextFile(string FilePath) // read the instructions file and split to lines

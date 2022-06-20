@@ -108,11 +108,11 @@ bool whileCommand::FindIfElementInVector(vector<string> v, string element)
     else return 0;
 }
 
-int whileCommand::FindElementLocation(vector<vector<string>> v, string element, int i)    
+int whileCommand::FindElementLocation(const vector<vector<string>> &v, string element, int i)    
 {
-    for (size_t row = i; row < LEXER->allTextLines.size(); row++)
+    for (size_t row = i; row < v.size(); row++)
     {
-        if (FindIfElementInVector(LEXER->allTextLines[row], element)) return row;
+        if (FindIfElementInVector(v[row], element)) return row;
     }
     return 0;
 }

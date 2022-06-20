@@ -9,6 +9,7 @@ int main()
     {
         i = parser->parsing(LEXER->allTextLines[i], i);
     }
-
+    delete parser;
+    
     return 0;
 }

@@ -63,7 +63,7 @@ private:
 
     bool checkExpression(double x, string op, string y);
     bool FindIfElementInVector(vector<string> v, string element);
-    int FindElementLocation(vector<vector<string>> v, string element, int i);
+    int FindElementLocation(const vector<vector<string>> &v, string element, int i);
     int loopLength;
 
 public:
